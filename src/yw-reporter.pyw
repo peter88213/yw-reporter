@@ -351,10 +351,11 @@ def run(sourcePath):
 
         types[0] = True
         columns[0] = True
+        columns[1] = True
 
     #--- Instantiate a user interface object
 
-    ui = MyGui('Configurable reports for yWriter projects')
+    ui = MyGui('Generate yWriter reports')
 
     optionCnt = 0
     ui.ShowChapters.set(levels[optionCnt])

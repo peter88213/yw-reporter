@@ -1,4 +1,4 @@
-"""Provide a Markdown converter class for yWriter projects. 
+"""Provide a HTML report generator class for yWriter projects. 
 
 Copyright (c) 2021 Peter Triesberger
 For further information see https://github.com/peter88213/yw2md

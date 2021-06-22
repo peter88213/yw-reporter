@@ -33,7 +33,7 @@ tShowTitle = 'Title'
 tShowDescription = 'Description'
 tShowTags = 'Tags'
 tShowNotes = 'Notes'
-tShowActionPattern = 'A/R-Goals-Conflict-Outcome'
+tShowActionPattern = 'A/R-Goal-Conflict-Outcome'
 tShowRatings = 'Scene ratings'
 tShowWordcount = 'Word count'
 tShowLettercount = 'Letter count'
@@ -67,10 +67,10 @@ class MyGui(UiTk):
         self.hdTypes = Label(self.root, text='Types')
         self.hdColumns = Label(self.root, text='Columns')
         self.appInfo = Label(self.root, text='')
-        self.appInfo.config(height=2, width=60)
+        self.appInfo.config(height=2, width=80)
 
         self.successInfo = Label(self.root)
-        self.successInfo.config(height=1, width=50)
+        self.successInfo.config(height=1, width=80)
 
         self.processInfo = Label(self.root, text='')
 
@@ -149,83 +149,91 @@ class MyGui(UiTk):
 
         rowCnt = 1
         self.hdLevels.grid(row=rowCnt, column=1, sticky=W,
-                           padx=20, columnspan=3)
+                           padx=20)
         rowCnt += 1
         self.root.ShowChaptersCheckbox.grid(
-            row=rowCnt, column=1, sticky=W, padx=20, columnspan=3)
+            row=rowCnt, column=1, sticky=W, padx=20)
         rowCnt += 1
         self.root.ShowScenesCheckbox.grid(
-            row=rowCnt, column=1, sticky=W, padx=20, columnspan=3)
-        rowCnt += 1
-        self.hdTypes.grid(row=rowCnt, column=1, sticky=W,
-                          padx=20, columnspan=3)
+            row=rowCnt, column=1, sticky=W, padx=20)
+
+        rowCnt = 1
+        self.hdTypes.grid(row=rowCnt, column=2, sticky=W,
+                          padx=20)
         rowCnt += 1
         self.root.ShowNormalTypeCheckbox.grid(
-            row=rowCnt, column=1, sticky=W, padx=20, columnspan=3)
+            row=rowCnt, column=2, sticky=W, padx=20)
         rowCnt += 1
         self.root.ShowUnusedTypeCheckbox.grid(
-            row=rowCnt, column=1, sticky=W, padx=20, columnspan=3)
+            row=rowCnt, column=2, sticky=W, padx=20)
         rowCnt += 1
         self.root.ShowNotesTypeCheckbox.grid(
-            row=rowCnt, column=1, sticky=W, padx=20, columnspan=3)
+            row=rowCnt, column=2, sticky=W, padx=20)
         rowCnt += 1
         self.root.ShowTodoTypeCheckbox.grid(
-            row=rowCnt, column=1, sticky=W, padx=20, columnspan=3)
+            row=rowCnt, column=2, sticky=W, padx=20)
         rowCnt += 1
         self.root.ShowUnexportedCheckbox.grid(
-            row=rowCnt, column=1, sticky=W, padx=20, columnspan=3)
-        rowCnt += 1
-        self.hdColumns.grid(row=rowCnt, column=1, sticky=W,
-                            padx=20, columnspan=3)
+            row=rowCnt, column=2, sticky=W, padx=20)
+
+        rowCnt = 1
+        self.hdColumns.grid(row=rowCnt, column=3, sticky=W,
+                            padx=20)
         rowCnt += 1
         self.root.ShowTitleCheckbox.grid(
-            row=rowCnt, column=1, sticky=W, padx=20, columnspan=3)
+            row=rowCnt, column=3, sticky=W, padx=20)
         rowCnt += 1
         self.root.ShowDescriptionCheckbox.grid(
-            row=rowCnt, column=1, sticky=W, padx=20, columnspan=3)
+            row=rowCnt, column=3, sticky=W, padx=20)
         rowCnt += 1
         self.root.ShowViewpointCheckbox.grid(
-            row=rowCnt, column=1, sticky=W, padx=20, columnspan=3)
+            row=rowCnt, column=3, sticky=W, padx=20)
         rowCnt += 1
         self.root.ShowTagsCheckbox.grid(
-            row=rowCnt, column=1, sticky=W, padx=20, columnspan=3)
+            row=rowCnt, column=3, sticky=W, padx=20)
         rowCnt += 1
         self.root.ShowNotesCheckbox.grid(
-            row=rowCnt, column=1, sticky=W, padx=20, columnspan=3)
+            row=rowCnt, column=3, sticky=W, padx=20)
         rowCnt += 1
         self.root.ShowActionPatternCheckbox.grid(
-            row=rowCnt, column=1, sticky=W, padx=20, columnspan=3)
+            row=rowCnt, column=3, sticky=W, padx=20)
         rowCnt += 1
         self.root.ShowRatingsCheckbox.grid(
-            row=rowCnt, column=1, sticky=W, padx=20, columnspan=3)
+            row=rowCnt, column=3, sticky=W, padx=20)
         rowCnt += 1
         self.root.ShowWordcountCheckbox.grid(
-            row=rowCnt, column=1, sticky=W, padx=20, columnspan=3)
+            row=rowCnt, column=3, sticky=W, padx=20)
         rowCnt += 1
         self.root.ShowLettercountCheckbox.grid(
-            row=rowCnt, column=1, sticky=W, padx=20, columnspan=3)
+            row=rowCnt, column=3, sticky=W, padx=20)
         rowCnt += 1
         self.root.ShowStatusCheckbox.grid(
-            row=rowCnt, column=1, sticky=W, padx=20, columnspan=3)
+            row=rowCnt, column=3, sticky=W, padx=20)
         rowCnt += 1
         self.root.ShowCharactersCheckbox.grid(
-            row=rowCnt, column=1, sticky=W, padx=20, columnspan=3)
+            row=rowCnt, column=3, sticky=W, padx=20)
         rowCnt += 1
         self.root.ShowLocationsCheckbox.grid(
-            row=rowCnt, column=1, sticky=W, padx=20, columnspan=3)
+            row=rowCnt, column=3, sticky=W, padx=20)
         rowCnt += 1
         self.root.ShowItemsCheckbox.grid(
-            row=rowCnt, column=1, sticky=W, padx=20, columnspan=3)
+            row=rowCnt, column=3, sticky=W, padx=20)
+
         rowCnt += 1
-        self.appInfo.grid(row=rowCnt, column=1, pady=10, columnspan=3)
+        self.appInfo.grid(row=rowCnt, column=1,
+                          columnspan=3, pady=10)
+
         rowCnt += 1
         self.root.selectButton.grid(row=rowCnt, column=1, pady=10)
         self.root.runButton.grid(row=rowCnt, column=2, pady=10)
         self.root.quitButton.grid(row=rowCnt, column=3, pady=10)
+
         rowCnt += 1
         self.successInfo.grid(row=rowCnt, column=1, columnspan=3)
+
         rowCnt += 1
-        self.processInfo.grid(row=rowCnt, column=1, columnspan=3, pady=10)
+        self.processInfo.grid(row=rowCnt, column=1,
+                              columnspan=3, pady=10)
 
         self.sourcePath = None
         self.set_info_what('No file selected')
@@ -355,7 +363,7 @@ def run(sourcePath):
 
     #--- Instantiate a user interface object
 
-    ui = MyGui('Generate yWriter reports')
+    ui = MyGui('yWriter report')
 
     optionCnt = 0
     ui.ShowChapters.set(levels[optionCnt])

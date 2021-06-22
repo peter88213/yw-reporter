@@ -9,6 +9,7 @@ Published under the MIT License (https://opensource.org/licenses/mit-license.php
 """
 import os
 from configparser import ConfigParser
+import webbrowser
 
 from ywreporter.html_report import HtmlReport
 from ywreporter.rp_converter import RpConverter
@@ -298,6 +299,9 @@ class MyGui(UiTk):
                       'showItems': self.ShowItems.get(),
                       }
             self.converter.run(self.sourcePath, **kwargs)
+
+            if self.converter.newFile is not None:
+                webbrowser.open(self.converter.newFile)
 
 
 def run(sourcePath):

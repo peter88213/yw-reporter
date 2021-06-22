@@ -6,9 +6,9 @@ The yw-reporter Python script creates configurable reports from yWriter 7 projec
 
 ## Download and install
 
-[Download the latest release (version 0.1.2)](https://raw.githubusercontent.com/peter88213/yw-reporter/master/dist/yw-reporter_v0.1.2.zip)
+[Download the latest release (version 0.1.3)](https://raw.githubusercontent.com/peter88213/yw-reporter/master/dist/yw-reporter_v0.1.3.zip)
 
-- Unzip the downloaded zipfile "yw-reporter_v0.1.2.zip" into a new folder and open "README.md" for usage instructions.
+- Unzip the downloaded zipfile "yw-reporter_v0.1.3.zip" into a new folder and open "README.md" for usage instructions.
 
 [Changelog](changelog)
 

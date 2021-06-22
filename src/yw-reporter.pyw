@@ -138,14 +138,15 @@ class MyGui(UiTk):
 
         self.root.selectButton = Button(
             text="Select file", command=self.select_file)
-        self.root.selectButton.config(height=1, width=10)
+        self.root.selectButton.config(height=1, width=20)
 
-        self.root.runButton = Button(text='Convert', command=self.convert_file)
-        self.root.runButton.config(height=1, width=10)
+        self.root.runButton = Button(
+            text='Create report', command=self.convert_file)
+        self.root.runButton.config(height=1, width=20)
         self.root.runButton.config(state='disabled')
 
         self.root.quitButton = Button(text='Quit', command=self.stop)
-        self.root.quitButton.config(height=1, width=10)
+        self.root.quitButton.config(height=1, width=20)
 
         rowCnt = 1
         self.hdLevels.grid(row=rowCnt, column=1, sticky=W,
@@ -224,9 +225,12 @@ class MyGui(UiTk):
                           columnspan=3, pady=10)
 
         rowCnt += 1
-        self.root.selectButton.grid(row=rowCnt, column=1, pady=10)
-        self.root.runButton.grid(row=rowCnt, column=2, pady=10)
-        self.root.quitButton.grid(row=rowCnt, column=3, pady=10)
+        self.root.selectButton.grid(
+            row=rowCnt, column=1, padx=10, pady=10, sticky=W)
+        self.root.runButton.grid(row=rowCnt, column=2,
+                                 padx=10, pady=10, sticky=E)
+        self.root.quitButton.grid(
+            row=rowCnt, column=3, padx=10, pady=10, sticky=E)
 
         rowCnt += 1
         self.successInfo.grid(row=rowCnt, column=1, columnspan=3)

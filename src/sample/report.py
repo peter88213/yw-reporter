@@ -18,7 +18,28 @@ def run(sourcePath, suffix=''):
     ui = UiTk('yWriter report')
     converter = RpConverter()
     converter.ui = ui
-    kwargs = {'suffix': suffix}
+    kwargs = {'suffix': suffix,
+              'showChapters': True,
+              'showScenes': True,
+              'showNormalType': True,
+              'showUnusedType': True,
+              'showNotesType': True,
+              'showTodoType': True,
+              'showUnexported': True,
+              'showTitle': True,
+              'showDescription': True,
+              'showViewpoint': True,
+              'showTags': True,
+              'showNotes': True,
+              'showActionPattern': True,
+              'showRatings': True,
+              'showWordcount': True,
+              'showLettercount': True,
+              'showStatus': True,
+              'showCharacters': True,
+              'showLocations': True,
+              'showItems': True,
+              }
     converter.run(sourcePath, **kwargs)
     ui.start()
 

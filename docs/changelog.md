@@ -6,5 +6,5 @@
 
 ### v0.2.0
 
-Beta test release.
+Beta test release based on PyWriter v3.8.2.
 

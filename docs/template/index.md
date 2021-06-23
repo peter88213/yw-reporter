@@ -24,6 +24,11 @@ The *yw-reporter* script has a graphical user interface. However, a Python 3 ins
 
 See the [instructions for use](usage)
 
+## See also
+
+If you want to be even more flexible, and know HTML, take a look at the template-based [yw2html](https://peter88213.github.io/yw2html) report generator.
+
+
 ## License
 
 yw-reporter is distributed under the [MIT

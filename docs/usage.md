@@ -13,9 +13,9 @@ You can either
 - launch the program by double-clicking on the program/link icon, or
 - launch the program by dragging a yWriter project file and dropping it on the program/link icon.
 
-The report generator processes .yw5, .yw6 and .yw7 project files. If no yWriter project is specified by dragging and dropping on the program icon, the last selected project is preset. You can change it with **Select File**.
+The report generator processes .yw5, .yw6 and .yw7 project files. If no yWriter project is specified by dragging and dropping on the program icon, the latest project selected is preset. You can change it with **Select File**.
 
-The report options are set by ticking checkboxes. On program startup, the last selected options are preset.
+The report options are set by ticking checkboxes. On program startup, the latest options selected are preset.
 
 When the yWriter project is selected and the options are set, you can launch the report generator with **Create report**. A HTML report file is created in the yWriter project folder, and a web browser window opens to show it. If a report file already exists, you will be asked before it is overwritten.
 

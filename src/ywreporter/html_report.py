@@ -21,9 +21,10 @@ class HtmlReport(FileExport):
 
 <style type="text/css">
 body {font-family: sans-serif}
-p.title {font-size: large; font-weight: bold}
+p.title {font-size: larger; font-weight: bold}
 p.author {font-style: italic}
 td, th {padding: 10}
+th {font-size:smaller}
 table {border-spacing: 0}
 table, th, td {border: lightgrey solid 1px; vertical-align: top}
 td.chtitle {font-weight: bold}
@@ -58,85 +59,85 @@ tr.notexp {font-style: italic}
         scColumns = []
 
         if kwargs['showTitle']:
-            hdColumns.append('<td>Title</td>')
+            hdColumns.append('<th>Title</th>')
             chColumns.append('<td class="chtitle">$Title</td>')
             scColumns.append('<td>$Title</td>')
 
         if kwargs['showDescription']:
-            hdColumns.append('<td>Description</td>')
+            hdColumns.append('<th>Description</th>')
             chColumns.append('<td class="chdesc">$Desc</td>')
             scColumns.append('<td>$Desc</td>')
 
         if kwargs['showViewpoint']:
-            hdColumns.append('<td>Viewpoint</td>')
+            hdColumns.append('<th>Viewpoint</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$Viewpoint</td>')
 
         if kwargs['showTags']:
-            hdColumns.append('<td>Tags</td>')
+            hdColumns.append('<th>Tags</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$Tags</td>')
 
         if kwargs['showNotes']:
-            hdColumns.append('<td>Notes</td>')
+            hdColumns.append('<th>Notes</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$Notes</td>')
 
         if kwargs['showActionPattern']:
-            hdColumns.append('<td>A/R</td>')
+            hdColumns.append('<th>A/R</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$ReactionScene</td>')
-            hdColumns.append('<td>Goal</td>')
+            hdColumns.append('<th>Goal</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$Goal</td>')
-            hdColumns.append('<td>Conflict</td>')
+            hdColumns.append('<th>Conflict</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$Conflict</td>')
-            hdColumns.append('<td>Outcome</td>')
+            hdColumns.append('<th>Outcome</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$Outcome</td>')
 
         if kwargs['showRatings']:
-            hdColumns.append('<td>$FieldTitle1</td>')
+            hdColumns.append('<th>$FieldTitle1</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$Field1</td>')
-            hdColumns.append('<td>$FieldTitle2</td>')
+            hdColumns.append('<th>$FieldTitle2</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$Field2</td>')
-            hdColumns.append('<td>$FieldTitle3</td>')
+            hdColumns.append('<th>$FieldTitle3</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$Field3</td>')
-            hdColumns.append('<td>$FieldTitle4</td>')
+            hdColumns.append('<th>$FieldTitle4</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$Field4</td>')
 
         if kwargs['showWordcount']:
-            hdColumns.append('<td>Word count</td>')
+            hdColumns.append('<th>Word count</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$WordCount</td>')
 
         if kwargs['showLettercount']:
-            hdColumns.append('<td>Letter count</td>')
+            hdColumns.append('<th>Letter count</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$LetterCount</td>')
 
         if kwargs['showStatus']:
-            hdColumns.append('<td>Status</td>')
+            hdColumns.append('<th>Status</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$Status</td>')
 
         if kwargs['showCharacters']:
-            hdColumns.append('<td>Characters</td>')
+            hdColumns.append('<th>Characters</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$Characters</td>')
 
         if kwargs['showLocations']:
-            hdColumns.append('<td>Locations</td>')
+            hdColumns.append('<th>Locations</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$Locations</td>')
 
         if kwargs['showItems']:
-            hdColumns.append('<td>Items</td>')
+            hdColumns.append('<th>Items</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$Items</td>')
 
@@ -144,7 +145,7 @@ tr.notexp {font-style: italic}
         chRow = ''.join(chColumns)
         scRow = ''.join(scColumns)
 
-        self.fileHeader += '<tr>' + hdRow + '</tr>'
+        self.fileHeader += '<thead><tr>' + hdRow + '</tr></thead>'
 
         if kwargs['showChapters']:
 

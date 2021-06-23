@@ -1,8 +1,16 @@
-The yw-reporter Python script creates configurable reports from yWriter 7 projects.
+![screenshot](Screenshots/form01.png)
+
+[yWriter](http://spacejock.com/yWriter7.html) is a free word processor written by Australian author and programmer Simon Haynes. 
+
+yWriter projects include a variety of metadata about chapters and scenes in addition to the actual novel text. To display this metadata clearly, yWriter can output different HTML reports. 
+
+If the prefabricated reports are not enough for you, you can use the *yw-reporter* Python script to create configurable tables and display them in the web browser. This works with *.yw5*, *.yw6* and *.yw7* project files. 
+
+The *yw-reporter* script has a graphical user interface. However, a Python 3 installation is required to run it.
 
 ## Requirements
 
-- [Python 3](https://www.python.org). Python 3.4 or more recent will work. However, Python 3.7 or above is highly recommended.
+- [Python 3](https://www.python.org). Python 3.4 or more recent will work.
 
 ## Download and install
 

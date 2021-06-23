@@ -4,5 +4,7 @@
 
 ## Changelog
 
+### v0.2.0
 
+Beta test release.
 

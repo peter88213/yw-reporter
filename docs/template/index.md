@@ -20,7 +20,7 @@ The *yw-reporter* script has a graphical user interface. However, a Python 3 ins
 
 [Changelog](changelog)
 
-## Usage, Markdown reference
+## Usage, Options reference
 
 See the [instructions for use](usage)
 

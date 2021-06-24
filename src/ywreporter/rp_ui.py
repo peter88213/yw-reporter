@@ -123,7 +123,7 @@ class RpUi(UiTk):
             text=self.tShowDate, variable=self.ShowDate, onvalue=True, offvalue=False)
         self.root.ShowTimeCheckbox = ttk.Checkbutton(
             text=self.tShowTime, variable=self.ShowTime, onvalue=True, offvalue=False)
-        self.root.ShowTimeCheckbox = ttk.Checkbutton(
+        self.root.ShowDurationCheckbox = ttk.Checkbutton(
             text=self.tShowDuration, variable=self.ShowDuration, onvalue=True, offvalue=False)
         self.root.ShowActionPatternCheckbox = ttk.Checkbutton(
             text=self.tShowActionPattern, variable=self.ShowActionPattern, onvalue=True, offvalue=False)
@@ -206,6 +206,9 @@ class RpUi(UiTk):
             row=rowCnt, column=3, sticky=W, padx=20)
         rowCnt += 1
         self.root.ShowTimeCheckbox.grid(
+            row=rowCnt, column=3, sticky=W, padx=20)
+        rowCnt += 1
+        self.root.ShowDurationCheckbox.grid(
             row=rowCnt, column=3, sticky=W, padx=20)
         rowCnt += 1
         self.root.ShowActionPatternCheckbox.grid(

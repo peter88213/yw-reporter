@@ -86,12 +86,12 @@ tr.notexp {font-style: italic}
         if kwargs['showDate']:
             hdColumns.append('<th>Date</th>')
             chColumns.append('<td></td>')
-            scColumns.append('<td>$Date</td>')
+            scColumns.append('<td>$ScDate</td>')
 
         if kwargs['showTime']:
             hdColumns.append('<th>Time</th>')
             chColumns.append('<td></td>')
-            scColumns.append('<td>$Time</td>')
+            scColumns.append('<td>$ScTime</td>')
 
         if kwargs['showDuration']:
             hdColumns.append('<th>Duration</th>')
@@ -204,20 +204,23 @@ tr.notexp {font-style: italic}
         if self.scenes[scId].date is None:
 
             if self.scenes[scId].day is None:
-                sceneMapping['Date'] = ''
+                sceneMapping['ScDate'] = ''
             else:
-                sceneMapping['Date'] = 'Day ' + self.scenes[scId].day
+                sceneMapping['ScDate'] = 'Day ' + self.scenes[scId].day
+
+        else:
+            sceneMapping['ScDate'] = self.scenes[scId].date
 
         if self.scenes[scId].time is None:
 
             if self.scenes[scId].hour is None:
-                sceneMapping['Time'] = ''
+                sceneMapping['ScTime'] = ''
             else:
-                sceneMapping['Time'] = self.scenes[scId].hour.zfill(2) + \
+                sceneMapping['ScTime'] = self.scenes[scId].hour.zfill(2) + \
                     ':' + self.scenes[scId].minute.zfill(2)
 
         else:
-            sceneMapping['Time'] = self.scenes[scId].time.rsplit(':', 1)[0]
+            sceneMapping['ScTime'] = self.scenes[scId].time.rsplit(':', 1)[0]
 
         if self.scenes[scId].lastsDays is None:
             days = ''

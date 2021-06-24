@@ -14,9 +14,9 @@ The *yw-reporter* script has a graphical user interface. However, a Python 3 ins
 
 ## Download and install
 
-[Download the latest release (version 0.3.2)](https://raw.githubusercontent.com/peter88213/yw-reporter/master/dist/yw-reporter_v0.3.2.zip)
+[Download the latest release (version 0.3.3)](https://raw.githubusercontent.com/peter88213/yw-reporter/master/dist/yw-reporter_v0.3.3.zip)
 
-- Unzip the downloaded zipfile "yw-reporter_v0.3.2.zip" into a new folder and open "README.md" for usage instructions.
+- Unzip the downloaded zipfile "yw-reporter_v0.3.3.zip" into a new folder and open "README.md" for usage instructions.
 
 [Changelog](changelog)
 

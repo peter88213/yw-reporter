@@ -4,6 +4,7 @@ Copyright (c) 2021 Peter Triesberger
 For further information see https://github.com/peter88213/yw2html
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
+from string import Template
 from pywriter.file.file_export import FileExport
 
 
@@ -53,6 +54,8 @@ tr.notexp {font-style: italic}
 
     def __init__(self, filePath, **kwargs):
         FileExport.__init__(self, filePath)
+
+        self.filters = kwargs['filters']
 
         hdColumns = []
         chColumns = []
@@ -193,3 +196,52 @@ tr.notexp {font-style: italic}
 
             if kwargs['showUnexported']:
                 self.notExportedSceneTemplate = '<tr class="notexp">' + scRow + '</tr>'
+
+    def reject_scene(self, scId):
+        """Return True if the scene is to be filtered out."""
+
+        if 'tag' in self.filters:
+
+            if self.filters['tag'] in self.scenes[scId].tags:
+                return False
+
+            else:
+                return True
+
+        if 'character' in self.filters:
+
+            if self.filters['character'] in self.scenes[scId].characters:
+                return False
+
+            else:
+                return True
+
+        if 'location' in self.filters:
+
+            if self.filters['location'] in self.scenes[scId].locations:
+                return False
+
+            else:
+                return True
+
+        if 'item' in self.filters:
+
+            if self.filters['item'] in self.scenes[scId].items:
+                return False
+
+            else:
+                return True
+
+        if 'viewpoint' in self.filters:
+
+            try:
+                if self.scenes[scId].characters[0] == self.filters['viewpoint']:
+                    return False
+
+                else:
+                    return True
+
+            except:
+                return True
+
+        return False

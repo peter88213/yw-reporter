@@ -258,6 +258,8 @@ class RpUi(UiTk):
         self.set_info_what('No file selected')
         self.startDir = os.getcwd()
 
+        self.filters = {}
+
     def start(self):
         """Start the user interface.
         Note: This can not be done in the __init__() method.
@@ -300,10 +302,9 @@ class RpUi(UiTk):
         self.successInfo.config(
             bg=self.root.cget("background"))
 
-        options = [False, True]
-
         if self.sourcePath:
             kwargs = {'suffix': HtmlReport.SUFFIX,
+                      'filters': self.filters,
                       'showChapters': self.ShowChapters.get(),
                       'showScenes': self.ShowScenes.get(),
                       'showNormalType': self.ShowNormalType.get(),

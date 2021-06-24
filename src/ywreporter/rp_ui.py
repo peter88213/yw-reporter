@@ -35,6 +35,7 @@ class RpUi(UiTk):
     tShowNotes = 'Notes'
     tShowDate = 'Date'
     tShowTime = 'Time'
+    tShowDuration = 'Duration'
     tShowActionPattern = 'A/R-Goal-Conflict-Outcome'
     tShowRatings = 'Scene ratings'
     tShowWordcount = 'Word count'
@@ -44,7 +45,7 @@ class RpUi(UiTk):
     tShowCharacters = 'Characters'
     tShowLocations = 'Locations'
     tShowItems = 'Items'
-    columnsTotal = 15
+    columnsTotal = 16
 
     def __init__(self, title, description=None):
         """Make the converter object visible to the user interface 
@@ -84,6 +85,7 @@ class RpUi(UiTk):
         self.ShowNotes = BooleanVar()
         self.ShowDate = BooleanVar()
         self.ShowTime = BooleanVar()
+        self.ShowDuration = BooleanVar()
         self.ShowActionPattern = BooleanVar()
         self.ShowRatings = BooleanVar()
         self.ShowWordcount = BooleanVar()
@@ -121,6 +123,8 @@ class RpUi(UiTk):
             text=self.tShowDate, variable=self.ShowDate, onvalue=True, offvalue=False)
         self.root.ShowTimeCheckbox = ttk.Checkbutton(
             text=self.tShowTime, variable=self.ShowTime, onvalue=True, offvalue=False)
+        self.root.ShowTimeCheckbox = ttk.Checkbutton(
+            text=self.tShowDuration, variable=self.ShowDuration, onvalue=True, offvalue=False)
         self.root.ShowActionPatternCheckbox = ttk.Checkbutton(
             text=self.tShowActionPattern, variable=self.ShowActionPattern, onvalue=True, offvalue=False)
         self.root.ShowRatingsCheckbox = ttk.Checkbutton(
@@ -311,6 +315,7 @@ class RpUi(UiTk):
                       'showNotes': self.ShowNotes.get(),
                       'showDate': self.ShowDate.get(),
                       'showTime': self.ShowTime.get(),
+                      'showDuration': self.ShowDuration.get(),
                       'showActionPattern': self.ShowActionPattern.get(),
                       'showRatings': self.ShowRatings.get(),
                       'showWordcount': self.ShowWordcount.get(),

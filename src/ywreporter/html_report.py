@@ -93,6 +93,11 @@ tr.notexp {font-style: italic}
             chColumns.append('<td></td>')
             scColumns.append('<td>$Time</td>')
 
+        if kwargs['showDuration']:
+            hdColumns.append('<th>Duration</th>')
+            chColumns.append('<td></td>')
+            scColumns.append('<td>$Duration</td>')
+
         if kwargs['showActionPattern']:
             hdColumns.append('<th>A/R</th>')
             chColumns.append('<td></td>')
@@ -213,5 +218,25 @@ tr.notexp {font-style: italic}
 
         else:
             sceneMapping['Time'] = self.scenes[scId].time.rsplit(':', 1)[0]
+
+        if self.scenes[scId].lastsDays is None:
+            days = ''
+        else:
+            days = self.scenes[scId].lastsDays + 'd '
+
+        if self.scenes[scId].lastsHours is None:
+            hours = ''
+
+        else:
+            hours = self.scenes[scId].lastsHours + 'h '
+
+        if self.scenes[scId].lastsMinutes is None:
+
+            minutes = ''
+
+        else:
+            minutes = self.scenes[scId].lastsMinutes + 'min'
+
+        sceneMapping['Duration'] = days + hours + minutes
 
         return sceneMapping

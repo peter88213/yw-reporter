@@ -1,7 +1,7 @@
 """Provide a user interface for the reporter: Tkinter facade
 
 Copyright (c) 2020 Peter Triesberger
-For further information see https://github.com/peter88213/PyWriter
+For further information see https://github.com/peter88213/yw-reporter
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
 import os
@@ -13,6 +13,12 @@ from tkinter import ttk
 
 from pywriter.ui.ui_tk import UiTk
 from ywreporter.html_report import HtmlReport
+from pywriter.file.filter import Filter
+from pywriter.file.sc_vp_filter import ScVpFilter
+from pywriter.file.sc_cr_filter import ScCrFilter
+from pywriter.file.sc_lc_filter import ScLcFilter
+from pywriter.file.sc_it_filter import ScItFilter
+from pywriter.file.sc_tg_filter import ScTgFilter
 
 
 class RpUi(UiTk):
@@ -298,13 +304,15 @@ class RpUi(UiTk):
     def convert_file(self):
         """Call the converter's conversion method, if a source file is selected.
         """
+        sceneFilter = Filter()
+
         self.processInfo.config(text='')
         self.successInfo.config(
             bg=self.root.cget("background"))
 
         if self.sourcePath:
             kwargs = {'suffix': HtmlReport.SUFFIX,
-                      'filters': self.filters,
+                      'sceneFilter': sceneFilter,
                       'showChapters': self.ShowChapters.get(),
                       'showScenes': self.ShowScenes.get(),
                       'showNormalType': self.ShowNormalType.get(),

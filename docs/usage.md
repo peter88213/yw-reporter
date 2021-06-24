@@ -39,13 +39,16 @@ You can generate as many reports with different options as you like without exit
 - **Include todo** -- Create a table row for every chapter or scene marked "ToDo" (.yw7 only).
 - **Include unexported** -- Create table rows for scenes that won't be exported as RTF from yWriter.
 
-#### columns
+#### Columns
 
 - **Title** -- Create a column for chapter/scene titles.
 - **Description** -- Create a column for chapter/scene descriptions.
 - **Viewpoint** -- Create a column for scene viewpoints.
 - **Tags** -- Create a column for scene tags (comma separated).
 - **Notes** -- Create a column for scene notes.
+- **Date** -- Create a column for either specific date or day.
+- **Time** -- Create a column for either specific time or hour/minute.
+- **Duration** -- Create a column for days, hours, minutes the scene lasts.
 - **A/R-Goal-Conflict-Outcome** -- Create four columns (A/R, Goal etc.) 
 - **Ratings** -- Create four columns (scene rating 1-4).
 - **Word count** -- Create a column for scene word count.

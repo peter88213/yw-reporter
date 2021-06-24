@@ -33,7 +33,8 @@ class RpUi(UiTk):
     tShowDescription = 'Description'
     tShowTags = 'Tags'
     tShowNotes = 'Notes'
-    tShowDateTime = 'Date/Time'
+    tShowDate = 'Date'
+    tShowTime = 'Time'
     tShowActionPattern = 'A/R-Goal-Conflict-Outcome'
     tShowRatings = 'Scene ratings'
     tShowWordcount = 'Word count'
@@ -43,7 +44,7 @@ class RpUi(UiTk):
     tShowCharacters = 'Characters'
     tShowLocations = 'Locations'
     tShowItems = 'Items'
-    columnsTotal = 14
+    columnsTotal = 15
 
     def __init__(self, title, description=None):
         """Make the converter object visible to the user interface 
@@ -81,7 +82,8 @@ class RpUi(UiTk):
         self.ShowViewpoint = BooleanVar()
         self.ShowTags = BooleanVar()
         self.ShowNotes = BooleanVar()
-        self.ShowDateTime = BooleanVar()
+        self.ShowDate = BooleanVar()
+        self.ShowTime = BooleanVar()
         self.ShowActionPattern = BooleanVar()
         self.ShowRatings = BooleanVar()
         self.ShowWordcount = BooleanVar()
@@ -115,8 +117,10 @@ class RpUi(UiTk):
             text=self.tShowTags, variable=self.ShowTags, onvalue=True, offvalue=False)
         self.root.ShowNotesCheckbox = ttk.Checkbutton(
             text=self.tShowNotes, variable=self.ShowNotes, onvalue=True, offvalue=False)
-        self.root.ShowDateTimeCheckbox = ttk.Checkbutton(
-            text=self.tShowDateTime, variable=self.ShowDateTime, onvalue=True, offvalue=False)
+        self.root.ShowDateCheckbox = ttk.Checkbutton(
+            text=self.tShowDate, variable=self.ShowDate, onvalue=True, offvalue=False)
+        self.root.ShowTimeCheckbox = ttk.Checkbutton(
+            text=self.tShowTime, variable=self.ShowTime, onvalue=True, offvalue=False)
         self.root.ShowActionPatternCheckbox = ttk.Checkbutton(
             text=self.tShowActionPattern, variable=self.ShowActionPattern, onvalue=True, offvalue=False)
         self.root.ShowRatingsCheckbox = ttk.Checkbutton(
@@ -194,7 +198,10 @@ class RpUi(UiTk):
         self.root.ShowNotesCheckbox.grid(
             row=rowCnt, column=3, sticky=W, padx=20)
         rowCnt += 1
-        self.root.ShowDateTimeCheckbox.grid(
+        self.root.ShowDateCheckbox.grid(
+            row=rowCnt, column=3, sticky=W, padx=20)
+        rowCnt += 1
+        self.root.ShowTimeCheckbox.grid(
             row=rowCnt, column=3, sticky=W, padx=20)
         rowCnt += 1
         self.root.ShowActionPatternCheckbox.grid(
@@ -302,7 +309,8 @@ class RpUi(UiTk):
                       'showViewpoint': self.ShowViewpoint.get(),
                       'showTags': self.ShowTags.get(),
                       'showNotes': self.ShowNotes.get(),
-                      'showDateTime': self.ShowDateTime.get(),
+                      'showDate': self.ShowDate.get(),
+                      'showTime': self.ShowTime.get(),
                       'showActionPattern': self.ShowActionPattern.get(),
                       'showRatings': self.ShowRatings.get(),
                       'showWordcount': self.ShowWordcount.get(),

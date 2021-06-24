@@ -83,10 +83,12 @@ tr.notexp {font-style: italic}
             chColumns.append('<td></td>')
             scColumns.append('<td>$Notes</td>')
 
-        if kwargs['showDateTime']:
+        if kwargs['showDate']:
             hdColumns.append('<th>Date</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$Date</td>')
+
+        if kwargs['showTime']:
             hdColumns.append('<th>Time</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$Time</td>')

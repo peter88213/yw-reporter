@@ -1,6 +1,6 @@
-# yw-reporter
+# yw-reporter - Configurable report generator for yWriter projects
 
-Configurable report generator for yWriter projects
+For more information, see the [project homepage](https://peter88213.github.io/yw-reporter) with description and download instructions.
 
 ## License
 

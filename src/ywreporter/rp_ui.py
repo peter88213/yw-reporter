@@ -33,6 +33,7 @@ class RpUi(UiTk):
     tShowDescription = 'Description'
     tShowTags = 'Tags'
     tShowNotes = 'Notes'
+    tShowDateTime = 'Date/Time'
     tShowActionPattern = 'A/R-Goal-Conflict-Outcome'
     tShowRatings = 'Scene ratings'
     tShowWordcount = 'Word count'
@@ -42,7 +43,7 @@ class RpUi(UiTk):
     tShowCharacters = 'Characters'
     tShowLocations = 'Locations'
     tShowItems = 'Items'
-    columnsTotal = 13
+    columnsTotal = 14
 
     def __init__(self, title, description=None):
         """Make the converter object visible to the user interface 
@@ -80,6 +81,7 @@ class RpUi(UiTk):
         self.ShowViewpoint = BooleanVar()
         self.ShowTags = BooleanVar()
         self.ShowNotes = BooleanVar()
+        self.ShowDateTime = BooleanVar()
         self.ShowActionPattern = BooleanVar()
         self.ShowRatings = BooleanVar()
         self.ShowWordcount = BooleanVar()
@@ -113,6 +115,8 @@ class RpUi(UiTk):
             text=self.tShowTags, variable=self.ShowTags, onvalue=True, offvalue=False)
         self.root.ShowNotesCheckbox = ttk.Checkbutton(
             text=self.tShowNotes, variable=self.ShowNotes, onvalue=True, offvalue=False)
+        self.root.ShowDateTimeCheckbox = ttk.Checkbutton(
+            text=self.tShowDateTime, variable=self.ShowDateTime, onvalue=True, offvalue=False)
         self.root.ShowActionPatternCheckbox = ttk.Checkbutton(
             text=self.tShowActionPattern, variable=self.ShowActionPattern, onvalue=True, offvalue=False)
         self.root.ShowRatingsCheckbox = ttk.Checkbutton(
@@ -188,6 +192,9 @@ class RpUi(UiTk):
             row=rowCnt, column=3, sticky=W, padx=20)
         rowCnt += 1
         self.root.ShowNotesCheckbox.grid(
+            row=rowCnt, column=3, sticky=W, padx=20)
+        rowCnt += 1
+        self.root.ShowDateTimeCheckbox.grid(
             row=rowCnt, column=3, sticky=W, padx=20)
         rowCnt += 1
         self.root.ShowActionPatternCheckbox.grid(
@@ -295,6 +302,7 @@ class RpUi(UiTk):
                       'showViewpoint': self.ShowViewpoint.get(),
                       'showTags': self.ShowTags.get(),
                       'showNotes': self.ShowNotes.get(),
+                      'showDateTime': self.ShowDateTime.get(),
                       'showActionPattern': self.ShowActionPattern.get(),
                       'showRatings': self.ShowRatings.get(),
                       'showWordcount': self.ShowWordcount.get(),

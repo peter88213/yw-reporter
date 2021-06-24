@@ -83,6 +83,14 @@ tr.notexp {font-style: italic}
             chColumns.append('<td></td>')
             scColumns.append('<td>$Notes</td>')
 
+        if kwargs['showDateTime']:
+            hdColumns.append('<th>Date</th>')
+            chColumns.append('<td></td>')
+            scColumns.append('<td>$Date</td>')
+            hdColumns.append('<th>Time</th>')
+            chColumns.append('<td></td>')
+            scColumns.append('<td>$Time</td>')
+
         if kwargs['showActionPattern']:
             hdColumns.append('<th>A/R</th>')
             chColumns.append('<td></td>')
@@ -178,3 +186,30 @@ tr.notexp {font-style: italic}
 
             if kwargs['showUnexported']:
                 self.notExportedSceneTemplate = '<tr class="notexp">' + scRow + '</tr>'
+
+    def get_sceneMapping(self, scId, sceneNumber, wordsTotal, lettersTotal):
+        """Return a mapping dictionary for a scene section.
+        Extend the superclass method.
+        """
+        sceneMapping = FileExport.get_sceneMapping(
+            self, scId, sceneNumber, wordsTotal, lettersTotal)
+
+        if self.scenes[scId].date is None:
+
+            if self.scenes[scId].day is None:
+                sceneMapping['Date'] = ''
+            else:
+                sceneMapping['Date'] = 'Day ' + self.scenes[scId].day
+
+        if self.scenes[scId].time is None:
+
+            if self.scenes[scId].hour is None:
+                sceneMapping['Time'] = ''
+            else:
+                sceneMapping['Time'] = self.scenes[scId].hour.zfill(2) + \
+                    ':' + self.scenes[scId].minute.zfill(2)
+
+        else:
+            sceneMapping['Time'] = self.scenes[scId].time.rsplit(':', 1)[0]
+
+        return sceneMapping

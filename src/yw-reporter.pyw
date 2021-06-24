@@ -94,6 +94,8 @@ def run(sourcePath):
     optionCnt += 1
     ui.ShowNotes.set(columns[optionCnt])
     optionCnt += 1
+    ui.ShowDateTime.set(columns[optionCnt])
+    optionCnt += 1
     ui.ShowActionPattern.set(columns[optionCnt])
     optionCnt += 1
     ui.ShowRatings.set(columns[optionCnt])
@@ -183,6 +185,8 @@ def run(sourcePath):
     config.set('COLUMNS', str(optionCnt), str(ui.ShowTags.get()))
     optionCnt += 1
     config.set('COLUMNS', str(optionCnt), str(ui.ShowNotes.get()))
+    optionCnt += 1
+    config.set('COLUMNS', str(optionCnt), str(ui.ShowDateTime.get()))
     optionCnt += 1
     config.set('COLUMNS', str(optionCnt), str(ui.ShowActionPattern.get()))
     optionCnt += 1

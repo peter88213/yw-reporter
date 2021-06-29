@@ -13,7 +13,7 @@ You can either
 - launch the program by double-clicking on the program/link icon, or
 - launch the program by dragging a yWriter project file and dropping it on the program/link icon.
 
-The report generator processes .yw5, .yw6 and .yw7 project files. If no yWriter project is specified by dragging and dropping on the program icon, the latest project selected is preset. You can change it with **Select File**.
+The report generator processes yw7 project files. If no yWriter project is specified by dragging and dropping on the program icon, the latest project selected is preset. You can change it with **Select File**.
 
 The report options are set by ticking checkboxes. On program startup, the latest options selected are preset.
 

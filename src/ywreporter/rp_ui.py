@@ -20,6 +20,8 @@ from pywriter.file.sc_lc_filter import ScLcFilter
 from pywriter.file.sc_it_filter import ScItFilter
 from pywriter.file.sc_tg_filter import ScTgFilter
 
+from pywriter.yw.yw7_file import Yw7File
+
 
 class RpUi(UiTk):
     """Extend the Tkinter GUI, 
@@ -52,6 +54,12 @@ class RpUi(UiTk):
     tShowLocations = 'Locations'
     tShowItems = 'Items'
     columnsTotal = 16
+    tNone = 'None'
+    tTags = 'Tag'
+    tCharacters = 'Character'
+    tLocations = 'Location'
+    tItems = 'Item'
+    filtersTotal = 4
 
     def __init__(self, title, description=None):
         """Make the converter object visible to the user interface 
@@ -68,6 +76,7 @@ class RpUi(UiTk):
 
         self.hdLevels = Label(self.root, text='Levels')
         self.hdTypes = Label(self.root, text='Types')
+        self.hdFilters = Label(self.root, text='Filter')
         self.hdColumns = Label(self.root, text='Columns')
         self.appInfo = Label(self.root, text='')
         self.appInfo.config(height=2, width=80)
@@ -100,6 +109,7 @@ class RpUi(UiTk):
         self.ShowCharacters = BooleanVar()
         self.ShowLocations = BooleanVar()
         self.ShowItems = BooleanVar()
+        self.Filter = IntVar()
 
         self.root.ShowChaptersCheckbox = ttk.Checkbutton(
             text=self.tShowChapters, variable=self.ShowChapters, onvalue=True, offvalue=False)
@@ -148,6 +158,19 @@ class RpUi(UiTk):
         self.root.ShowItemsCheckbox = ttk.Checkbutton(
             text=self.tShowItems, variable=self.ShowItems, onvalue=True, offvalue=False)
 
+        self.root.NoneCheckbox = ttk.Radiobutton(
+            text=self.tNone, variable=self.Filter, value=0)
+        self.root.TagsCheckbox = ttk.Radiobutton(
+            text=self.tTags, variable=self.Filter, value=1)
+        self.root.CharactersCheckbox = ttk.Radiobutton(
+            text=self.tCharacters, variable=self.Filter, value=2)
+        self.root.LocationsCheckbox = ttk.Radiobutton(
+            text=self.tLocations, variable=self.Filter, value=3)
+        self.root.ItemsCheckbox = ttk.Radiobutton(
+            text=self.tItems, variable=self.Filter, value=4)
+
+        self.root.filterSpinbox = ttk.Spinbox(values=['one', 'two', 'three'])
+
         self.root.selectButton = Button(
             text="Select file", command=self.select_file)
         self.root.selectButton.config(height=1, width=20)
@@ -160,86 +183,116 @@ class RpUi(UiTk):
         self.root.quitButton = Button(text='Quit', command=self.stop)
         self.root.quitButton.config(height=1, width=20)
 
-        rowCnt = 1
-        self.hdLevels.grid(row=rowCnt, column=1, sticky=W,
-                           padx=20)
-        rowCnt += 1
+        row1Cnt = 1
+        self.hdLevels.grid(row=row1Cnt, column=1, sticky=W, padx=20)
+
+        row1Cnt += 1
         self.root.ShowChaptersCheckbox.grid(
-            row=rowCnt, column=1, sticky=W, padx=20)
-        rowCnt += 1
+            row=row1Cnt, column=1, sticky=W, padx=20)
+        row1Cnt += 1
         self.root.ShowScenesCheckbox.grid(
-            row=rowCnt, column=1, sticky=W, padx=20)
+            row=row1Cnt, column=1, sticky=W, padx=20)
 
-        rowCnt = 1
-        self.hdTypes.grid(row=rowCnt, column=2, sticky=W,
-                          padx=20)
-        rowCnt += 1
+        row2Cnt = 1
+        self.hdTypes.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+
+        row2Cnt += 1
         self.root.ShowNormalTypeCheckbox.grid(
-            row=rowCnt, column=2, sticky=W, padx=20)
-        rowCnt += 1
+            row=row2Cnt, column=2, sticky=W, padx=20)
+        row2Cnt += 1
         self.root.ShowUnusedTypeCheckbox.grid(
-            row=rowCnt, column=2, sticky=W, padx=20)
-        rowCnt += 1
+            row=row2Cnt, column=2, sticky=W, padx=20)
+        row2Cnt += 1
         self.root.ShowNotesTypeCheckbox.grid(
-            row=rowCnt, column=2, sticky=W, padx=20)
-        rowCnt += 1
+            row=row2Cnt, column=2, sticky=W, padx=20)
+        row2Cnt += 1
         self.root.ShowTodoTypeCheckbox.grid(
-            row=rowCnt, column=2, sticky=W, padx=20)
-        rowCnt += 1
+            row=row2Cnt, column=2, sticky=W, padx=20)
+        row2Cnt += 1
         self.root.ShowUnexportedCheckbox.grid(
-            row=rowCnt, column=2, sticky=W, padx=20)
+            row=row2Cnt, column=2, sticky=W, padx=20)
 
-        rowCnt = 1
-        self.hdColumns.grid(row=rowCnt, column=3, sticky=W,
+        row2Cnt += 2
+        self.hdFilters.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+        row2Cnt += 1
+        self.root.NoneCheckbox.grid(
+            row=row2Cnt, column=2, sticky=W, padx=20)
+        row2Cnt += 1
+        self.root.TagsCheckbox.grid(
+            row=row2Cnt, column=2, sticky=W, padx=20)
+        row2Cnt += 1
+        self.root.CharactersCheckbox.grid(
+            row=row2Cnt, column=2, sticky=W, padx=20)
+        row2Cnt += 1
+        self.root.LocationsCheckbox.grid(
+            row=row2Cnt, column=2, sticky=W, padx=20)
+        row2Cnt += 1
+        self.root.ItemsCheckbox.grid(
+            row=row2Cnt, column=2, sticky=W, padx=20)
+        row2Cnt += 1
+        self.root.filterSpinbox.grid(
+            row=row2Cnt, column=2, sticky=W, padx=20)
+
+        row3Cnt = 1
+        self.hdColumns.grid(row=row3Cnt, column=3, sticky=W,
                             padx=20)
-        rowCnt += 1
+        row3Cnt += 1
         self.root.ShowTitleCheckbox.grid(
-            row=rowCnt, column=3, sticky=W, padx=20)
-        rowCnt += 1
+            row=row3Cnt, column=3, sticky=W, padx=20)
+        row3Cnt += 1
         self.root.ShowDescriptionCheckbox.grid(
-            row=rowCnt, column=3, sticky=W, padx=20)
-        rowCnt += 1
+            row=row3Cnt, column=3, sticky=W, padx=20)
+        row3Cnt += 1
         self.root.ShowViewpointCheckbox.grid(
-            row=rowCnt, column=3, sticky=W, padx=20)
-        rowCnt += 1
+            row=row3Cnt, column=3, sticky=W, padx=20)
+        row3Cnt += 1
         self.root.ShowTagsCheckbox.grid(
-            row=rowCnt, column=3, sticky=W, padx=20)
-        rowCnt += 1
+            row=row3Cnt, column=3, sticky=W, padx=20)
+        row3Cnt += 1
         self.root.ShowNotesCheckbox.grid(
-            row=rowCnt, column=3, sticky=W, padx=20)
-        rowCnt += 1
+            row=row3Cnt, column=3, sticky=W, padx=20)
+        row3Cnt += 1
         self.root.ShowDateCheckbox.grid(
-            row=rowCnt, column=3, sticky=W, padx=20)
-        rowCnt += 1
+            row=row3Cnt, column=3, sticky=W, padx=20)
+        row3Cnt += 1
         self.root.ShowTimeCheckbox.grid(
-            row=rowCnt, column=3, sticky=W, padx=20)
-        rowCnt += 1
+            row=row3Cnt, column=3, sticky=W, padx=20)
+        row3Cnt += 1
         self.root.ShowDurationCheckbox.grid(
-            row=rowCnt, column=3, sticky=W, padx=20)
-        rowCnt += 1
+            row=row3Cnt, column=3, sticky=W, padx=20)
+        row3Cnt += 1
         self.root.ShowActionPatternCheckbox.grid(
-            row=rowCnt, column=3, sticky=W, padx=20)
-        rowCnt += 1
+            row=row3Cnt, column=3, sticky=W, padx=20)
+        row3Cnt += 1
         self.root.ShowRatingsCheckbox.grid(
-            row=rowCnt, column=3, sticky=W, padx=20)
-        rowCnt += 1
+            row=row3Cnt, column=3, sticky=W, padx=20)
+        row3Cnt += 1
         self.root.ShowWordcountCheckbox.grid(
-            row=rowCnt, column=3, sticky=W, padx=20)
-        rowCnt += 1
+            row=row3Cnt, column=3, sticky=W, padx=20)
+        row3Cnt += 1
         self.root.ShowLettercountCheckbox.grid(
-            row=rowCnt, column=3, sticky=W, padx=20)
-        rowCnt += 1
+            row=row3Cnt, column=3, sticky=W, padx=20)
+        row3Cnt += 1
         self.root.ShowStatusCheckbox.grid(
-            row=rowCnt, column=3, sticky=W, padx=20)
-        rowCnt += 1
+            row=row3Cnt, column=3, sticky=W, padx=20)
+        row3Cnt += 1
         self.root.ShowCharactersCheckbox.grid(
-            row=rowCnt, column=3, sticky=W, padx=20)
-        rowCnt += 1
+            row=row3Cnt, column=3, sticky=W, padx=20)
+        row3Cnt += 1
         self.root.ShowLocationsCheckbox.grid(
-            row=rowCnt, column=3, sticky=W, padx=20)
-        rowCnt += 1
+            row=row3Cnt, column=3, sticky=W, padx=20)
+        row3Cnt += 1
         self.root.ShowItemsCheckbox.grid(
-            row=rowCnt, column=3, sticky=W, padx=20)
+            row=row3Cnt, column=3, sticky=W, padx=20)
+
+        if row3Cnt > row2Cnt:
+            rowCnt = row3Cnt
+
+        else:
+            rowCnt = row2Cnt
+
+        if row1Cnt > rowCnt:
+            rowCnt = row1Cnt
 
         rowCnt += 1
         self.appInfo.grid(row=rowCnt, column=1,
@@ -260,11 +313,74 @@ class RpUi(UiTk):
         self.processInfo.grid(row=rowCnt, column=1,
                               columnspan=3, pady=10)
 
-        self.sourcePath = None
+        self._sourcePath = None
         self.set_info_what('No file selected')
         self.startDir = os.getcwd()
 
-        self.filters = {}
+        self.sceneFilter = Filter()
+        self.tags = []
+        self.characters = []
+        self.locations = []
+        self.items = []
+
+    @property
+    def sourcePath(self):
+        return self._sourcePath
+
+    @sourcePath.setter
+    def sourcePath(self, path):
+        """Set sourcePath updating the filter selector lists."""
+
+        self.locations = []
+        self.items = []
+
+        # Build filter selector lists.
+
+        if path is not None:
+            novel = Yw7File(path)
+
+            if novel.file_exists():
+                novel.read()
+
+                # Build tag list.
+
+                self.tags = []
+
+                for chId in novel.srtChapters:
+
+                    for scId in novel.chapters[chId].srtScenes:
+
+                        if novel.scenes[scId].tags:
+
+                            for tag in novel.scenes[scId].tags:
+
+                                if not tag in self.tags:
+                                    self.tags.append(tag)
+
+                # Build character list.
+
+                self.characters = []
+
+                for crId in novel.characters:
+                    self.characters.append(novel.characters[crId].title)
+
+                # Build location list.
+
+                self.locations = []
+
+                for lcId in novel.locations:
+                    self.locations.append(novel.locations[lcId].title)
+
+                # Build item list.
+
+                self.items = []
+
+                for itId in novel.items:
+                    self.items.append(novel.items[itId].title)
+
+            del novel
+
+        self._sourcePath = path
 
     def start(self):
         """Start the user interface.
@@ -304,7 +420,6 @@ class RpUi(UiTk):
     def convert_file(self):
         """Call the converter's conversion method, if a source file is selected.
         """
-        sceneFilter = Filter()
 
         self.processInfo.config(text='')
         self.successInfo.config(
@@ -312,7 +427,7 @@ class RpUi(UiTk):
 
         if self.sourcePath:
             kwargs = {'suffix': HtmlReport.SUFFIX,
-                      'sceneFilter': sceneFilter,
+                      'sceneFilter': self.sceneFilter,
                       'showChapters': self.ShowChapters.get(),
                       'showScenes': self.ShowScenes.get(),
                       'showNormalType': self.ShowNormalType.get(),

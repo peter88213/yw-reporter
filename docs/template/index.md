@@ -4,7 +4,7 @@
 
 yWriter projects include a variety of metadata about chapters and scenes in addition to the actual novel text. To display this metadata clearly, yWriter can output different HTML reports. 
 
-If the prefabricated reports are not enough for you, you can use the *yw-reporter* Python script to create configurable tables and display them in the web browser. This works with *.yw5*, *.yw6* and *.yw7* project files. 
+If the prefabricated reports are not enough for you, you can use the *yw-reporter* Python script to create configurable tables and display them in the web browser. This works with *.yw7* project files. 
 
 The *yw-reporter* script has a graphical user interface. However, a Python 3 installation is required to run it.
 

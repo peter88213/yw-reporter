@@ -14,11 +14,11 @@ from tkinter import ttk
 from pywriter.ui.ui_tk import UiTk
 from ywreporter.html_report import HtmlReport
 from pywriter.file.filter import Filter
+from pywriter.file.sc_tg_filter import ScTgFilter
 from pywriter.file.sc_vp_filter import ScVpFilter
 from pywriter.file.sc_cr_filter import ScCrFilter
 from pywriter.file.sc_lc_filter import ScLcFilter
 from pywriter.file.sc_it_filter import ScItFilter
-from pywriter.file.sc_tg_filter import ScTgFilter
 
 from pywriter.yw.yw7_file import Yw7File
 
@@ -56,16 +56,28 @@ class RpUi(UiTk):
     columnsTotal = 16
     tNone = 'None'
     tTags = 'Tag'
+    tViewpoints = 'Viewpoint'
     tCharacters = 'Character'
     tLocations = 'Location'
     tItems = 'Item'
-    filtersTotal = 4
+    filtersTotal = 6
 
     def __init__(self, title, description=None):
         """Make the converter object visible to the user interface 
         in order to make method calls possible.
         Add the widgets needed to invoke the converter manually.
         """
+        self.tags = []
+        self.viewpoints = []
+        self.vpIds = []
+        self.characters = []
+        self.crIds = []
+        self.locations = []
+        self.lcIds = []
+        self.items = []
+        self.itIds = []
+        self.filterCat = []
+
         self.converter = None
         self.infoWhatText = ''
         self.infoHowText = ''
@@ -109,7 +121,7 @@ class RpUi(UiTk):
         self.ShowCharacters = BooleanVar()
         self.ShowLocations = BooleanVar()
         self.ShowItems = BooleanVar()
-        self.Filter = IntVar()
+        self.FilterCatSelection = IntVar()
 
         self.root.ShowChaptersCheckbox = ttk.Checkbutton(
             text=self.tShowChapters, variable=self.ShowChapters, onvalue=True, offvalue=False)
@@ -159,17 +171,19 @@ class RpUi(UiTk):
             text=self.tShowItems, variable=self.ShowItems, onvalue=True, offvalue=False)
 
         self.root.NoneCheckbox = ttk.Radiobutton(
-            text=self.tNone, variable=self.Filter, value=0)
+            text=self.tNone, variable=self.FilterCatSelection, value=0, command=lambda: self.set_filter_category(0))
         self.root.TagsCheckbox = ttk.Radiobutton(
-            text=self.tTags, variable=self.Filter, value=1)
+            text=self.tTags, variable=self.FilterCatSelection, value=1, command=lambda: self.set_filter_category(1))
+        self.root.ViewpointsCheckbox = ttk.Radiobutton(
+            text=self.tViewpoints, variable=self.FilterCatSelection, value=2, command=lambda: self.set_filter_category(2))
         self.root.CharactersCheckbox = ttk.Radiobutton(
-            text=self.tCharacters, variable=self.Filter, value=2)
+            text=self.tCharacters, variable=self.FilterCatSelection, value=3, command=lambda: self.set_filter_category(3))
         self.root.LocationsCheckbox = ttk.Radiobutton(
-            text=self.tLocations, variable=self.Filter, value=3)
+            text=self.tLocations, variable=self.FilterCatSelection, value=4, command=lambda: self.set_filter_category(4))
         self.root.ItemsCheckbox = ttk.Radiobutton(
-            text=self.tItems, variable=self.Filter, value=4)
+            text=self.tItems, variable=self.FilterCatSelection, value=5, command=lambda: self.set_filter_category(5))
 
-        self.root.filterSpinbox = ttk.Spinbox(values=['one', 'two', 'three'])
+        self.root.filterCombobox = ttk.Combobox(values=[])
 
         self.root.selectButton = Button(
             text="Select file", command=self.select_file)
@@ -221,6 +235,9 @@ class RpUi(UiTk):
         self.root.TagsCheckbox.grid(
             row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
+        self.root.ViewpointsCheckbox.grid(
+            row=row2Cnt, column=2, sticky=W, padx=20)
+        row2Cnt += 1
         self.root.CharactersCheckbox.grid(
             row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
@@ -230,7 +247,7 @@ class RpUi(UiTk):
         self.root.ItemsCheckbox.grid(
             row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
-        self.root.filterSpinbox.grid(
+        self.root.filterCombobox.grid(
             row=row2Cnt, column=2, sticky=W, padx=20)
 
         row3Cnt = 1
@@ -317,12 +334,6 @@ class RpUi(UiTk):
         self.set_info_what('No file selected')
         self.startDir = os.getcwd()
 
-        self.sceneFilter = Filter()
-        self.tags = []
-        self.characters = []
-        self.locations = []
-        self.items = []
-
     @property
     def sourcePath(self):
         return self._sourcePath
@@ -342,9 +353,17 @@ class RpUi(UiTk):
             if novel.file_exists():
                 novel.read()
 
-                # Build tag list.
+                # Build tag and viewpoint list.
 
                 self.tags = []
+                self.vpIds = []
+                self.viewpoints = []
+                self.crIds = []
+                self.characters = []
+                self.lcIds = []
+                self.locations = []
+                self.itIds = []
+                self.items = []
 
                 for chId in novel.srtChapters:
 
@@ -357,28 +376,47 @@ class RpUi(UiTk):
                                 if not tag in self.tags:
                                     self.tags.append(tag)
 
-                # Build character list.
+                        if novel.scenes[scId].characters:
+                            vpId = novel.scenes[scId].characters[0]
 
-                self.characters = []
+                            if not vpId in self.vpIds:
+                                self.vpIds.append(vpId)
+                                self.viewpoints.append(
+                                    novel.characters[vpId].title)
 
-                for crId in novel.characters:
-                    self.characters.append(novel.characters[crId].title)
+                            for crId in novel.scenes[scId].characters:
 
-                # Build location list.
+                                if not crId in self.crIds:
+                                    self.crIds.append(crId)
+                                    self.characters.append(
+                                        novel.characters[crId].title)
 
-                self.locations = []
+                        if novel.scenes[scId].locations:
 
-                for lcId in novel.locations:
-                    self.locations.append(novel.locations[lcId].title)
+                            for lcId in novel.scenes[scId].locations:
 
-                # Build item list.
+                                if not lcId in self.lcIds:
+                                    self.lcIds.append(lcId)
+                                    self.locations.append(
+                                        novel.locations[lcId].title)
 
-                self.items = []
+                        if novel.scenes[scId].items:
 
-                for itId in novel.items:
-                    self.items.append(novel.items[itId].title)
+                            for itId in novel.scenes[scId].items:
+
+                                if not itId in self.itIds:
+                                    self.itIds.append(itId)
+                                    self.items.append(
+                                        novel.items[itId].title)
 
             del novel
+
+        # Initialize the filter category selection widgets.
+
+        self.filterCat = [[], self.tags, self.viewpoints,
+                          self.characters, self.locations, self.items]
+        self.set_filter_category(0)
+        self.FilterCatSelection.set(0)
 
         self._sourcePath = path
 
@@ -392,6 +430,16 @@ class RpUi(UiTk):
         """Stop the user interface.
         """
         self.root.destroy()
+
+    def set_filter_category(self, selection):
+        options = self.filterCat[selection]
+        self.root.filterCombobox['values'] = options
+
+        if options:
+            self.root.filterCombobox.set(options[0])
+
+        else:
+            self.root.filterCombobox.set('')
 
     def select_file(self):
         """Open a file dialog in order to set the sourcePath property.
@@ -425,9 +473,32 @@ class RpUi(UiTk):
         self.successInfo.config(
             bg=self.root.cget("background"))
 
+        # Filter options.
+
+        filterCat = self.FilterCatSelection.get()
+        option = self.root.filterCombobox.current()
+
+        if filterCat == 0:
+            sceneFilter = Filter()
+
+        elif filterCat == 1:
+            sceneFilter = ScTgFilter(self.tags[option])
+
+        elif filterCat == 2:
+            sceneFilter = ScVpFilter(self.vpIds[option])
+
+        elif filterCat == 3:
+            sceneFilter = ScCrFilter(self.crIds[option])
+
+        elif filterCat == 4:
+            sceneFilter = ScLcFilter(self.lcIds[option])
+
+        elif filterCat == 5:
+            sceneFilter = ScItFilter(self.itIds[option])
+
         if self.sourcePath:
             kwargs = {'suffix': HtmlReport.SUFFIX,
-                      'sceneFilter': self.sceneFilter,
+                      'sceneFilter': sceneFilter,
                       'showChapters': self.ShowChapters.get(),
                       'showScenes': self.ShowScenes.get(),
                       'showNormalType': self.ShowNormalType.get(),

@@ -26,21 +26,31 @@ You can generate as many reports with different options as you like without exit
 
 ### Options
 
-#### Level options
+#### Levels
 
 - **Include chapters** -- Create table rows for chapters as specified below.
 - **Include scenes** -- Create table rows for scenes as specified below.
 
-#### Type options
+#### Types
 
-- **Include normal** -- Create a table row for every "normal" chapter or scene.
-- **Include unused** -- Create a table row for every "unused" chapter or scene.
-- **Include notes** -- Create a table row for every chapter or scene marked "Notes" or "Info".
-- **Include todo** -- Create a table row for every chapter or scene marked "ToDo" (.yw7 only).
-- **Include unexported** -- Create table rows for scenes that won't be exported as RTF from yWriter.
+- **Include "normal" type** -- Create a table row for every "normal" chapter or scene.
+- **Include "unused" type** -- Create a table row for every "unused" chapter or scene.
+- **Include "notes" type** -- Create a table row for every chapter or scene marked "Notes" or "Info".
+- **Include "to do" type** -- Create a table row for every chapter or scene marked "ToDo" (.yw7 only).
+- **Include "do not export" type** -- Create table rows for scenes that won't be exported as RTF from yWriter.
+
+#### Filter
+- **None** -- Show all scenes matching the types above.
+- **Tag** -- Show only scenes with the selected tag.
+- **Viewpoint** -- Show only scenes with the selected viewpoint.
+- **Character** -- Show only scenes with the selected character.
+- **Location** -- Show only scenes with the selected location.
+- **Item** -- Show only scenes with the selected item.
+
 
 #### Columns
 
+- **Number** -- Create a column for chapter/scene numbers.
 - **Title** -- Create a column for chapter/scene titles.
 - **Description** -- Create a column for chapter/scene descriptions.
 - **Viewpoint** -- Create a column for scene viewpoints.
@@ -50,7 +60,8 @@ You can generate as many reports with different options as you like without exit
 - **Time** -- Create a column for either specific time or hour/minute.
 - **Duration** -- Create a column for days, hours, minutes the scene lasts.
 - **A/R-Goal-Conflict-Outcome** -- Create four columns (A/R, Goal etc.) 
-- **Ratings** -- Create four columns (scene rating 1-4).
+- **Scene ratings** -- Create four columns (scene rating 1-4).
+- **Words total** -- Create a column for incremental word count.
 - **Word count** -- Create a column for scene word count.
 - **Letter count** -- Create a column for scene letter count.
 - **Status** -- Create a column for scene status (Outline, Draft etc.)

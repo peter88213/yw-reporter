@@ -60,6 +60,11 @@ tr.notexp {font-style: italic}
         chColumns = []
         scColumns = []
 
+        if kwargs['showNumber']:
+            hdColumns.append('<th>Number</th>')
+            chColumns.append('<td class="chtitle">$ChapterNumber</td>')
+            scColumns.append('<td>$SceneNumber</td>')
+
         if kwargs['showTitle']:
             hdColumns.append('<th>Title</th>')
             chColumns.append('<td class="chtitle">$Title</td>')
@@ -127,6 +132,11 @@ tr.notexp {font-style: italic}
             hdColumns.append('<th>$FieldTitle4</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$Field4</td>')
+
+        if kwargs['showWordsTotal']:
+            hdColumns.append('<th>Words total</th>')
+            chColumns.append('<td></td>')
+            scColumns.append('<td>$WordsTotal</td>')
 
         if kwargs['showWordcount']:
             hdColumns.append('<th>Word count</th>')

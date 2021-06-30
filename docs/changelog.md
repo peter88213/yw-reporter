@@ -4,9 +4,14 @@
 
 ## Changelog
 
-### v0.6.0 Add filtering, abandon yw5 and yw6 support
+### v0.6.0 Major revision
 
-Based on PyWriter v 3.12.0
+- Abandon yw5 and yw6 support.
+- Add chapter/scene numbers.
+- Add Words total.
+- Add filtering.
+
+Based on PyWriter v 3.12.1
 
 ### v0.4.0 Add date, time and duration columns
 

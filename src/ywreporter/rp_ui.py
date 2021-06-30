@@ -37,6 +37,7 @@ class RpUi(UiTk):
     tShowTodoType = 'Include "to do" type'
     tShowUnexported = 'Include "do not export" type'
     typesTotal = 5
+    tShowNumber = 'Number'
     tShowTitle = 'Title'
     tShowDescription = 'Description'
     tShowTags = 'Tags'
@@ -46,6 +47,7 @@ class RpUi(UiTk):
     tShowDuration = 'Duration'
     tShowActionPattern = 'A/R-Goal-Conflict-Outcome'
     tShowRatings = 'Scene ratings'
+    tShowWordsTotal = 'Words total'
     tShowWordcount = 'Word count'
     tShowLettercount = 'Letter count'
     tShowStatus = 'Status'
@@ -53,7 +55,7 @@ class RpUi(UiTk):
     tShowCharacters = 'Characters'
     tShowLocations = 'Locations'
     tShowItems = 'Items'
-    columnsTotal = 16
+    columnsTotal = 18
     tNone = 'None'
     tTags = 'Tag'
     tViewpoints = 'Viewpoint'
@@ -105,6 +107,8 @@ class RpUi(UiTk):
         self.ShowNotesType = BooleanVar()
         self.ShowTodoType = BooleanVar()
         self.ShowUnexported = BooleanVar()
+
+        self.ShowNumber = BooleanVar()
         self.ShowTitle = BooleanVar()
         self.ShowDescription = BooleanVar()
         self.ShowViewpoint = BooleanVar()
@@ -115,6 +119,7 @@ class RpUi(UiTk):
         self.ShowDuration = BooleanVar()
         self.ShowActionPattern = BooleanVar()
         self.ShowRatings = BooleanVar()
+        self.ShowWordsTotal = BooleanVar()
         self.ShowWordcount = BooleanVar()
         self.ShowLettercount = BooleanVar()
         self.ShowStatus = BooleanVar()
@@ -137,6 +142,9 @@ class RpUi(UiTk):
             text=self.tShowTodoType, variable=self.ShowTodoType, onvalue=True, offvalue=False)
         self.root.ShowUnexportedCheckbox = ttk.Checkbutton(
             text=self.tShowUnexported, variable=self.ShowUnexported, onvalue=True, offvalue=False)
+
+        self.root.ShowNumberCheckbox = ttk.Checkbutton(
+            text=self.tShowNumber, variable=self.ShowNumber, onvalue=True, offvalue=False)
         self.root.ShowTitleCheckbox = ttk.Checkbutton(
             text=self.tShowTitle, variable=self.ShowTitle, onvalue=True, offvalue=False)
         self.root.ShowDescriptionCheckbox = ttk.Checkbutton(
@@ -157,6 +165,8 @@ class RpUi(UiTk):
             text=self.tShowActionPattern, variable=self.ShowActionPattern, onvalue=True, offvalue=False)
         self.root.ShowRatingsCheckbox = ttk.Checkbutton(
             text=self.tShowRatings, variable=self.ShowRatings, onvalue=True, offvalue=False)
+        self.root.ShowWordsTotalCheckbox = ttk.Checkbutton(
+            text=self.tShowWordsTotal, variable=self.ShowWordsTotal, onvalue=True, offvalue=False)
         self.root.ShowWordcountCheckbox = ttk.Checkbutton(
             text=self.tShowWordcount, variable=self.ShowWordcount, onvalue=True, offvalue=False)
         self.root.ShowLettercountCheckbox = ttk.Checkbutton(
@@ -254,6 +264,9 @@ class RpUi(UiTk):
         self.hdColumns.grid(row=row3Cnt, column=3, sticky=W,
                             padx=20)
         row3Cnt += 1
+        self.root.ShowNumberCheckbox.grid(
+            row=row3Cnt, column=3, sticky=W, padx=20)
+        row3Cnt += 1
         self.root.ShowTitleCheckbox.grid(
             row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
@@ -282,6 +295,9 @@ class RpUi(UiTk):
             row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
         self.root.ShowRatingsCheckbox.grid(
+            row=row3Cnt, column=3, sticky=W, padx=20)
+        row3Cnt += 1
+        self.root.ShowWordsTotalCheckbox.grid(
             row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
         self.root.ShowWordcountCheckbox.grid(
@@ -506,6 +522,7 @@ class RpUi(UiTk):
                       'showNotesType': self.ShowNotesType.get(),
                       'showTodoType': self.ShowTodoType.get(),
                       'showUnexported': self.ShowUnexported.get(),
+                      'showNumber': self.ShowNumber.get(),
                       'showTitle': self.ShowTitle.get(),
                       'showDescription': self.ShowDescription.get(),
                       'showViewpoint': self.ShowViewpoint.get(),
@@ -516,6 +533,7 @@ class RpUi(UiTk):
                       'showDuration': self.ShowDuration.get(),
                       'showActionPattern': self.ShowActionPattern.get(),
                       'showRatings': self.ShowRatings.get(),
+                      'showWordsTotal': self.ShowWordsTotal.get(),
                       'showWordcount': self.ShowWordcount.get(),
                       'showLettercount': self.ShowLettercount.get(),
                       'showStatus': self.ShowStatus.get(),

@@ -84,6 +84,8 @@ def run(sourcePath):
     ui.ShowUnexported.set(types[optionCnt])
 
     optionCnt = 0
+    ui.ShowNumber.set(columns[optionCnt])
+    optionCnt += 1
     ui.ShowTitle.set(columns[optionCnt])
     optionCnt += 1
     ui.ShowDescription.set(columns[optionCnt])
@@ -103,6 +105,8 @@ def run(sourcePath):
     ui.ShowActionPattern.set(columns[optionCnt])
     optionCnt += 1
     ui.ShowRatings.set(columns[optionCnt])
+    optionCnt += 1
+    ui.ShowWordsTotal.set(columns[optionCnt])
     optionCnt += 1
     ui.ShowWordcount.set(columns[optionCnt])
     optionCnt += 1
@@ -180,6 +184,8 @@ def run(sourcePath):
         config.add_section('COLUMNS')
 
     optionCnt = 0
+    config.set('COLUMNS', str(optionCnt), str(ui.ShowNumber.get()))
+    optionCnt += 1
     config.set('COLUMNS', str(optionCnt), str(ui.ShowTitle.get()))
     optionCnt += 1
     config.set('COLUMNS', str(optionCnt), str(ui.ShowDescription.get()))
@@ -199,6 +205,8 @@ def run(sourcePath):
     config.set('COLUMNS', str(optionCnt), str(ui.ShowActionPattern.get()))
     optionCnt += 1
     config.set('COLUMNS', str(optionCnt), str(ui.ShowRatings.get()))
+    optionCnt += 1
+    config.set('COLUMNS', str(optionCnt), str(ui.ShowWordsTotal.get()))
     optionCnt += 1
     config.set('COLUMNS', str(optionCnt), str(ui.ShowWordcount.get()))
     optionCnt += 1

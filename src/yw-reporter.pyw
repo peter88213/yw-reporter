@@ -59,9 +59,11 @@ def run(sourcePath):
         for i in range(RpUi.columnsTotal):
             columns.append(False)
 
+        # Extra Preset: Show "normal"/"Title"/"Description".
+
         types[0] = True
-        columns[0] = True
         columns[1] = True
+        columns[2] = True
 
     #--- Instantiate a user interface object
 

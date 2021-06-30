@@ -4,7 +4,7 @@
 
 ## Changelog
 
-### v0.6.0 Major revision
+### v1.0.0 Feature complete
 
 - Abandon yw5 and yw6 support.
 - Add chapter/scene numbers.

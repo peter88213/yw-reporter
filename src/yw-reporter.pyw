@@ -18,7 +18,8 @@ def run(sourcePath):
 
     #--- Try to get persistent configuration data
 
-    iniPath = os.getenv('APPDATA').replace('\\', '/') + '/yw-reporter'
+    iniPath = os.getenv('APPDATA').replace('\\', '/') + \
+        '/pyWriter/yw-reporter/config'
 
     if not os.path.isdir(iniPath):
         os.makedirs(iniPath)

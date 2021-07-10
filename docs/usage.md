@@ -6,12 +6,12 @@ The *yw-reporter* Python script creates configurable reports from yWriter projec
 
 ## Usage
 
-It is recommended to create a link on the desktop.
+The included installation script creates a shortcut on the desktop. 
 
 You can either
 
-- launch the program by double-clicking on the program/link icon, or
-- launch the program by dragging a yWriter project file and dropping it on the program/link icon.
+- launch the program by double-clicking on the shortcut icon, or
+- launch the program by dragging a yWriter project file and dropping it on the shortcut icon.
 
 The report generator processes yw7 project files. If no yWriter project is specified by dragging and dropping on the program icon, the latest project selected is preset. You can change it with **Select File**.
 
@@ -76,6 +76,13 @@ The latest yWriter project selected and the latest options are saved in a config
 
 In Windows, this is the file path: 
 
-`c:\Users\<user name>\AppData\Roaming\yw-reporter\yw-reporter.ini`
+`c:\Users\<user name>\AppData\Roaming\PyWriter\yw-reporter\config\yw-reporter.ini`
 
 You can safely delete this file at any time.
+
+## Installation path
+
+The **install.bat** installation script installs *yw-reporter.pyw* in the user profile. This is the installation path: 
+
+`c:\Users\<user name>\AppData\Roaming\PyWriter\yw-reporter`
+

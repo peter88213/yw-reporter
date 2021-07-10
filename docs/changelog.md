@@ -4,6 +4,14 @@
 
 ## Changelog
 
+### v1.0.1 Include installation script
+
+**install.bat** installs the script for the local user and creates a 
+shortcut on the desktop.
+The Configuration file's path has moved to a subfolder of the installation path.
+
+Based on PyWriter v3.12.7
+
 ### v1.0.0 Feature complete
 
 - Abandon yw5 and yw6 support.

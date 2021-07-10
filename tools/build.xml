@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="yw-reporter" basedir=".">
-	<property name="release" value="1.0.0" />
+	<property name="release" value="1.0.1" />
 	<property name="src" location="../src" />
 	<property name="test" location="../test" />
 	<property name="build" location="../build" />
@@ -29,15 +29,17 @@
 		
 		<mkdir dir="${build}" />
 		<mkdir dir="${dist}" />
-		<mkdir dir="${build}/yw-reporter_v${release}" />
+		<mkdir dir="${build}/${release-name}" />
 
-		<copy file="${test}/yw-reporter.pyw" todir="${build}/yw-reporter_v${release}" />
-		<replace encoding="utf-8" file="${build}/yw-reporter_v${release}/yw-reporter.pyw" token="@release" value="${release}" />
+		<copy file="./install.bat" todir="${build}/${release-name}" />
+		
+		<copy file="${test}/yw-reporter.pyw" todir="${build}/${release-name}" />
+		<replace encoding="utf-8" file="${build}/${release-name}/yw-reporter.pyw" token="@release" value="${release}" />
 
-		<copy file="../LICENSE" todir="${build}/yw-reporter_v${release}" />
-		<copy file="${docs}/usage.md" tofile="${build}/yw-reporter_v${release}/README.md" />
+		<copy file="../LICENSE" todir="${build}/${release-name}" />
+		<copy file="${docs}/usage.md" tofile="${build}/${release-name}/README.md" />
 
-		<zip destfile="${dist}/yw-reporter_v${release}.zip" basedir="${build}/yw-reporter_v${release}" />
+		<zip destfile="${dist}/yw-reporter_v${release}.zip" basedir="${build}/${release-name}" />
 
 		<copy file="${docs}/template/index.md" overwrite="True" todir="${docs}" />
 		<replace encoding="utf-8" file="${docs}/index.md" token="0.99.0" value="${release}" />

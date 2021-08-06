@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v1.0.2 No automatic shortcut creation
+
+- Due to sporadic security warnings, the automatic shortcut creation during installation is removed. The user is now guided to create the application shortcut manually.  
+
+Based on PyWriter v3.16.0
+
 ### v1.0.1 Include installation script
 
 **install.bat** installs the script for the local user and creates a 

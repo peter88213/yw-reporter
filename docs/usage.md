@@ -6,7 +6,7 @@ The *yw-reporter* Python script creates configurable reports from yWriter projec
 
 ## Usage
 
-The included installation script creates a shortcut on the desktop. 
+The included installation script prompts you to create a shortcut on the desktop. 
 
 You can either
 

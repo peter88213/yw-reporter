@@ -14,8 +14,8 @@ import inliner
 
 SRC = '../src/'
 BUILD = '../test/'
-SOURCE_FILE_GUI = 'yw-reporter.pyw'
-TARGET_FILE_GUI = BUILD + 'yw-reporter.pyw'
+SOURCE_FILE_GUI = 'yw_reporter_.pyw'
+TARGET_FILE_GUI = BUILD + 'yw_reporter.pyw'
 
 
 def main():
@@ -23,12 +23,6 @@ def main():
 
     try:
         os.remove(TARGET_FILE_GUI)
-
-    except:
-        pass
-
-    try:
-        os.remove(TARGET_FILE_CMD)
 
     except:
         pass

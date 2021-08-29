@@ -12,14 +12,14 @@
 	<target name="build" description="inline all library modules">
 		<delete file="${test}/yw-reporter.py" />
 		<exec executable="python" failonerror="true">
-		    <arg value="${src}/build_yw-reporter.py"/>
+		    <arg value="${src}/build_yw_reporter.py"/>
 		</exec>
 		<fixcrlf encoding="utf-8" eol="lf" srcdir="${test}" includes="**/*.py" />
 	</target>
 
 	<target name="test" description="inline all library modules">
 		<exec executable="python" failonerror="true">
-		    <arg value="${test}/test_yw-reporter.py"/>
+		    <arg value="${test}/test_yw_reporter.py"/>
 		</exec>
 	</target>
 
@@ -33,7 +33,7 @@
 
 		<copy file="./install.bat" todir="${build}/${release-name}" />
 		
-		<copy file="${test}/yw-reporter.pyw" todir="${build}/${release-name}" />
+		<copy file="${test}/yw_reporter.pyw" tofile="${build}/${release-name}/yw-reporter.pyw" />
 		<replace encoding="utf-8" file="${build}/${release-name}/yw-reporter.pyw" token="@release" value="${release}" />
 
 		<copy file="../LICENSE" todir="${build}/${release-name}" />
@@ -48,7 +48,7 @@
 
 	<target name="clean" description="clean up">
 		
-		<delete file="${test}/yw-reporter.pyw" />
+		<delete file="${test}/yw_reporter.pyw" />
 		
 	</target>
 

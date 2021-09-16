@@ -8,8 +8,11 @@ For further information see https://github.com/peter88213/yw-reporter
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
 import os
+import sys
 import argparse
 from configparser import ConfigParser
+
+from pywriter.ui.ui import Ui
 
 from ywreporter.rp_converter import RpConverter
 from ywreporter.rp_ui import RpUi
@@ -65,6 +68,12 @@ def run(sourcePath, silentMode=True, installDir='./'):
         columns[2] = True
 
     #--- Instantiate a user interface object
+
+    if silentMode:
+        ui = Ui
+        converter = RpConverter()
+        converter.run(sourcePath)
+        sys.exit(0)
 
     ui = RpUi('yWriter report generator @release')
 
@@ -226,16 +235,21 @@ def run(sourcePath, silentMode=True, installDir='./'):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(
-        description='yWriter report generator',
-        epilog='')
-    parser.add_argument('sourcePath',
-                        metavar='Sourcefile',
-                        help='The path of the yWriter project file.')
-
-    parser.add_argument('--silent',
-                        action="store_true",
-                        help='suppress error messages and the request to confirm overwriting')
-    args = parser.parse_args()
     installDir = os.getenv('APPDATA').replace('\\', '/') + '/pyWriter/' + APPNAME + '/config/'
-    run(args.sourcePath, args.silent, installDir)
+
+    if len(sys.argv) == 1:
+        run(None, False, installDir)
+
+    else:
+        parser = argparse.ArgumentParser(
+            description='yWriter report generator',
+            epilog='')
+        parser.add_argument('sourcePath',
+                            metavar='Sourcefile',
+                            help='The path of the yWriter project file.')
+
+        parser.add_argument('--silent',
+                            action="store_true",
+                            help='suppress error messages and the request to confirm overwriting')
+        args = parser.parse_args()
+        run(args.sourcePath, args.silent, installDir)

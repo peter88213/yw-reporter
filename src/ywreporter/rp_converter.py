@@ -13,4 +13,4 @@ from ywreporter.html_report import HtmlReport
 class RpConverter(YwCnvUi):
     """A converter class for html report."""
     EXPORT_SOURCE_CLASSES = [Yw7File]
-    EXPORT_TARGET_CLASSES = [HtmlReport, ]
+    EXPORT_TARGET_CLASSES = [HtmlReport]

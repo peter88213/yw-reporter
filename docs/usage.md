@@ -70,6 +70,12 @@ You can generate as many reports with different options as you like without exit
 - **Items** -- Create a column for items in scene (comma separated).
 
 
+#### Output
+
+- **HTML** -- Create a HTML file and open it with the default Web browser.
+- **CSV** -- Create a CSV (comma separated values) file and open it with the default CSV application.
+
+
 ## Configuration file
 
 The latest yWriter project selected and the latest options are saved in a configuration file. 

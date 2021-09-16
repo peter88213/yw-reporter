@@ -6,6 +6,8 @@ yWriter projects include a variety of metadata about chapters and scenes in addi
 
 If the prefabricated reports are not enough for you, you can use the *yw-reporter* Python script to create configurable tables and display them in the web browser. This works with *.yw7* project files. 
 
+Alternatively, the report can be generated as a CSV file for spreadsheet programs.
+
 The *yw-reporter* script has a graphical user interface. However, a Python 3 installation is required to run it.
 
 ## Requirements

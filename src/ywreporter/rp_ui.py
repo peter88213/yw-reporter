@@ -13,6 +13,7 @@ from tkinter import ttk
 
 from pywriter.ui.ui_tk import UiTk
 from ywreporter.html_report import HtmlReport
+from ywreporter.csv_report import CsvReport
 from pywriter.file.filter import Filter
 from pywriter.file.sc_tg_filter import ScTgFilter
 from pywriter.file.sc_vp_filter import ScVpFilter
@@ -21,6 +22,7 @@ from pywriter.file.sc_lc_filter import ScLcFilter
 from pywriter.file.sc_it_filter import ScItFilter
 
 from pywriter.yw.yw7_file import Yw7File
+from pywriter.converter.export_target_factory import ExportTargetFactory
 
 
 class RpUi(UiTk):
@@ -63,6 +65,8 @@ class RpUi(UiTk):
     tLocations = 'Location'
     tItems = 'Item'
     filtersTotal = 6
+    tHtml = 'HTML'
+    tCsv = 'CSV'
 
     def __init__(self, title, description=None):
         """Make the converter object visible to the user interface 
@@ -92,6 +96,7 @@ class RpUi(UiTk):
         self.hdTypes = Label(self.root, text='Types')
         self.hdFilters = Label(self.root, text='Filter')
         self.hdColumns = Label(self.root, text='Columns')
+        self.hdOutput = Label(self.root, text='Output')
         self.appInfo = Label(self.root, text='')
         self.appInfo.config(height=2, width=80)
 
@@ -127,6 +132,7 @@ class RpUi(UiTk):
         self.ShowLocations = BooleanVar()
         self.ShowItems = BooleanVar()
         self.FilterCatSelection = IntVar()
+        self.OutputSelection = IntVar()
 
         self.root.ShowChaptersCheckbox = ttk.Checkbutton(
             text=self.tShowChapters, variable=self.ShowChapters, onvalue=True, offvalue=False)
@@ -195,6 +201,12 @@ class RpUi(UiTk):
 
         self.root.filterCombobox = ttk.Combobox(values=[])
 
+        self.root.htmlCheckbox = ttk.Radiobutton(
+            text=self.tHtml, variable=self.OutputSelection, value=0, command=lambda: self.set_output_mode(0))
+
+        self.root.csvCheckbox = ttk.Radiobutton(
+            text=self.tCsv, variable=self.OutputSelection, value=1, command=lambda: self.set_output_mode(1))
+
         self.root.selectButton = Button(
             text="Select file", command=self.select_file)
         self.root.selectButton.config(height=1, width=20)
@@ -258,6 +270,15 @@ class RpUi(UiTk):
             row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
         self.root.filterCombobox.grid(
+            row=row2Cnt, column=2, sticky=W, padx=20)
+
+        row2Cnt += 2
+        self.hdOutput.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+        row2Cnt += 1
+        self.root.htmlCheckbox.grid(
+            row=row2Cnt, column=2, sticky=W, padx=20)
+        row2Cnt += 1
+        self.root.csvCheckbox.grid(
             row=row2Cnt, column=2, sticky=W, padx=20)
 
         row3Cnt = 1
@@ -456,6 +477,14 @@ class RpUi(UiTk):
 
         else:
             self.root.filterCombobox.set('')
+
+    def set_output_mode(self, selection):
+
+        if selection == 1:
+            self.converter.exportTargetFactory = ExportTargetFactory([CsvReport])
+
+        else:
+            self.converter.exportTargetFactory = ExportTargetFactory([HtmlReport])
 
     def select_file(self):
         """Open a file dialog in order to set the sourcePath property.

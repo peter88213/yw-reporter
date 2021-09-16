@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v1.1.0 Optional CSV report
+
+The report can optionally be output in csv format instead of HTML.
+
+Based on PyWriter v3.22.0
+
 ### v1.0.3 Bugfix release
 
 This release is strongly recommended.

@@ -7,25 +7,22 @@ Copyright (c) 2021 Peter Triesberger
 For further information see https://github.com/peter88213/yw-reporter
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
-import sys
 import os
+import argparse
 from configparser import ConfigParser
 
 from ywreporter.rp_converter import RpConverter
 from ywreporter.rp_ui import RpUi
 
+APPNAME = 'yw-reporter'
 
-def run(sourcePath):
 
-    #--- Try to get persistent configuration data
+def run(sourcePath, silentMode=True, installDir='./'):
 
-    iniPath = os.getenv('APPDATA').replace('\\', '/') + \
-        '/pyWriter/yw-reporter/config'
+    if not os.path.isdir(installDir):
+        os.makedirs(installDir)
 
-    if not os.path.isdir(iniPath):
-        os.makedirs(iniPath)
-
-    iniFile = iniPath + '/yw-reporter.ini'
+    iniFile = installDir + APPNAME + '.ini'
     config = ConfigParser()
 
     levels = []
@@ -229,11 +226,16 @@ def run(sourcePath):
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(
+        description='yWriter report generator',
+        epilog='')
+    parser.add_argument('sourcePath',
+                        metavar='Sourcefile',
+                        help='The path of the yWriter project file.')
 
-    try:
-        sourcePath = sys.argv[1].replace('\\', '/')
-
-    except:
-        sourcePath = None
-
-    run(sourcePath)
+    parser.add_argument('--silent',
+                        action="store_true",
+                        help='suppress error messages and the request to confirm overwriting')
+    args = parser.parse_args()
+    installDir = os.getenv('APPDATA').replace('\\', '/') + '/pyWriter/' + APPNAME + '/config/'
+    run(args.sourcePath, args.silent, installDir)

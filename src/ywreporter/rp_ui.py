@@ -481,10 +481,10 @@ class RpUi(UiTk):
     def set_output_mode(self, selection):
 
         if selection == 1:
-            self.converter.exportTargetFactory = ExportTargetFactory([CsvReport])
+            self.converter.exportTargetFactory.fileClasses = [CsvReport]
 
         else:
-            self.converter.exportTargetFactory = ExportTargetFactory([HtmlReport])
+            self.converter.exportTargetFactory.fileClasses = [HtmlReport]
 
     def select_file(self):
         """Open a file dialog in order to set the sourcePath property.

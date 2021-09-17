@@ -22,7 +22,6 @@ from pywriter.file.sc_lc_filter import ScLcFilter
 from pywriter.file.sc_it_filter import ScItFilter
 
 from pywriter.yw.yw7_file import Yw7File
-from pywriter.converter.export_target_factory import ExportTargetFactory
 
 
 class RpUi(UiTk):
@@ -68,11 +67,12 @@ class RpUi(UiTk):
     tHtml = 'HTML'
     tCsv = 'CSV'
 
-    def __init__(self, title, description=None):
+    def __init__(self, title, description=None, sourcePath=None, **kwargs):
         """Make the converter object visible to the user interface 
         in order to make method calls possible.
         Add the widgets needed to invoke the converter manually.
         """
+        self.kwargs = kwargs
         self.tags = []
         self.viewpoints = []
         self.vpIds = []
@@ -105,32 +105,32 @@ class RpUi(UiTk):
 
         self.processInfo = Label(self.root, text='')
 
-        self.ShowChapters = BooleanVar()
-        self.ShowScenes = BooleanVar()
-        self.ShowNormalType = BooleanVar()
-        self.ShowUnusedType = BooleanVar()
-        self.ShowNotesType = BooleanVar()
-        self.ShowTodoType = BooleanVar()
-        self.ShowUnexported = BooleanVar()
+        self.ShowChapters = BooleanVar(value=kwargs['showChapters'])
+        self.ShowScenes = BooleanVar(value=kwargs['showScenes'])
+        self.ShowNormalType = BooleanVar(value=kwargs['showNormalType'])
+        self.ShowUnusedType = BooleanVar(value=kwargs['showUnusedType'])
+        self.ShowNotesType = BooleanVar(value=kwargs['showNotesType'])
+        self.ShowTodoType = BooleanVar(value=kwargs['showTodoType'])
+        self.ShowUnexported = BooleanVar(value=kwargs['showUnexported'])
 
-        self.ShowNumber = BooleanVar()
-        self.ShowTitle = BooleanVar()
-        self.ShowDescription = BooleanVar()
-        self.ShowViewpoint = BooleanVar()
-        self.ShowTags = BooleanVar()
-        self.ShowNotes = BooleanVar()
-        self.ShowDate = BooleanVar()
-        self.ShowTime = BooleanVar()
-        self.ShowDuration = BooleanVar()
-        self.ShowActionPattern = BooleanVar()
-        self.ShowRatings = BooleanVar()
-        self.ShowWordsTotal = BooleanVar()
-        self.ShowWordcount = BooleanVar()
-        self.ShowLettercount = BooleanVar()
-        self.ShowStatus = BooleanVar()
-        self.ShowCharacters = BooleanVar()
-        self.ShowLocations = BooleanVar()
-        self.ShowItems = BooleanVar()
+        self.ShowNumber = BooleanVar(value=kwargs['showNumber'])
+        self.ShowTitle = BooleanVar(value=kwargs['showTitle'])
+        self.ShowDescription = BooleanVar(value=kwargs['showDescription'])
+        self.ShowViewpoint = BooleanVar(value=kwargs['showViewpoint'])
+        self.ShowTags = BooleanVar(value=kwargs['showTags'])
+        self.ShowNotes = BooleanVar(value=kwargs['showNotes'])
+        self.ShowDate = BooleanVar(value=kwargs['showDate'])
+        self.ShowTime = BooleanVar(value=kwargs['showTime'])
+        self.ShowDuration = BooleanVar(value=kwargs['showDuration'])
+        self.ShowActionPattern = BooleanVar(value=kwargs['showActionPattern'])
+        self.ShowRatings = BooleanVar(value=kwargs['showRatings'])
+        self.ShowWordsTotal = BooleanVar(value=kwargs['showWordsTotal'])
+        self.ShowWordcount = BooleanVar(value=kwargs['showWordcount'])
+        self.ShowLettercount = BooleanVar(value=kwargs['showLettercount'])
+        self.ShowStatus = BooleanVar(value=kwargs['showStatus'])
+        self.ShowCharacters = BooleanVar(value=kwargs['showCharacters'])
+        self.ShowLocations = BooleanVar(value=kwargs['showLocations'])
+        self.ShowItems = BooleanVar(value=kwargs['showItems'])
         self.FilterCatSelection = IntVar()
         self.OutputSelection = IntVar()
 
@@ -207,12 +207,10 @@ class RpUi(UiTk):
         self.root.csvCheckbox = ttk.Radiobutton(
             text=self.tCsv, variable=self.OutputSelection, value=1, command=lambda: self.set_output_mode(1))
 
-        self.root.selectButton = Button(
-            text="Select file", command=self.select_file)
+        self.root.selectButton = Button(text="Select file", command=self.select_file)
         self.root.selectButton.config(height=1, width=20)
 
-        self.root.runButton = Button(
-            text='Create report', command=self.convert_file)
+        self.root.runButton = Button(text='Create report', command=self.convert_file)
         self.root.runButton.config(height=1, width=20)
         self.root.runButton.config(state='disabled')
 
@@ -223,121 +221,86 @@ class RpUi(UiTk):
         self.hdLevels.grid(row=row1Cnt, column=1, sticky=W, padx=20)
 
         row1Cnt += 1
-        self.root.ShowChaptersCheckbox.grid(
-            row=row1Cnt, column=1, sticky=W, padx=20)
+        self.root.ShowChaptersCheckbox.grid(row=row1Cnt, column=1, sticky=W, padx=20)
         row1Cnt += 1
-        self.root.ShowScenesCheckbox.grid(
-            row=row1Cnt, column=1, sticky=W, padx=20)
+        self.root.ShowScenesCheckbox.grid(row=row1Cnt, column=1, sticky=W, padx=20)
 
         row2Cnt = 1
         self.hdTypes.grid(row=row2Cnt, column=2, sticky=W, padx=20)
 
         row2Cnt += 1
-        self.root.ShowNormalTypeCheckbox.grid(
-            row=row2Cnt, column=2, sticky=W, padx=20)
+        self.root.ShowNormalTypeCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
-        self.root.ShowUnusedTypeCheckbox.grid(
-            row=row2Cnt, column=2, sticky=W, padx=20)
+        self.root.ShowUnusedTypeCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
-        self.root.ShowNotesTypeCheckbox.grid(
-            row=row2Cnt, column=2, sticky=W, padx=20)
+        self.root.ShowNotesTypeCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
-        self.root.ShowTodoTypeCheckbox.grid(
-            row=row2Cnt, column=2, sticky=W, padx=20)
+        self.root.ShowTodoTypeCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
-        self.root.ShowUnexportedCheckbox.grid(
-            row=row2Cnt, column=2, sticky=W, padx=20)
+        self.root.ShowUnexportedCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
 
         row2Cnt += 2
         self.hdFilters.grid(row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
-        self.root.NoneCheckbox.grid(
-            row=row2Cnt, column=2, sticky=W, padx=20)
+        self.root.NoneCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
-        self.root.TagsCheckbox.grid(
-            row=row2Cnt, column=2, sticky=W, padx=20)
+        self.root.TagsCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
-        self.root.ViewpointsCheckbox.grid(
-            row=row2Cnt, column=2, sticky=W, padx=20)
+        self.root.ViewpointsCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
-        self.root.CharactersCheckbox.grid(
-            row=row2Cnt, column=2, sticky=W, padx=20)
+        self.root.CharactersCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
-        self.root.LocationsCheckbox.grid(
-            row=row2Cnt, column=2, sticky=W, padx=20)
+        self.root.LocationsCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
-        self.root.ItemsCheckbox.grid(
-            row=row2Cnt, column=2, sticky=W, padx=20)
+        self.root.ItemsCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
-        self.root.filterCombobox.grid(
-            row=row2Cnt, column=2, sticky=W, padx=20)
+        self.root.filterCombobox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
 
         row2Cnt += 2
         self.hdOutput.grid(row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
-        self.root.htmlCheckbox.grid(
-            row=row2Cnt, column=2, sticky=W, padx=20)
+        self.root.htmlCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
-        self.root.csvCheckbox.grid(
-            row=row2Cnt, column=2, sticky=W, padx=20)
+        self.root.csvCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
 
         row3Cnt = 1
-        self.hdColumns.grid(row=row3Cnt, column=3, sticky=W,
-                            padx=20)
+        self.hdColumns.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowNumberCheckbox.grid(
-            row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.ShowNumberCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowTitleCheckbox.grid(
-            row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.ShowTitleCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowDescriptionCheckbox.grid(
-            row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.ShowDescriptionCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowViewpointCheckbox.grid(
-            row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.ShowViewpointCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowTagsCheckbox.grid(
-            row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.ShowTagsCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowNotesCheckbox.grid(
-            row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.ShowNotesCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowDateCheckbox.grid(
-            row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.ShowDateCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowTimeCheckbox.grid(
-            row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.ShowTimeCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowDurationCheckbox.grid(
-            row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.ShowDurationCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowActionPatternCheckbox.grid(
-            row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.ShowActionPatternCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowRatingsCheckbox.grid(
-            row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.ShowRatingsCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowWordsTotalCheckbox.grid(
-            row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.ShowWordsTotalCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowWordcountCheckbox.grid(
-            row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.ShowWordcountCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowLettercountCheckbox.grid(
-            row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.ShowLettercountCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowStatusCheckbox.grid(
-            row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.ShowStatusCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowCharactersCheckbox.grid(
-            row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.ShowCharactersCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowLocationsCheckbox.grid(
-            row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.ShowLocationsCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowItemsCheckbox.grid(
-            row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.ShowItemsCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
 
         if row3Cnt > row2Cnt:
             rowCnt = row3Cnt
@@ -349,27 +312,39 @@ class RpUi(UiTk):
             rowCnt = row1Cnt
 
         rowCnt += 1
-        self.appInfo.grid(row=rowCnt, column=1,
-                          columnspan=3, pady=10)
+        self.appInfo.grid(row=rowCnt, column=1, columnspan=3, pady=10)
 
         rowCnt += 1
-        self.root.selectButton.grid(
-            row=rowCnt, column=1, padx=10, pady=10, sticky=W)
-        self.root.runButton.grid(row=rowCnt, column=2,
-                                 padx=10, pady=10, sticky=E)
-        self.root.quitButton.grid(
-            row=rowCnt, column=3, padx=10, pady=10, sticky=E)
+        self.root.selectButton.grid(row=rowCnt, column=1, padx=10, pady=10, sticky=W)
+        self.root.runButton.grid(row=rowCnt, column=2, padx=10, pady=10, sticky=E)
+        self.root.quitButton.grid(row=rowCnt, column=3, padx=10, pady=10, sticky=E)
 
         rowCnt += 1
         self.successInfo.grid(row=rowCnt, column=1, columnspan=3)
 
         rowCnt += 1
-        self.processInfo.grid(row=rowCnt, column=1,
-                              columnspan=3, pady=10)
+        self.processInfo.grid(row=rowCnt, column=1, columnspan=3, pady=10)
 
-        self._sourcePath = None
-        self.set_info_what('No file selected')
-        self.startDir = os.getcwd()
+        self.sourcePath = None
+
+        if kwargs['yw_last_open']:
+
+            if os.path.isfile(kwargs['yw_last_open']):
+                self.sourcePath = kwargs['yw_last_open']
+
+        if sourcePath:
+
+            if os.path.isfile(sourcePath):
+                self.sourcePath = sourcePath
+
+        if self.sourcePath is not None:
+            self.set_info_what('File: ' + os.path.normpath(self.sourcePath))
+            self.root.runButton.config(state='normal')
+
+        else:
+            self._sourcePath = None
+            self.set_info_what('No file selected')
+            self.startDir = os.getcwd()
 
     @property
     def sourcePath(self):
@@ -542,35 +517,37 @@ class RpUi(UiTk):
             sceneFilter = ScItFilter(self.itIds[option])
 
         if self.sourcePath:
-            kwargs = {'suffix': HtmlReport.SUFFIX,
-                      'sceneFilter': sceneFilter,
-                      'showChapters': self.ShowChapters.get(),
-                      'showScenes': self.ShowScenes.get(),
-                      'showNormalType': self.ShowNormalType.get(),
-                      'showUnusedType': self.ShowUnusedType.get(),
-                      'showNotesType': self.ShowNotesType.get(),
-                      'showTodoType': self.ShowTodoType.get(),
-                      'showUnexported': self.ShowUnexported.get(),
-                      'showNumber': self.ShowNumber.get(),
-                      'showTitle': self.ShowTitle.get(),
-                      'showDescription': self.ShowDescription.get(),
-                      'showViewpoint': self.ShowViewpoint.get(),
-                      'showTags': self.ShowTags.get(),
-                      'showNotes': self.ShowNotes.get(),
-                      'showDate': self.ShowDate.get(),
-                      'showTime': self.ShowTime.get(),
-                      'showDuration': self.ShowDuration.get(),
-                      'showActionPattern': self.ShowActionPattern.get(),
-                      'showRatings': self.ShowRatings.get(),
-                      'showWordsTotal': self.ShowWordsTotal.get(),
-                      'showWordcount': self.ShowWordcount.get(),
-                      'showLettercount': self.ShowLettercount.get(),
-                      'showStatus': self.ShowStatus.get(),
-                      'showCharacters': self.ShowCharacters.get(),
-                      'showLocations': self.ShowLocations.get(),
-                      'showItems': self.ShowItems.get(),
-                      }
-            self.converter.run(self.sourcePath, **kwargs)
+            self.kwargs = {
+                'yw_last_open': self.sourcePath,
+                'suffix': HtmlReport.SUFFIX,
+                'sceneFilter': sceneFilter,
+                'showChapters': self.ShowChapters.get(),
+                'showScenes': self.ShowScenes.get(),
+                'showNormalType': self.ShowNormalType.get(),
+                'showUnusedType': self.ShowUnusedType.get(),
+                'showNotesType': self.ShowNotesType.get(),
+                'showTodoType': self.ShowTodoType.get(),
+                'showUnexported': self.ShowUnexported.get(),
+                'showNumber': self.ShowNumber.get(),
+                'showTitle': self.ShowTitle.get(),
+                'showDescription': self.ShowDescription.get(),
+                'showViewpoint': self.ShowViewpoint.get(),
+                'showTags': self.ShowTags.get(),
+                'showNotes': self.ShowNotes.get(),
+                'showDate': self.ShowDate.get(),
+                'showTime': self.ShowTime.get(),
+                'showDuration': self.ShowDuration.get(),
+                'showActionPattern': self.ShowActionPattern.get(),
+                'showRatings': self.ShowRatings.get(),
+                'showWordsTotal': self.ShowWordsTotal.get(),
+                'showWordcount': self.ShowWordcount.get(),
+                'showLettercount': self.ShowLettercount.get(),
+                'showStatus': self.ShowStatus.get(),
+                'showCharacters': self.ShowCharacters.get(),
+                'showLocations': self.ShowLocations.get(),
+                'showItems': self.ShowItems.get(),
+            }
+            self.converter.run(self.sourcePath, **self.kwargs)
 
             if self.converter.newFile is not None:
                 webbrowser.open(self.converter.newFile)

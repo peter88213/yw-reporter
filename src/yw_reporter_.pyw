@@ -56,7 +56,7 @@ OPTIONS = dict(
 
 def run(sourcePath, silentMode=True, installDir=''):
 
-    #--- Load configuration from available sources
+    #--- Load configuration
 
     sourceDir = os.path.dirname(sourcePath)
 
@@ -66,14 +66,9 @@ def run(sourcePath, silentMode=True, installDir=''):
     else:
         sourceDir += '/'
 
-    iniFileName = APPNAME + '.ini'
-    iniFiles = [installDir + iniFileName, sourceDir + iniFileName]
-
+    iniFile = installDir + APPNAME + '.ini'
     configuration = Configuration(SETTINGS, OPTIONS)
-
-    for iniFile in iniFiles:
-        configuration.read(iniFile)
-
+    configuration.read(iniFile)
     kwargs = dict(
         suffix=SUFFIX,
         sceneFilter=Filter()
@@ -102,7 +97,7 @@ def run(sourcePath, silentMode=True, installDir=''):
             elif keyword in configuration.settings:
                 configuration.settings[keyword] = converter.ui.kwargs[keyword]
 
-            configuration.write(sourceDir + iniFileName)
+            configuration.write(iniFile)
 
 
 if __name__ == '__main__':

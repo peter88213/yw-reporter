@@ -4,7 +4,7 @@
 
 ## Changelog
 
-### v1.1.0 Optional CSV report
+### v1.2.0 Optional CSV report
 
 The report can optionally be output in csv format instead of HTML.
 

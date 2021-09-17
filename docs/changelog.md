@@ -4,6 +4,13 @@
 
 ## Changelog
 
+### v1.4.0 Add output selector to the configuration file
+
+- The configuration file has a new format.
+- Major refactoring to enable automated testing.
+
+Based on PyWriter v3.24.3
+
 ### v1.2.0 Optional CSV report
 
 The report can optionally be output in csv format instead of HTML.

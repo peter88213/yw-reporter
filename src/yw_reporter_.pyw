@@ -23,6 +23,7 @@ APPNAME = 'yw-reporter'
 
 SETTINGS = dict(
     yw_last_open='',
+    outputSelection=0,
 )
 
 OPTIONS = dict(

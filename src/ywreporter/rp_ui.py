@@ -132,7 +132,7 @@ class RpUi(UiTk):
         self.ShowLocations = BooleanVar(value=kwargs['showLocations'])
         self.ShowItems = BooleanVar(value=kwargs['showItems'])
         self.FilterCatSelection = IntVar()
-        self.OutputSelection = IntVar()
+        self.OutputSelection = IntVar(value=kwargs['outputSelection'])
 
         self.root.ShowChaptersCheckbox = ttk.Checkbutton(
             text=self.tShowChapters, variable=self.ShowChapters, onvalue=True, offvalue=False)
@@ -517,36 +517,37 @@ class RpUi(UiTk):
             sceneFilter = ScItFilter(self.itIds[option])
 
         if self.sourcePath:
-            self.kwargs = {
-                'yw_last_open': self.sourcePath,
-                'suffix': HtmlReport.SUFFIX,
-                'sceneFilter': sceneFilter,
-                'showChapters': self.ShowChapters.get(),
-                'showScenes': self.ShowScenes.get(),
-                'showNormalType': self.ShowNormalType.get(),
-                'showUnusedType': self.ShowUnusedType.get(),
-                'showNotesType': self.ShowNotesType.get(),
-                'showTodoType': self.ShowTodoType.get(),
-                'showUnexported': self.ShowUnexported.get(),
-                'showNumber': self.ShowNumber.get(),
-                'showTitle': self.ShowTitle.get(),
-                'showDescription': self.ShowDescription.get(),
-                'showViewpoint': self.ShowViewpoint.get(),
-                'showTags': self.ShowTags.get(),
-                'showNotes': self.ShowNotes.get(),
-                'showDate': self.ShowDate.get(),
-                'showTime': self.ShowTime.get(),
-                'showDuration': self.ShowDuration.get(),
-                'showActionPattern': self.ShowActionPattern.get(),
-                'showRatings': self.ShowRatings.get(),
-                'showWordsTotal': self.ShowWordsTotal.get(),
-                'showWordcount': self.ShowWordcount.get(),
-                'showLettercount': self.ShowLettercount.get(),
-                'showStatus': self.ShowStatus.get(),
-                'showCharacters': self.ShowCharacters.get(),
-                'showLocations': self.ShowLocations.get(),
-                'showItems': self.ShowItems.get(),
-            }
+            self.kwargs = dict(
+                yw_last_open=self.sourcePath,
+                outputSelection=self.OutputSelection.get(),
+                suffix=HtmlReport.SUFFIX,
+                sceneFilter=sceneFilter,
+                showChapters=self.ShowChapters.get(),
+                showScenes=self.ShowScenes.get(),
+                showNormalType=self.ShowNormalType.get(),
+                showUnusedType=self.ShowUnusedType.get(),
+                showNotesType=self.ShowNotesType.get(),
+                showTodoType=self.ShowTodoType.get(),
+                showUnexported=self.ShowUnexported.get(),
+                showNumber=self.ShowNumber.get(),
+                showTitle=self.ShowTitle.get(),
+                showDescription=self.ShowDescription.get(),
+                showViewpoint=self.ShowViewpoint.get(),
+                showTags=self.ShowTags.get(),
+                showNotes=self.ShowNotes.get(),
+                showDate=self.ShowDate.get(),
+                showTime=self.ShowTime.get(),
+                showDuration=self.ShowDuration.get(),
+                showActionPattern=self.ShowActionPattern.get(),
+                showRatings=self.ShowRatings.get(),
+                showWordsTotal=self.ShowWordsTotal.get(),
+                showWordcount=self.ShowWordcount.get(),
+                showLettercount=self.ShowLettercount.get(),
+                showStatus=self.ShowStatus.get(),
+                showCharacters=self.ShowCharacters.get(),
+                showLocations=self.ShowLocations.get(),
+                showItems=self.ShowItems.get(),
+            )
             self.converter.run(self.sourcePath, **self.kwargs)
 
             if self.converter.newFile is not None:

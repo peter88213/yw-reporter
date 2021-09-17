@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="yw-reporter" basedir=".">
-	<property name="release" value="1.3.2" />
+	<property name="release" value="1.3.3" />
 	<property name="src" location="../src" />
 	<property name="test" location="../test" />
 	<property name="build" location="../build" />
@@ -17,7 +17,7 @@
 		<fixcrlf encoding="utf-8" eol="lf" srcdir="${test}" includes="**/*.py" />
 	</target>
 
-	<target name="test" description="inline all library modules">
+	<target name="test" description="integration tests">
 		<exec executable="python" failonerror="true">
 		    <arg value="${test}/test_yw_reporter.py"/>
 		</exec>

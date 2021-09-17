@@ -8,7 +8,7 @@ Published under the MIT License (https://opensource.org/licenses/mit-license.php
 from shutil import copyfile
 import os
 import unittest
-import yw_reporter_
+import yw_reporter
 
 
 # Test environment
@@ -89,21 +89,21 @@ class NormalOperation(unittest.TestCase):
     def test_defaults(self):
         copyfile(NORMAL_YW7, TEST_YW7)
         os.chdir(TEST_EXEC_PATH)
-        yw_reporter_.run(TEST_YW7, silentMode=True)
+        yw_reporter.run(TEST_YW7, silentMode=True)
         self.assertEqual(read_file(TEST_HTML), read_file(NORMAL_HTML))
 
     def test_html(self):
         copyfile(NORMAL_YW7, TEST_YW7)
         copyfile(INI_HTML, TEST_INI)
         os.chdir(TEST_EXEC_PATH)
-        yw_reporter_.run(TEST_YW7, silentMode=True)
+        yw_reporter.run(TEST_YW7, silentMode=True)
         self.assertEqual(read_file(TEST_HTML), read_file(NORMAL_HTML))
 
     def test_csv(self):
         copyfile(NORMAL_YW7, TEST_YW7)
         copyfile(INI_CSV, TEST_INI)
         os.chdir(TEST_EXEC_PATH)
-        yw_reporter_.run(TEST_YW7, silentMode=True, installDir=TEST_EXEC_PATH)
+        yw_reporter.run(TEST_YW7, silentMode=True, installDir=TEST_EXEC_PATH)
         self.assertEqual(read_file(TEST_CSV), read_file(NORMAL_CSV))
 
     def tearDown(self):

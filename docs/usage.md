@@ -73,7 +73,7 @@ You can generate as many reports with different options as you like without exit
 #### Output
 
 - **HTML** -- Create a HTML file and open it with the default Web browser.
-- **CSV** -- Create a CSV (comma separated values) file and open it with the default CSV application.
+- **CSV** -- Create an uft-8 encoded CSV (comma separated values) file and open it with the default CSV application. 
 
 
 ## Configuration file

@@ -17,6 +17,8 @@ from pywriter.file.filter import Filter
 
 from ywreporter.rp_converter import RpConverter
 from ywreporter.rp_ui import RpUi
+from ywreporter.html_report import HtmlReport
+from ywreporter.csv_report import CsvReport
 
 SUFFIX = '_report'
 APPNAME = 'yw-reporter'
@@ -80,6 +82,13 @@ def run(sourcePath, silentMode=True, installDir=''):
     converter = RpConverter()
 
     if silentMode:
+
+        if kwargs['outputSelection'] == '1':
+            converter.exportTargetFactory.fileClasses = [CsvReport]
+
+        else:
+            converter.exportTargetFactory.fileClasses = [HtmlReport]
+
         converter.ui = Ui('')
         converter.run(sourcePath, **kwargs)
 
@@ -103,6 +112,7 @@ def run(sourcePath, silentMode=True, installDir=''):
 
 if __name__ == '__main__':
     installDir = os.getenv('APPDATA').replace('\\', '/') + '/pyWriter/' + APPNAME + '/config/'
+    os.makedirs(installDir, exist_ok=True)
 
     if len(sys.argv) == 1:
         run('', False, installDir)

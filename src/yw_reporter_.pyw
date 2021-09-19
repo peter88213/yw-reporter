@@ -17,8 +17,6 @@ from pywriter.file.filter import Filter
 
 from ywreporter.rp_converter import RpConverter
 from ywreporter.rp_ui import RpUi
-from ywreporter.html_report import HtmlReport
-from ywreporter.csv_report import CsvReport
 
 SUFFIX = '_report'
 APPNAME = 'yw-reporter'

@@ -13,7 +13,6 @@ from tkinter import ttk
 
 from pywriter.ui.ui_tk import UiTk
 from ywreporter.html_report import HtmlReport
-from ywreporter.csv_report import CsvReport
 from pywriter.file.filter import Filter
 from pywriter.file.sc_tg_filter import ScTgFilter
 from pywriter.file.sc_vp_filter import ScVpFilter

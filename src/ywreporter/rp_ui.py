@@ -202,10 +202,10 @@ class RpUi(UiTk):
         self.root.filterCombobox = ttk.Combobox(values=[])
 
         self.root.htmlCheckbox = ttk.Radiobutton(
-            text=self.tHtml, variable=self.OutputSelection, value=0, command=lambda: self.set_output_mode(0))
+            text=self.tHtml, variable=self.OutputSelection, value=0)
 
         self.root.csvCheckbox = ttk.Radiobutton(
-            text=self.tCsv, variable=self.OutputSelection, value=1, command=lambda: self.set_output_mode(1))
+            text=self.tCsv, variable=self.OutputSelection, value=1)
 
         self.root.selectButton = Button(text="Select file", command=self.select_file)
         self.root.selectButton.config(height=1, width=20)
@@ -453,14 +453,6 @@ class RpUi(UiTk):
         else:
             self.root.filterCombobox.set('')
 
-    def set_output_mode(self, selection):
-
-        if selection == 1:
-            self.converter.exportTargetFactory.fileClasses = [CsvReport]
-
-        else:
-            self.converter.exportTargetFactory.fileClasses = [HtmlReport]
-
     def select_file(self):
         """Open a file dialog in order to set the sourcePath property.
         """
@@ -519,7 +511,7 @@ class RpUi(UiTk):
         if self.sourcePath:
             self.kwargs = dict(
                 yw_last_open=self.sourcePath,
-                outputSelection=self.OutputSelection.get(),
+                outputSelection=str(self.OutputSelection.get()),
                 suffix=HtmlReport.SUFFIX,
                 sceneFilter=sceneFilter,
                 showChapters=self.ShowChapters.get(),

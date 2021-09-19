@@ -78,7 +78,7 @@ You can generate as many reports with different options as you like without exit
 
 ## Configuration file
 
-The latest yWriter project selected and the latest options are saved in a configuration file. 
+The latest yWriter project selected and the latest options used for a report are saved in a configuration file. 
 
 In Windows, this is the file path: 
 

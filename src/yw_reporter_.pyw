@@ -82,13 +82,6 @@ def run(sourcePath, silentMode=True, installDir=''):
     converter = RpConverter()
 
     if silentMode:
-
-        if kwargs['outputSelection'] == '1':
-            converter.exportTargetFactory.fileClasses = [CsvReport]
-
-        else:
-            converter.exportTargetFactory.fileClasses = [HtmlReport]
-
         converter.ui = Ui('')
         converter.run(sourcePath, **kwargs)
 

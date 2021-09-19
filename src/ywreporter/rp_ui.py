@@ -104,107 +104,107 @@ class RpUi(UiTk):
 
         self.processInfo = Label(self.root, text='')
 
-        self.ShowChapters = BooleanVar(value=kwargs['showChapters'])
-        self.ShowScenes = BooleanVar(value=kwargs['showScenes'])
-        self.ShowNormalType = BooleanVar(value=kwargs['showNormalType'])
-        self.ShowUnusedType = BooleanVar(value=kwargs['showUnusedType'])
-        self.ShowNotesType = BooleanVar(value=kwargs['showNotesType'])
-        self.ShowTodoType = BooleanVar(value=kwargs['showTodoType'])
-        self.ShowUnexported = BooleanVar(value=kwargs['showUnexported'])
+        self.showChapters = BooleanVar(value=kwargs['showChapters'])
+        self.showScenes = BooleanVar(value=kwargs['showScenes'])
+        self.showNormalType = BooleanVar(value=kwargs['showNormalType'])
+        self.showUnusedType = BooleanVar(value=kwargs['showUnusedType'])
+        self.showNotesType = BooleanVar(value=kwargs['showNotesType'])
+        self.showTodoType = BooleanVar(value=kwargs['showTodoType'])
+        self.showUnexported = BooleanVar(value=kwargs['showUnexported'])
 
-        self.ShowNumber = BooleanVar(value=kwargs['showNumber'])
-        self.ShowTitle = BooleanVar(value=kwargs['showTitle'])
-        self.ShowDescription = BooleanVar(value=kwargs['showDescription'])
-        self.ShowViewpoint = BooleanVar(value=kwargs['showViewpoint'])
-        self.ShowTags = BooleanVar(value=kwargs['showTags'])
-        self.ShowNotes = BooleanVar(value=kwargs['showNotes'])
-        self.ShowDate = BooleanVar(value=kwargs['showDate'])
-        self.ShowTime = BooleanVar(value=kwargs['showTime'])
-        self.ShowDuration = BooleanVar(value=kwargs['showDuration'])
-        self.ShowActionPattern = BooleanVar(value=kwargs['showActionPattern'])
-        self.ShowRatings = BooleanVar(value=kwargs['showRatings'])
-        self.ShowWordsTotal = BooleanVar(value=kwargs['showWordsTotal'])
-        self.ShowWordcount = BooleanVar(value=kwargs['showWordcount'])
-        self.ShowLettercount = BooleanVar(value=kwargs['showLettercount'])
-        self.ShowStatus = BooleanVar(value=kwargs['showStatus'])
-        self.ShowCharacters = BooleanVar(value=kwargs['showCharacters'])
-        self.ShowLocations = BooleanVar(value=kwargs['showLocations'])
-        self.ShowItems = BooleanVar(value=kwargs['showItems'])
-        self.FilterCatSelection = IntVar()
-        self.OutputSelection = IntVar(value=kwargs['outputSelection'])
+        self.showNumber = BooleanVar(value=kwargs['showNumber'])
+        self.showTitle = BooleanVar(value=kwargs['showTitle'])
+        self.showDescription = BooleanVar(value=kwargs['showDescription'])
+        self.showViewpoint = BooleanVar(value=kwargs['showViewpoint'])
+        self.showTags = BooleanVar(value=kwargs['showTags'])
+        self.showNotes = BooleanVar(value=kwargs['showNotes'])
+        self.showDate = BooleanVar(value=kwargs['showDate'])
+        self.showTime = BooleanVar(value=kwargs['showTime'])
+        self.showDuration = BooleanVar(value=kwargs['showDuration'])
+        self.showActionPattern = BooleanVar(value=kwargs['showActionPattern'])
+        self.showRatings = BooleanVar(value=kwargs['showRatings'])
+        self.showWordsTotal = BooleanVar(value=kwargs['showWordsTotal'])
+        self.showWordcount = BooleanVar(value=kwargs['showWordcount'])
+        self.showLettercount = BooleanVar(value=kwargs['showLettercount'])
+        self.showStatus = BooleanVar(value=kwargs['showStatus'])
+        self.showCharacters = BooleanVar(value=kwargs['showCharacters'])
+        self.showLocations = BooleanVar(value=kwargs['showLocations'])
+        self.showItems = BooleanVar(value=kwargs['showItems'])
+        self.filterCatSelection = IntVar()
+        self.outputSelection = IntVar(value=kwargs['outputSelection'])
 
         self.root.ShowChaptersCheckbox = ttk.Checkbutton(
-            text=self.tShowChapters, variable=self.ShowChapters, onvalue=True, offvalue=False)
+            text=self.tShowChapters, variable=self.showChapters, onvalue=True, offvalue=False)
         self.root.ShowScenesCheckbox = ttk.Checkbutton(
-            text=self.tShowScenes, variable=self.ShowScenes, onvalue=True, offvalue=False)
+            text=self.tShowScenes, variable=self.showScenes, onvalue=True, offvalue=False)
         self.root.ShowNormalTypeCheckbox = ttk.Checkbutton(
-            text=self.tShowNormalType, variable=self.ShowNormalType, onvalue=True, offvalue=False)
+            text=self.tShowNormalType, variable=self.showNormalType, onvalue=True, offvalue=False)
         self.root.ShowUnusedTypeCheckbox = ttk.Checkbutton(
-            text=self.tShowUnusedType, variable=self.ShowUnusedType, onvalue=True, offvalue=False)
+            text=self.tShowUnusedType, variable=self.showUnusedType, onvalue=True, offvalue=False)
         self.root.ShowNotesTypeCheckbox = ttk.Checkbutton(
-            text=self.tShowNotesType, variable=self.ShowNotesType, onvalue=True, offvalue=False)
+            text=self.tShowNotesType, variable=self.showNotesType, onvalue=True, offvalue=False)
         self.root.ShowTodoTypeCheckbox = ttk.Checkbutton(
-            text=self.tShowTodoType, variable=self.ShowTodoType, onvalue=True, offvalue=False)
+            text=self.tShowTodoType, variable=self.showTodoType, onvalue=True, offvalue=False)
         self.root.ShowUnexportedCheckbox = ttk.Checkbutton(
-            text=self.tShowUnexported, variable=self.ShowUnexported, onvalue=True, offvalue=False)
+            text=self.tShowUnexported, variable=self.showUnexported, onvalue=True, offvalue=False)
 
         self.root.ShowNumberCheckbox = ttk.Checkbutton(
-            text=self.tShowNumber, variable=self.ShowNumber, onvalue=True, offvalue=False)
+            text=self.tShowNumber, variable=self.showNumber, onvalue=True, offvalue=False)
         self.root.ShowTitleCheckbox = ttk.Checkbutton(
-            text=self.tShowTitle, variable=self.ShowTitle, onvalue=True, offvalue=False)
+            text=self.tShowTitle, variable=self.showTitle, onvalue=True, offvalue=False)
         self.root.ShowDescriptionCheckbox = ttk.Checkbutton(
-            text=self.tShowDescription, variable=self.ShowDescription, onvalue=True, offvalue=False)
+            text=self.tShowDescription, variable=self.showDescription, onvalue=True, offvalue=False)
         self.root.ShowViewpointCheckbox = ttk.Checkbutton(
-            text=self.tShowViewpoint, variable=self.ShowViewpoint, onvalue=True, offvalue=False)
+            text=self.tShowViewpoint, variable=self.showViewpoint, onvalue=True, offvalue=False)
         self.root.ShowTagsCheckbox = ttk.Checkbutton(
-            text=self.tShowTags, variable=self.ShowTags, onvalue=True, offvalue=False)
+            text=self.tShowTags, variable=self.showTags, onvalue=True, offvalue=False)
         self.root.ShowNotesCheckbox = ttk.Checkbutton(
-            text=self.tShowNotes, variable=self.ShowNotes, onvalue=True, offvalue=False)
+            text=self.tShowNotes, variable=self.showNotes, onvalue=True, offvalue=False)
         self.root.ShowDateCheckbox = ttk.Checkbutton(
-            text=self.tShowDate, variable=self.ShowDate, onvalue=True, offvalue=False)
+            text=self.tShowDate, variable=self.showDate, onvalue=True, offvalue=False)
         self.root.ShowTimeCheckbox = ttk.Checkbutton(
-            text=self.tShowTime, variable=self.ShowTime, onvalue=True, offvalue=False)
+            text=self.tShowTime, variable=self.showTime, onvalue=True, offvalue=False)
         self.root.ShowDurationCheckbox = ttk.Checkbutton(
-            text=self.tShowDuration, variable=self.ShowDuration, onvalue=True, offvalue=False)
+            text=self.tShowDuration, variable=self.showDuration, onvalue=True, offvalue=False)
         self.root.ShowActionPatternCheckbox = ttk.Checkbutton(
-            text=self.tShowActionPattern, variable=self.ShowActionPattern, onvalue=True, offvalue=False)
+            text=self.tShowActionPattern, variable=self.showActionPattern, onvalue=True, offvalue=False)
         self.root.ShowRatingsCheckbox = ttk.Checkbutton(
-            text=self.tShowRatings, variable=self.ShowRatings, onvalue=True, offvalue=False)
+            text=self.tShowRatings, variable=self.showRatings, onvalue=True, offvalue=False)
         self.root.ShowWordsTotalCheckbox = ttk.Checkbutton(
-            text=self.tShowWordsTotal, variable=self.ShowWordsTotal, onvalue=True, offvalue=False)
+            text=self.tShowWordsTotal, variable=self.showWordsTotal, onvalue=True, offvalue=False)
         self.root.ShowWordcountCheckbox = ttk.Checkbutton(
-            text=self.tShowWordcount, variable=self.ShowWordcount, onvalue=True, offvalue=False)
+            text=self.tShowWordcount, variable=self.showWordcount, onvalue=True, offvalue=False)
         self.root.ShowLettercountCheckbox = ttk.Checkbutton(
-            text=self.tShowLettercount, variable=self.ShowLettercount, onvalue=True, offvalue=False)
+            text=self.tShowLettercount, variable=self.showLettercount, onvalue=True, offvalue=False)
         self.root.ShowStatusCheckbox = ttk.Checkbutton(
-            text=self.tShowStatus, variable=self.ShowStatus, onvalue=True, offvalue=False)
+            text=self.tShowStatus, variable=self.showStatus, onvalue=True, offvalue=False)
         self.root.ShowCharactersCheckbox = ttk.Checkbutton(
-            text=self.tShowCharacters, variable=self.ShowCharacters, onvalue=True, offvalue=False)
+            text=self.tShowCharacters, variable=self.showCharacters, onvalue=True, offvalue=False)
         self.root.ShowLocationsCheckbox = ttk.Checkbutton(
-            text=self.tShowLocations, variable=self.ShowLocations, onvalue=True, offvalue=False)
+            text=self.tShowLocations, variable=self.showLocations, onvalue=True, offvalue=False)
         self.root.ShowItemsCheckbox = ttk.Checkbutton(
-            text=self.tShowItems, variable=self.ShowItems, onvalue=True, offvalue=False)
+            text=self.tShowItems, variable=self.showItems, onvalue=True, offvalue=False)
 
         self.root.NoneCheckbox = ttk.Radiobutton(
-            text=self.tNone, variable=self.FilterCatSelection, value=0, command=lambda: self.set_filter_category(0))
+            text=self.tNone, variable=self.filterCatSelection, value=0, command=lambda: self.set_filter_category(0))
         self.root.TagsCheckbox = ttk.Radiobutton(
-            text=self.tTags, variable=self.FilterCatSelection, value=1, command=lambda: self.set_filter_category(1))
+            text=self.tTags, variable=self.filterCatSelection, value=1, command=lambda: self.set_filter_category(1))
         self.root.ViewpointsCheckbox = ttk.Radiobutton(
-            text=self.tViewpoints, variable=self.FilterCatSelection, value=2, command=lambda: self.set_filter_category(2))
+            text=self.tViewpoints, variable=self.filterCatSelection, value=2, command=lambda: self.set_filter_category(2))
         self.root.CharactersCheckbox = ttk.Radiobutton(
-            text=self.tCharacters, variable=self.FilterCatSelection, value=3, command=lambda: self.set_filter_category(3))
+            text=self.tCharacters, variable=self.filterCatSelection, value=3, command=lambda: self.set_filter_category(3))
         self.root.LocationsCheckbox = ttk.Radiobutton(
-            text=self.tLocations, variable=self.FilterCatSelection, value=4, command=lambda: self.set_filter_category(4))
+            text=self.tLocations, variable=self.filterCatSelection, value=4, command=lambda: self.set_filter_category(4))
         self.root.ItemsCheckbox = ttk.Radiobutton(
-            text=self.tItems, variable=self.FilterCatSelection, value=5, command=lambda: self.set_filter_category(5))
+            text=self.tItems, variable=self.filterCatSelection, value=5, command=lambda: self.set_filter_category(5))
 
         self.root.filterCombobox = ttk.Combobox(values=[])
 
         self.root.htmlCheckbox = ttk.Radiobutton(
-            text=self.tHtml, variable=self.OutputSelection, value=0)
+            text=self.tHtml, variable=self.outputSelection, value=0)
 
         self.root.csvCheckbox = ttk.Radiobutton(
-            text=self.tCsv, variable=self.OutputSelection, value=1)
+            text=self.tCsv, variable=self.outputSelection, value=1)
 
         self.root.selectButton = Button(text="Select file", command=self.select_file)
         self.root.selectButton.config(height=1, width=20)
@@ -427,7 +427,7 @@ class RpUi(UiTk):
         self.filterCat = [[], self.tags, self.viewpoints,
                           self.characters, self.locations, self.items]
         self.set_filter_category(0)
-        self.FilterCatSelection.set(0)
+        self.filterCatSelection.set(0)
 
         self._sourcePath = path
 
@@ -486,7 +486,7 @@ class RpUi(UiTk):
 
         # Filter options.
 
-        filterCat = self.FilterCatSelection.get()
+        filterCat = self.filterCatSelection.get()
         option = self.root.filterCombobox.current()
 
         if filterCat == 0:
@@ -510,34 +510,34 @@ class RpUi(UiTk):
         if self.sourcePath:
             self.kwargs = dict(
                 yw_last_open=self.sourcePath,
-                outputSelection=str(self.OutputSelection.get()),
+                outputSelection=str(self.outputSelection.get()),
                 suffix=HtmlReport.SUFFIX,
                 sceneFilter=sceneFilter,
-                showChapters=self.ShowChapters.get(),
-                showScenes=self.ShowScenes.get(),
-                showNormalType=self.ShowNormalType.get(),
-                showUnusedType=self.ShowUnusedType.get(),
-                showNotesType=self.ShowNotesType.get(),
-                showTodoType=self.ShowTodoType.get(),
-                showUnexported=self.ShowUnexported.get(),
-                showNumber=self.ShowNumber.get(),
-                showTitle=self.ShowTitle.get(),
-                showDescription=self.ShowDescription.get(),
-                showViewpoint=self.ShowViewpoint.get(),
-                showTags=self.ShowTags.get(),
-                showNotes=self.ShowNotes.get(),
-                showDate=self.ShowDate.get(),
-                showTime=self.ShowTime.get(),
-                showDuration=self.ShowDuration.get(),
-                showActionPattern=self.ShowActionPattern.get(),
-                showRatings=self.ShowRatings.get(),
-                showWordsTotal=self.ShowWordsTotal.get(),
-                showWordcount=self.ShowWordcount.get(),
-                showLettercount=self.ShowLettercount.get(),
-                showStatus=self.ShowStatus.get(),
-                showCharacters=self.ShowCharacters.get(),
-                showLocations=self.ShowLocations.get(),
-                showItems=self.ShowItems.get(),
+                showChapters=self.showChapters.get(),
+                showScenes=self.showScenes.get(),
+                showNormalType=self.showNormalType.get(),
+                showUnusedType=self.showUnusedType.get(),
+                showNotesType=self.showNotesType.get(),
+                showTodoType=self.showTodoType.get(),
+                showUnexported=self.showUnexported.get(),
+                showNumber=self.showNumber.get(),
+                showTitle=self.showTitle.get(),
+                showDescription=self.showDescription.get(),
+                showViewpoint=self.showViewpoint.get(),
+                showTags=self.showTags.get(),
+                showNotes=self.showNotes.get(),
+                showDate=self.showDate.get(),
+                showTime=self.showTime.get(),
+                showDuration=self.showDuration.get(),
+                showActionPattern=self.showActionPattern.get(),
+                showRatings=self.showRatings.get(),
+                showWordsTotal=self.showWordsTotal.get(),
+                showWordcount=self.showWordcount.get(),
+                showLettercount=self.showLettercount.get(),
+                showStatus=self.showStatus.get(),
+                showCharacters=self.showCharacters.get(),
+                showLocations=self.showLocations.get(),
+                showItems=self.showItems.get(),
             )
             self.converter.run(self.sourcePath, **self.kwargs)
 

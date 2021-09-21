@@ -24,49 +24,11 @@ from pywriter.yw.yw7_file import Yw7File
 
 
 class RpUi(UiTk):
-    """Extend the Tkinter GUI, 
-    and link it to the application.
+    """Tkinter based GUI.
+    Extend the superclass.
     """
 
-    tShowChapters = 'Include chapters'
-    tShowScenes = 'Include scenes'
-    levelsTotal = 2
-    tShowNormalType = 'Include "normal" type'
-    tShowUnusedType = 'Include "unused" type'
-    tShowNotesType = 'Include "notes" type'
-    tShowTodoType = 'Include "to do" type'
-    tShowUnexported = 'Include "do not export" type'
-    typesTotal = 5
-    tShowNumber = 'Number'
-    tShowTitle = 'Title'
-    tShowDescription = 'Description'
-    tShowTags = 'Tags'
-    tShowNotes = 'Notes'
-    tShowDate = 'Date'
-    tShowTime = 'Time'
-    tShowDuration = 'Duration'
-    tShowActionPattern = 'A/R-Goal-Conflict-Outcome'
-    tShowRatings = 'Scene ratings'
-    tShowWordsTotal = 'Words total'
-    tShowWordcount = 'Word count'
-    tShowLettercount = 'Letter count'
-    tShowStatus = 'Status'
-    tShowViewpoint = 'Viewpoint'
-    tShowCharacters = 'Characters'
-    tShowLocations = 'Locations'
-    tShowItems = 'Items'
-    columnsTotal = 18
-    tNone = 'None'
-    tTags = 'Tag'
-    tViewpoints = 'Viewpoint'
-    tCharacters = 'Character'
-    tLocations = 'Location'
-    tItems = 'Item'
-    filtersTotal = 6
-    tHtml = 'HTML'
-    tCsv = 'CSV'
-
-    def __init__(self, title, description=None, sourcePath=None, **kwargs):
+    def __init__(self, title, sourcePath=None, **kwargs):
         """Make the converter object visible to the user interface 
         in order to make method calls possible.
         Add the widgets needed to invoke the converter manually.
@@ -86,32 +48,28 @@ class RpUi(UiTk):
         self.converter = None
         self.infoWhatText = ''
         self.infoHowText = ''
-        # UiTk.__init__(self, title)
 
         self.root = Tk()
         self.root.title(title)
 
-        self.hdLevels = Label(self.root, text='Levels')
-        self.hdTypes = Label(self.root, text='Types')
-        self.hdFilters = Label(self.root, text='Filter')
-        self.hdColumns = Label(self.root, text='Columns')
-        self.hdOutput = Label(self.root, text='Output')
         self.appInfo = Label(self.root, text='')
         self.appInfo.config(height=2, width=80)
-
         self.successInfo = Label(self.root)
         self.successInfo.config(height=1, width=80)
-
         self.processInfo = Label(self.root, text='')
 
+        self.hdLevels = Label(self.root, text='Levels')
         self.showChapters = BooleanVar(value=kwargs['showChapters'])
         self.showScenes = BooleanVar(value=kwargs['showScenes'])
+
+        self.hdTypes = Label(self.root, text='Types')
         self.showNormalType = BooleanVar(value=kwargs['showNormalType'])
         self.showUnusedType = BooleanVar(value=kwargs['showUnusedType'])
         self.showNotesType = BooleanVar(value=kwargs['showNotesType'])
         self.showTodoType = BooleanVar(value=kwargs['showTodoType'])
         self.showUnexported = BooleanVar(value=kwargs['showUnexported'])
 
+        self.hdColumns = Label(self.root, text='Columns')
         self.showNumber = BooleanVar(value=kwargs['showNumber'])
         self.showTitle = BooleanVar(value=kwargs['showTitle'])
         self.showDescription = BooleanVar(value=kwargs['showDescription'])
@@ -130,81 +88,85 @@ class RpUi(UiTk):
         self.showCharacters = BooleanVar(value=kwargs['showCharacters'])
         self.showLocations = BooleanVar(value=kwargs['showLocations'])
         self.showItems = BooleanVar(value=kwargs['showItems'])
+
+        self.hdFilters = Label(self.root, text='Filter')
         self.filterCatSelection = IntVar()
+
+        self.hdOutput = Label(self.root, text='Output')
         self.outputSelection = IntVar(value=kwargs['outputSelection'])
 
-        self.root.ShowChaptersCheckbox = ttk.Checkbutton(
-            text=self.tShowChapters, variable=self.showChapters, onvalue=True, offvalue=False)
-        self.root.ShowScenesCheckbox = ttk.Checkbutton(
-            text=self.tShowScenes, variable=self.showScenes, onvalue=True, offvalue=False)
-        self.root.ShowNormalTypeCheckbox = ttk.Checkbutton(
-            text=self.tShowNormalType, variable=self.showNormalType, onvalue=True, offvalue=False)
-        self.root.ShowUnusedTypeCheckbox = ttk.Checkbutton(
-            text=self.tShowUnusedType, variable=self.showUnusedType, onvalue=True, offvalue=False)
-        self.root.ShowNotesTypeCheckbox = ttk.Checkbutton(
-            text=self.tShowNotesType, variable=self.showNotesType, onvalue=True, offvalue=False)
-        self.root.ShowTodoTypeCheckbox = ttk.Checkbutton(
-            text=self.tShowTodoType, variable=self.showTodoType, onvalue=True, offvalue=False)
-        self.root.ShowUnexportedCheckbox = ttk.Checkbutton(
-            text=self.tShowUnexported, variable=self.showUnexported, onvalue=True, offvalue=False)
+        self.root.showChaptersCheckbox = ttk.Checkbutton(
+            text='Include chapters', variable=self.showChapters, onvalue=True, offvalue=False)
+        self.root.showScenesCheckbox = ttk.Checkbutton(
+            text='Include scenes', variable=self.showScenes, onvalue=True, offvalue=False)
+        self.root.showNormalTypeCheckbox = ttk.Checkbutton(
+            text='Include "normal" type', variable=self.showNormalType, onvalue=True, offvalue=False)
+        self.root.showUnusedTypeCheckbox = ttk.Checkbutton(
+            text='Include "unused" type', variable=self.showUnusedType, onvalue=True, offvalue=False)
+        self.root.showNotesTypeCheckbox = ttk.Checkbutton(
+            text='Include "notes" type', variable=self.showNotesType, onvalue=True, offvalue=False)
+        self.root.showTodoTypeCheckbox = ttk.Checkbutton(
+            text='Include "to do" type', variable=self.showTodoType, onvalue=True, offvalue=False)
+        self.root.showUnexportedCheckbox = ttk.Checkbutton(
+            text='Include "do not export" type', variable=self.showUnexported, onvalue=True, offvalue=False)
 
-        self.root.ShowNumberCheckbox = ttk.Checkbutton(
-            text=self.tShowNumber, variable=self.showNumber, onvalue=True, offvalue=False)
-        self.root.ShowTitleCheckbox = ttk.Checkbutton(
-            text=self.tShowTitle, variable=self.showTitle, onvalue=True, offvalue=False)
-        self.root.ShowDescriptionCheckbox = ttk.Checkbutton(
-            text=self.tShowDescription, variable=self.showDescription, onvalue=True, offvalue=False)
-        self.root.ShowViewpointCheckbox = ttk.Checkbutton(
-            text=self.tShowViewpoint, variable=self.showViewpoint, onvalue=True, offvalue=False)
-        self.root.ShowTagsCheckbox = ttk.Checkbutton(
-            text=self.tShowTags, variable=self.showTags, onvalue=True, offvalue=False)
-        self.root.ShowNotesCheckbox = ttk.Checkbutton(
-            text=self.tShowNotes, variable=self.showNotes, onvalue=True, offvalue=False)
-        self.root.ShowDateCheckbox = ttk.Checkbutton(
-            text=self.tShowDate, variable=self.showDate, onvalue=True, offvalue=False)
-        self.root.ShowTimeCheckbox = ttk.Checkbutton(
-            text=self.tShowTime, variable=self.showTime, onvalue=True, offvalue=False)
-        self.root.ShowDurationCheckbox = ttk.Checkbutton(
-            text=self.tShowDuration, variable=self.showDuration, onvalue=True, offvalue=False)
-        self.root.ShowActionPatternCheckbox = ttk.Checkbutton(
-            text=self.tShowActionPattern, variable=self.showActionPattern, onvalue=True, offvalue=False)
-        self.root.ShowRatingsCheckbox = ttk.Checkbutton(
-            text=self.tShowRatings, variable=self.showRatings, onvalue=True, offvalue=False)
-        self.root.ShowWordsTotalCheckbox = ttk.Checkbutton(
-            text=self.tShowWordsTotal, variable=self.showWordsTotal, onvalue=True, offvalue=False)
-        self.root.ShowWordcountCheckbox = ttk.Checkbutton(
-            text=self.tShowWordcount, variable=self.showWordcount, onvalue=True, offvalue=False)
-        self.root.ShowLettercountCheckbox = ttk.Checkbutton(
-            text=self.tShowLettercount, variable=self.showLettercount, onvalue=True, offvalue=False)
-        self.root.ShowStatusCheckbox = ttk.Checkbutton(
-            text=self.tShowStatus, variable=self.showStatus, onvalue=True, offvalue=False)
-        self.root.ShowCharactersCheckbox = ttk.Checkbutton(
-            text=self.tShowCharacters, variable=self.showCharacters, onvalue=True, offvalue=False)
-        self.root.ShowLocationsCheckbox = ttk.Checkbutton(
-            text=self.tShowLocations, variable=self.showLocations, onvalue=True, offvalue=False)
-        self.root.ShowItemsCheckbox = ttk.Checkbutton(
-            text=self.tShowItems, variable=self.showItems, onvalue=True, offvalue=False)
+        self.root.showNumberCheckbox = ttk.Checkbutton(
+            text='Number', variable=self.showNumber, onvalue=True, offvalue=False)
+        self.root.showTitleCheckbox = ttk.Checkbutton(
+            text='Title', variable=self.showTitle, onvalue=True, offvalue=False)
+        self.root.showDescriptionCheckbox = ttk.Checkbutton(
+            text='Description', variable=self.showDescription, onvalue=True, offvalue=False)
+        self.root.showViewpointCheckbox = ttk.Checkbutton(
+            text='Viewpoint', variable=self.showViewpoint, onvalue=True, offvalue=False)
+        self.root.showTagsCheckbox = ttk.Checkbutton(
+            text='Tags', variable=self.showTags, onvalue=True, offvalue=False)
+        self.root.showNotesCheckbox = ttk.Checkbutton(
+            text='Notes', variable=self.showNotes, onvalue=True, offvalue=False)
+        self.root.showDateCheckbox = ttk.Checkbutton(
+            text='Date', variable=self.showDate, onvalue=True, offvalue=False)
+        self.root.showTimeCheckbox = ttk.Checkbutton(
+            text='Time', variable=self.showTime, onvalue=True, offvalue=False)
+        self.root.showDurationCheckbox = ttk.Checkbutton(
+            text='Duration', variable=self.showDuration, onvalue=True, offvalue=False)
+        self.root.showActionPatternCheckbox = ttk.Checkbutton(
+            text='A/R-Goal-Conflict-Outcome', variable=self.showActionPattern, onvalue=True, offvalue=False)
+        self.root.showRatingsCheckbox = ttk.Checkbutton(
+            text='Scene ratings', variable=self.showRatings, onvalue=True, offvalue=False)
+        self.root.showWordsTotalCheckbox = ttk.Checkbutton(
+            text='Words total', variable=self.showWordsTotal, onvalue=True, offvalue=False)
+        self.root.showWordcountCheckbox = ttk.Checkbutton(
+            text='Word count', variable=self.showWordcount, onvalue=True, offvalue=False)
+        self.root.showLettercountCheckbox = ttk.Checkbutton(
+            text='Letter count', variable=self.showLettercount, onvalue=True, offvalue=False)
+        self.root.showStatusCheckbox = ttk.Checkbutton(
+            text='Status', variable=self.showStatus, onvalue=True, offvalue=False)
+        self.root.showCharactersCheckbox = ttk.Checkbutton(
+            text='Characters', variable=self.showCharacters, onvalue=True, offvalue=False)
+        self.root.showLocationsCheckbox = ttk.Checkbutton(
+            text='Locations', variable=self.showLocations, onvalue=True, offvalue=False)
+        self.root.showItemsCheckbox = ttk.Checkbutton(
+            text='Items', variable=self.showItems, onvalue=True, offvalue=False)
 
-        self.root.NoneCheckbox = ttk.Radiobutton(
-            text=self.tNone, variable=self.filterCatSelection, value=0, command=lambda: self.set_filter_category(0))
-        self.root.TagsCheckbox = ttk.Radiobutton(
-            text=self.tTags, variable=self.filterCatSelection, value=1, command=lambda: self.set_filter_category(1))
-        self.root.ViewpointsCheckbox = ttk.Radiobutton(
-            text=self.tViewpoints, variable=self.filterCatSelection, value=2, command=lambda: self.set_filter_category(2))
-        self.root.CharactersCheckbox = ttk.Radiobutton(
-            text=self.tCharacters, variable=self.filterCatSelection, value=3, command=lambda: self.set_filter_category(3))
-        self.root.LocationsCheckbox = ttk.Radiobutton(
-            text=self.tLocations, variable=self.filterCatSelection, value=4, command=lambda: self.set_filter_category(4))
-        self.root.ItemsCheckbox = ttk.Radiobutton(
-            text=self.tItems, variable=self.filterCatSelection, value=5, command=lambda: self.set_filter_category(5))
+        self.root.noneCheckbox = ttk.Radiobutton(
+            text='None', variable=self.filterCatSelection, value=0, command=lambda: self.set_filter_category(0))
+        self.root.tagsCheckbox = ttk.Radiobutton(
+            text='Tag', variable=self.filterCatSelection, value=1, command=lambda: self.set_filter_category(1))
+        self.root.viewpointsCheckbox = ttk.Radiobutton(
+            text='Viewpoint', variable=self.filterCatSelection, value=2, command=lambda: self.set_filter_category(2))
+        self.root.charactersCheckbox = ttk.Radiobutton(
+            text='Character', variable=self.filterCatSelection, value=3, command=lambda: self.set_filter_category(3))
+        self.root.locationsCheckbox = ttk.Radiobutton(
+            text='Location', variable=self.filterCatSelection, value=4, command=lambda: self.set_filter_category(4))
+        self.root.itemsCheckbox = ttk.Radiobutton(
+            text='Item', variable=self.filterCatSelection, value=5, command=lambda: self.set_filter_category(5))
 
         self.root.filterCombobox = ttk.Combobox(values=[])
 
         self.root.htmlCheckbox = ttk.Radiobutton(
-            text=self.tHtml, variable=self.outputSelection, value=0)
+            text='HTML', variable=self.outputSelection, value=0)
 
         self.root.csvCheckbox = ttk.Radiobutton(
-            text=self.tCsv, variable=self.outputSelection, value=1)
+            text='CSV', variable=self.outputSelection, value=1)
 
         self.root.selectButton = Button(text="Select file", command=self.select_file)
         self.root.selectButton.config(height=1, width=20)
@@ -220,38 +182,38 @@ class RpUi(UiTk):
         self.hdLevels.grid(row=row1Cnt, column=1, sticky=W, padx=20)
 
         row1Cnt += 1
-        self.root.ShowChaptersCheckbox.grid(row=row1Cnt, column=1, sticky=W, padx=20)
+        self.root.showChaptersCheckbox.grid(row=row1Cnt, column=1, sticky=W, padx=20)
         row1Cnt += 1
-        self.root.ShowScenesCheckbox.grid(row=row1Cnt, column=1, sticky=W, padx=20)
+        self.root.showScenesCheckbox.grid(row=row1Cnt, column=1, sticky=W, padx=20)
 
         row2Cnt = 1
         self.hdTypes.grid(row=row2Cnt, column=2, sticky=W, padx=20)
 
         row2Cnt += 1
-        self.root.ShowNormalTypeCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+        self.root.showNormalTypeCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
-        self.root.ShowUnusedTypeCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+        self.root.showUnusedTypeCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
-        self.root.ShowNotesTypeCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+        self.root.showNotesTypeCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
-        self.root.ShowTodoTypeCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+        self.root.showTodoTypeCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
-        self.root.ShowUnexportedCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+        self.root.showUnexportedCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
 
         row2Cnt += 2
         self.hdFilters.grid(row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
-        self.root.NoneCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+        self.root.noneCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
-        self.root.TagsCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+        self.root.tagsCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
-        self.root.ViewpointsCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+        self.root.viewpointsCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
-        self.root.CharactersCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+        self.root.charactersCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
-        self.root.LocationsCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+        self.root.locationsCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
-        self.root.ItemsCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
+        self.root.itemsCheckbox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
         row2Cnt += 1
         self.root.filterCombobox.grid(row=row2Cnt, column=2, sticky=W, padx=20)
 
@@ -265,41 +227,41 @@ class RpUi(UiTk):
         row3Cnt = 1
         self.hdColumns.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowNumberCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.showNumberCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowTitleCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.showTitleCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowDescriptionCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.showDescriptionCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowViewpointCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.showViewpointCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowTagsCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.showTagsCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowNotesCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.showNotesCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowDateCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.showDateCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowTimeCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.showTimeCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowDurationCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.showDurationCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowActionPatternCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.showActionPatternCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowRatingsCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.showRatingsCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowWordsTotalCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.showWordsTotalCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowWordcountCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.showWordcountCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowLettercountCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.showLettercountCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowStatusCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.showStatusCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowCharactersCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.showCharactersCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowLocationsCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.showLocationsCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
         row3Cnt += 1
-        self.root.ShowItemsCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
+        self.root.showItemsCheckbox.grid(row=row3Cnt, column=3, sticky=W, padx=20)
 
         if row3Cnt > row2Cnt:
             rowCnt = row3Cnt

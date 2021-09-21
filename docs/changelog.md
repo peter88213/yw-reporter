@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v1.4.2 Optional update
+
+- Refactor for better maintainability.
+
+Based on PyWriter v3.24.3
+
 ### v1.4.1 Optional update
 
 - Refactor for better maintainability.

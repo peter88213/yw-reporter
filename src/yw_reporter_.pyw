@@ -118,6 +118,6 @@ if __name__ == '__main__':
 
         parser.add_argument('--silent',
                             action="store_true",
-                            help='suppress error messages and the request to confirm overwriting')
+                            help='operation without grphical user interface; suppress error messages and the request to confirm overwriting')
         args = parser.parse_args()
         run(args.sourcePath, args.silent, installDir)

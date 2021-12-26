@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v1.4.3 Support non-Windows OS
+
+- Move installation and configuration to another location (see instructions for use).
+
+Based on PyWriter v3.28.1
+
 ### v1.4.2 Optional update
 
 - Refactor for better maintainability.

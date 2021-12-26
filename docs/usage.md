@@ -80,15 +80,15 @@ You can generate as many reports with different options as you like without exit
 
 The latest yWriter project selected and the latest options used for a report are saved in a configuration file. 
 
-In Windows, this is the file path: 
+On Windows, this is the file path: 
 
-`c:\Users\<user name>\AppData\Roaming\PyWriter\yw-reporter\config\yw-reporter.ini`
+`c:\Users\<user name>\.pywriter\yw-reporter\config\yw-reporter.ini`
 
 You can safely delete this file at any time.
 
 ## Installation path
 
-The **install.bat** installation script installs *yw-reporter.pyw* in the user profile. This is the installation path: 
+The **install.bat** installation script installs *yw-reporter.pyw* in the user profile. This is the installation path on Windows: 
 
-`c:\Users\<user name>\AppData\Roaming\PyWriter\yw-reporter`
+`c:\Users\<user name>\.pywriter\yw-reporter`
 

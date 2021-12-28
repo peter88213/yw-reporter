@@ -14,7 +14,6 @@
 		<exec executable="python" failonerror="true">
 		    <arg value="${src}/build_yw_reporter.py"/>
 		</exec>
-		<fixcrlf encoding="utf-8" eol="lf" srcdir="${test}" includes="**/*.py" />
 	</target>
 
 	<target name="test" description="integration tests">
@@ -25,34 +24,31 @@
 		</exec>
 	</target>
 
-	<target name="dist" description="generate the distribution">
-		
+	<target name="dist" description="generate the distribution">		
 		<delete dir="${build}" />
 		<delete dir="${dist}" />
 		<mkdir dir="${build}" />
 		<mkdir dir="${dist}" />
 		<mkdir dir="${build}/${release-name}" />
 
-		<copy file="./install.bat" todir="${build}/${release-name}" />
-		
 		<copy file="${test}/yw_reporter.pyw" tofile="${build}/${release-name}/yw-reporter.pyw" />
 		<replace encoding="utf-8" file="${build}/${release-name}/yw-reporter.pyw" token="@release" value="${release}" />
 
+		<copy file="${src}/setup.pyw" todir="${build}/${release-name}" />		
 		<copy file="../LICENSE" todir="${build}/${release-name}" />
 		<copy file="${docs}/usage.md" tofile="${build}/${release-name}/README.md" />
+		
+		<fixcrlf encoding="utf-8" eol="lf" srcdir="${build}/${release-name}" includes="**/*.*" />
 
 		<zip destfile="${dist}/yw-reporter_v${release}.zip" basedir="${build}/${release-name}" />
 
 		<copy file="${docs}/template/index.md" overwrite="True" todir="${docs}" />
 		<replace encoding="utf-8" file="${docs}/index.md" token="0.99.0" value="${release}" />
-
 	</target>
 
-	<target name="clean" description="clean up">
-		
+	<target name="clean" description="clean up">	
 		<delete file="${test}/yw_reporter.pyw" />
-		<delete file="${test}/test_yw_reporter.py" />
-		
+		<delete file="${test}/test_yw_reporter.py" />		
 	</target>
 
 </project>

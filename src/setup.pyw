@@ -11,7 +11,6 @@ import os
 import stat
 from shutil import copyfile
 from pathlib import Path
-from tkinter import messagebox
 from string import Template
 
 try:

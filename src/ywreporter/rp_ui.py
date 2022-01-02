@@ -323,7 +323,7 @@ class RpUi(UiTk):
         if path is not None:
             novel = Yw7File(path)
 
-            if novel.file_exists():
+            if os.path.isfile(path):
                 novel.read()
 
                 # Build tag and viewpoint list.

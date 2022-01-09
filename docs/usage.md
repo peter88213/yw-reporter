@@ -88,7 +88,7 @@ You can safely delete this file at any time.
 
 ## Installation path
 
-The **install.bat** installation script installs *yw-reporter.pyw* in the user profile. This is the installation path on Windows: 
+The setup script installs *yw-reporter.pyw* in the user profile. This is the installation path on Windows: 
 
 `c:\Users\<user name>\.pywriter\yw-reporter`
 

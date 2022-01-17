@@ -1,6 +1,6 @@
-"""HTML report from yWriter. 
+"""Provide a class for HTML report file representation.
 
-Copyright (c) 2021 Peter Triesberger
+Copyright (c) 2022 Peter Triesberger
 For further information see https://github.com/peter88213/yw-reporter
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
@@ -52,7 +52,7 @@ tr.notexp {font-style: italic}
 '''
 
     def __init__(self, filePath, **kwargs):
-        FileExport.__init__(self, filePath)
+        super().__init__(filePath)
 
         self.sceneFilter = kwargs['sceneFilter']
 

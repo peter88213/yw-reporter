@@ -1,6 +1,6 @@
-"""CSV report from yWriter. 
+"""Provide a class for CSV report file representation.
 
-Copyright (c) 2021 Peter Triesberger
+Copyright (c) 2022 Peter Triesberger
 For further information see https://github.com/peter88213/yw-reporter
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
@@ -8,9 +8,8 @@ from pywriter.file.file_export import FileExport
 
 
 class CsvReport(FileExport):
-    """Export content or metadata from an yWriter project to a CSV file.
+    """Class for CSV export file representation.
     """
-
     DESCRIPTION = 'CSV report'
     EXTENSION = '.csv'
     SUFFIX = '_report'
@@ -26,7 +25,7 @@ class CsvReport(FileExport):
         return text
 
     def __init__(self, filePath, **kwargs):
-        FileExport.__init__(self, filePath)
+        super().__init__(filePath)
 
         self.sceneFilter = kwargs['sceneFilter']
 

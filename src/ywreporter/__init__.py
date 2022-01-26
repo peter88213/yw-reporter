@@ -5,7 +5,7 @@ Modules:
 csv_report -- Provide a class for CSV report file representation.
 html_report -- Provide a class for HTML report file representation.
 rp_converter -- Provide a converter class for yWriter reports. 
-rp_ui -- Provide a Tkinter facade user interface class.
+yw_reporter_tk -- Provide a tkinter GUI class for the yWriter report generator.
 
 Copyright (c) 2022 Peter Triesberger
 For further information see https://github.com/peter88213/yw-reporter

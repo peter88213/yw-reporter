@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-""""Provide a tkinter GUI class for yWriter file viewing.
+""""Provide a tkinter GUI class for the yWriter report generator.
 
 Copyright (c) 2022 Peter Triesberger
-For further information see https://github.com/peter88213/yw-viewer
+For further information see https://github.com/peter88213/yw-reporter
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
 import webbrowser
@@ -46,94 +46,94 @@ class YwReporterTk(MainTk):
         #--- Row 1: "Levels" checkboxes (chapters, scenes)
 
         row1Cnt = 1
-        self.hdLevels = tk.Label(self.mainWindow, text='Levels')
-        self.hdLevels.grid(row=row1Cnt, column=1, sticky=tk.W, padx=20)
+        hdLevels = tk.Label(self.mainWindow, text='Levels')
+        hdLevels.grid(row=row1Cnt, column=1, sticky=tk.W, padx=20)
 
         row1Cnt += 1
         self.showChapters = tk.BooleanVar(value=kwargs['showChapters'])
-        self.showChaptersCheckbox = ttk.Checkbutton(
+        showChaptersCheckbox = ttk.Checkbutton(
             self.mainWindow, text='Include chapters', variable=self.showChapters, onvalue=True, offvalue=False)
-        self.showChaptersCheckbox.grid(row=row1Cnt, column=1, sticky=tk.W, padx=20)
+        showChaptersCheckbox.grid(row=row1Cnt, column=1, sticky=tk.W, padx=20)
 
         row1Cnt += 1
         self.showScenes = tk.BooleanVar(value=kwargs['showScenes'])
-        self.showScenesCheckbox = ttk.Checkbutton(
+        showScenesCheckbox = ttk.Checkbutton(
             self.mainWindow, text='Include scenes', variable=self.showScenes, onvalue=True, offvalue=False)
-        self.showScenesCheckbox.grid(row=row1Cnt, column=1, sticky=tk.W, padx=20)
+        showScenesCheckbox.grid(row=row1Cnt, column=1, sticky=tk.W, padx=20)
 
         #--- Row 2: "Types" checkboxes (normal, unused, ...)
 
         row2Cnt = 1
-        self.hdTypes = tk.Label(self.mainWindow, text='Types')
-        self.hdTypes.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
+        hdTypes = tk.Label(self.mainWindow, text='Types')
+        hdTypes.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
         row2Cnt += 1
         self.showNormalType = tk.BooleanVar(value=kwargs['showNormalType'])
-        self.showNormalTypeCheckbox = ttk.Checkbutton(
+        showNormalTypeCheckbox = ttk.Checkbutton(
             self.mainWindow, text='Include "normal" type', variable=self.showNormalType, onvalue=True, offvalue=False)
-        self.showNormalTypeCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
+        showNormalTypeCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
         row2Cnt += 1
         self.showUnusedType = tk.BooleanVar(value=kwargs['showUnusedType'])
-        self.showUnusedTypeCheckbox = ttk.Checkbutton(
+        showUnusedTypeCheckbox = ttk.Checkbutton(
             self.mainWindow, text='Include "unused" type', variable=self.showUnusedType, onvalue=True, offvalue=False)
-        self.showUnusedTypeCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
+        showUnusedTypeCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
         row2Cnt += 1
         self.showNotesType = tk.BooleanVar(value=kwargs['showNotesType'])
-        self.showNotesTypeCheckbox = ttk.Checkbutton(
+        showNotesTypeCheckbox = ttk.Checkbutton(
             self.mainWindow, text='Include "notes" type', variable=self.showNotesType, onvalue=True, offvalue=False)
-        self.showNotesTypeCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
+        showNotesTypeCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
         row2Cnt += 1
         self.showTodoType = tk.BooleanVar(value=kwargs['showTodoType'])
-        self.showTodoTypeCheckbox = ttk.Checkbutton(
+        showTodoTypeCheckbox = ttk.Checkbutton(
             self.mainWindow, text='Include "to do" type', variable=self.showTodoType, onvalue=True, offvalue=False)
-        self.showTodoTypeCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
+        showTodoTypeCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
         row2Cnt += 1
         self.showUnexported = tk.BooleanVar(value=kwargs['showUnexported'])
-        self.showUnexportedCheckbox = ttk.Checkbutton(
+        showUnexportedCheckbox = ttk.Checkbutton(
             self.mainWindow, text='Include "do not export" type', variable=self.showUnexported, onvalue=True, offvalue=False)
-        self.showUnexportedCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
+        showUnexportedCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
         #--- Row 2: "Filter" combo boxes (None/Tag/Viewpoint/...)
 
         row2Cnt += 2
-        self.hdFilters = tk.Label(self.mainWindow, text='Filter')
-        self.hdFilters.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
+        hdFilters = tk.Label(self.mainWindow, text='Filter')
+        hdFilters.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
         self.filterCatSelection = tk.IntVar()
 
         row2Cnt += 1
-        self.noneCheckbox = ttk.Radiobutton(
+        noneCheckbox = ttk.Radiobutton(
             self.mainWindow, text='None', variable=self.filterCatSelection, value=0, command=lambda: self.set_filter_category(0))
-        self.noneCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
+        noneCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
         row2Cnt += 1
-        self.tagsCheckbox = ttk.Radiobutton(
+        tagsCheckbox = ttk.Radiobutton(
             self.mainWindow, text='Tag', variable=self.filterCatSelection, value=1, command=lambda: self.set_filter_category(1))
-        self.tagsCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
+        tagsCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
         row2Cnt += 1
-        self.viewpointsCheckbox = ttk.Radiobutton(
+        viewpointsCheckbox = ttk.Radiobutton(
             self.mainWindow, text='Viewpoint', variable=self.filterCatSelection, value=2, command=lambda: self.set_filter_category(2))
-        self.viewpointsCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
+        viewpointsCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
         row2Cnt += 1
-        self.charactersCheckbox = ttk.Radiobutton(
+        charactersCheckbox = ttk.Radiobutton(
             self.mainWindow, text='Character', variable=self.filterCatSelection, value=3, command=lambda: self.set_filter_category(3))
-        self.charactersCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
+        charactersCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
         row2Cnt += 1
-        self.locationsCheckbox = ttk.Radiobutton(
+        locationsCheckbox = ttk.Radiobutton(
             self.mainWindow, text='Location', variable=self.filterCatSelection, value=4, command=lambda: self.set_filter_category(4))
-        self.locationsCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
+        locationsCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
         row2Cnt += 1
-        self.itemsCheckbox = ttk.Radiobutton(
+        itemsCheckbox = ttk.Radiobutton(
             self.mainWindow, text='Item', variable=self.filterCatSelection, value=5, command=lambda: self.set_filter_category(5))
-        self.itemsCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
+        itemsCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
         row2Cnt += 1
         self.filterCombobox = ttk.Combobox(self.mainWindow, values=[])
@@ -142,142 +142,132 @@ class YwReporterTk(MainTk):
         #--- Row 2: "Output" comboboxes (HTML/CSV)
 
         row2Cnt += 2
-        self.hdOutput = tk.Label(self.mainWindow, text='Output')
+        hdOutput = tk.Label(self.mainWindow, text='Output')
+        hdOutput.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
+
         self.outputSelection = tk.IntVar(value=kwargs['outputSelection'])
-        self.hdOutput.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
         row2Cnt += 1
-        self.htmlCheckbox = ttk.Radiobutton(self.mainWindow, text='HTML', variable=self.outputSelection, value=0)
-        self.htmlCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
+        htmlCheckbox = ttk.Radiobutton(self.mainWindow, text='HTML', variable=self.outputSelection, value=0)
+        htmlCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
         row2Cnt += 1
-        self.csvCheckbox = ttk.Radiobutton(self.mainWindow, text='CSV', variable=self.outputSelection, value=1)
-        self.csvCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
+        csvCheckbox = ttk.Radiobutton(self.mainWindow, text='CSV', variable=self.outputSelection, value=1)
+        csvCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
         #--- Row 3: "Columns" checkboxes (Number, title, Description ...)
 
         row3Cnt = 1
-        self.hdColumns = tk.Label(self.mainWindow, text='Columns')
-        self.hdColumns.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
+        hdColumns = tk.Label(self.mainWindow, text='Columns')
+        hdColumns.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
         self.showNumber = tk.BooleanVar(value=kwargs['showNumber'])
-        self.showNumberCheckbox = ttk.Checkbutton(
+        showNumberCheckbox = ttk.Checkbutton(
             self.mainWindow, text='Number', variable=self.showNumber, onvalue=True, offvalue=False)
-        self.showNumberCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
+        showNumberCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
         self.showTitle = tk.BooleanVar(value=kwargs['showTitle'])
-        self.showTitleCheckbox = ttk.Checkbutton(
+        showTitleCheckbox = ttk.Checkbutton(
             self.mainWindow, text='Title', variable=self.showTitle, onvalue=True, offvalue=False)
-        self.showTitleCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
+        showTitleCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
         self.showDescription = tk.BooleanVar(value=kwargs['showDescription'])
-        self.showDescriptionCheckbox = ttk.Checkbutton(
+        showDescriptionCheckbox = ttk.Checkbutton(
             self.mainWindow, text='Description', variable=self.showDescription, onvalue=True, offvalue=False)
-        self.showDescriptionCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
+        showDescriptionCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
         self.showViewpoint = tk.BooleanVar(value=kwargs['showViewpoint'])
-        self.showViewpointCheckbox = ttk.Checkbutton(
+        showViewpointCheckbox = ttk.Checkbutton(
             self.mainWindow, text='Viewpoint', variable=self.showViewpoint, onvalue=True, offvalue=False)
-        self.showViewpointCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
+        showViewpointCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
         self.showTags = tk.BooleanVar(value=kwargs['showTags'])
-        self.showTagsCheckbox = ttk.Checkbutton(self.mainWindow, text='Tags',
-                                                variable=self.showTags, onvalue=True, offvalue=False)
-        self.showTagsCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
+        showTagsCheckbox = ttk.Checkbutton(self.mainWindow, text='Tags',
+                                           variable=self.showTags, onvalue=True, offvalue=False)
+        showTagsCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
         self.showNotes = tk.BooleanVar(value=kwargs['showNotes'])
-        self.showNotesCheckbox = ttk.Checkbutton(
+        showNotesCheckbox = ttk.Checkbutton(
             self.mainWindow,  text='Notes', variable=self.showNotes, onvalue=True, offvalue=False)
-        self.showNotesCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
+        showNotesCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
         self.showDate = tk.BooleanVar(value=kwargs['showDate'])
-        self.showDateCheckbox = ttk.Checkbutton(self.mainWindow, text='Date',
-                                                variable=self.showDate, onvalue=True, offvalue=False)
-        self.showDateCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
+        showDateCheckbox = ttk.Checkbutton(self.mainWindow, text='Date',
+                                           variable=self.showDate, onvalue=True, offvalue=False)
+        showDateCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
         self.showTime = tk.BooleanVar(value=kwargs['showTime'])
-        self.showTimeCheckbox = ttk.Checkbutton(self.mainWindow, text='Time',
-                                                variable=self.showTime, onvalue=True, offvalue=False)
-        self.showTimeCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
+        showTimeCheckbox = ttk.Checkbutton(self.mainWindow, text='Time',
+                                           variable=self.showTime, onvalue=True, offvalue=False)
+        showTimeCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
         self.showDuration = tk.BooleanVar(value=kwargs['showDuration'])
-        self.showDurationCheckbox = ttk.Checkbutton(
+        showDurationCheckbox = ttk.Checkbutton(
             self.mainWindow, text='Duration', variable=self.showDuration, onvalue=True, offvalue=False)
-        self.showDurationCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
+        showDurationCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
         self.showActionPattern = tk.BooleanVar(value=kwargs['showActionPattern'])
-        self.showActionPatternCheckbox = ttk.Checkbutton(
+        showActionPatternCheckbox = ttk.Checkbutton(
             self.mainWindow, text='A/R-Goal-Conflict-Outcome', variable=self.showActionPattern, onvalue=True, offvalue=False)
-        self.showActionPatternCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
+        showActionPatternCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
         self.showRatings = tk.BooleanVar(value=kwargs['showRatings'])
-        self.showRatingsCheckbox = ttk.Checkbutton(
+        showRatingsCheckbox = ttk.Checkbutton(
             self.mainWindow, text='Scene ratings', variable=self.showRatings, onvalue=True, offvalue=False)
-        self.showRatingsCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
+        showRatingsCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
         self.showWordsTotal = tk.BooleanVar(value=kwargs['showWordsTotal'])
-        self.showWordsTotalCheckbox = ttk.Checkbutton(
+        showWordsTotalCheckbox = ttk.Checkbutton(
             self.mainWindow, text='Words total', variable=self.showWordsTotal, onvalue=True, offvalue=False)
-        self.showWordsTotalCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
+        showWordsTotalCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
         self.showWordcount = tk.BooleanVar(value=kwargs['showWordcount'])
-        self.showWordcountCheckbox = ttk.Checkbutton(
+        showWordcountCheckbox = ttk.Checkbutton(
             self.mainWindow, text='Word count', variable=self.showWordcount, onvalue=True, offvalue=False)
-        self.showWordcountCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
+        showWordcountCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
         self.showLettercount = tk.BooleanVar(value=kwargs['showLettercount'])
-        self.showLettercountCheckbox = ttk.Checkbutton(
+        showLettercountCheckbox = ttk.Checkbutton(
             self.mainWindow, text='Letter count', variable=self.showLettercount, onvalue=True, offvalue=False)
-        self.showLettercountCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
+        showLettercountCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
         self.showStatus = tk.BooleanVar(value=kwargs['showStatus'])
-        self.showStatusCheckbox = ttk.Checkbutton(
+        showStatusCheckbox = ttk.Checkbutton(
             self.mainWindow, text='Status', variable=self.showStatus, onvalue=True, offvalue=False)
-        self.showStatusCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
+        showStatusCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
         self.showCharacters = tk.BooleanVar(value=kwargs['showCharacters'])
-        self.showCharactersCheckbox = ttk.Checkbutton(
+        showCharactersCheckbox = ttk.Checkbutton(
             self.mainWindow, text='Characters', variable=self.showCharacters, onvalue=True, offvalue=False)
-        self.showCharactersCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
+        showCharactersCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
         self.showLocations = tk.BooleanVar(value=kwargs['showLocations'])
-        self.showLocationsCheckbox = ttk.Checkbutton(
+        showLocationsCheckbox = ttk.Checkbutton(
             self.mainWindow, text='Locations', variable=self.showLocations, onvalue=True, offvalue=False)
-        self.showLocationsCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
+        showLocationsCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
         self.showItems = tk.BooleanVar(value=kwargs['showItems'])
-        self.showItemsCheckbox = ttk.Checkbutton(
+        showItemsCheckbox = ttk.Checkbutton(
             self.mainWindow, text='Items', variable=self.showItems, onvalue=True, offvalue=False)
-        self.showItemsCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
-
-        if row3Cnt > row2Cnt:
-            rowCnt = row3Cnt
-
-        else:
-            rowCnt = row2Cnt
-
-        if row1Cnt > rowCnt:
-            rowCnt = row1Cnt
-
-        #--- Bottom line: "Run" button.
+        showItemsCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
     def extend_menu(self):
         """Add main menu entries.

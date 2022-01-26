@@ -3,7 +3,7 @@
 
 Version @release
 
-Copyright (c) 2021 Peter Triesberger
+Copyright (c) 2022 Peter Triesberger
 For further information see https://github.com/peter88213/yw-reporter
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
@@ -17,7 +17,7 @@ from pywriter.ui.ui import Ui
 from pywriter.file.filter import Filter
 
 from ywreporter.rp_converter import RpConverter
-from ywreporter.rp_ui import RpUi
+from ywreporter.yw_reporter_tk import YwReporterTk
 
 SUFFIX = '_report'
 APPNAME = 'yw-reporter'
@@ -85,8 +85,17 @@ def run(sourcePath, silentMode=True, installDir=''):
         converter.run(sourcePath, **kwargs)
 
     else:
-        converter.ui = RpUi('yWriter report generator @release', sourcePath=sourcePath, **kwargs)
+        converter.ui = YwReporterTk('yWriter report generator @release', sourcePath=sourcePath, **kwargs)
         converter.ui.converter = converter
+
+        #--- Get initial project path.
+
+        if not sourcePath or not os.path.isfile(sourcePath):
+            sourcePath = kwargs['yw_last_open']
+
+        #--- Instantiate the viewer object.
+
+        converter.ui.open_project(sourcePath)
         converter.ui.start()
 
         #--- Save project specific configuration

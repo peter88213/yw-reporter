@@ -4,6 +4,10 @@
 
 ## Changelog
 
+### v1.6.0 GUI update
+
+Based on PyWriter v 4.0.0
+
 ### v1.4.3 Support non-Windows OS
 
 - Move installation and configuration to another location (see instructions for use).

@@ -5,8 +5,9 @@ For further information see https://github.com/peter88213/yw-reporter
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
 import os
-from pywriter.converter.yw_cnv_ui import YwCnvUi
 
+from pywriter.pywriter_globals import ERROR
+from pywriter.converter.yw_cnv_ui import YwCnvUi
 from pywriter.yw.yw7_file import Yw7File
 from ywreporter.html_report import HtmlReport
 from ywreporter.csv_report import CsvReport
@@ -22,7 +23,7 @@ class RpConverter(YwCnvUi):
         self.newFile = None
 
         if not os.path.isfile(sourcePath):
-            self.ui.set_info_how('ERROR: File "' + os.path.normpath(sourcePath) + '" not found.')
+            self.ui.set_info_how(f'{ERROR}File "{os.path.normpath(sourcePath)}" not found.')
             return
 
         fileName, fileExtension = os.path.splitext(sourcePath)
@@ -39,4 +40,4 @@ class RpConverter(YwCnvUi):
             self.export_from_yw(sourceFile, targetFile)
 
         else:
-            self.ui.set_info_how('ERROR: File type of "' + os.path.normpath(sourcePath) + '" not supported.')
+            self.ui.set_info_how(f'{ERROR}File type of "{os.path.normpath(sourcePath)}" not supported.')

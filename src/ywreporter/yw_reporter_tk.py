@@ -307,7 +307,7 @@ class YwReporterTk(MainTk):
 
         if message.startswith(ERROR):
             self.close_project()
-            self.statusBar.config(text=message)
+            self.set_info_how(message)
             return ''
 
         if self.ywPrj.title:
@@ -416,6 +416,7 @@ class YwReporterTk(MainTk):
     def convert_file(self):
         """Call the converter's conversion method, if a source file is selected.
         """
+        self.set_status('')
 
         # Filter options.
 
@@ -475,12 +476,3 @@ class YwReporterTk(MainTk):
 
         if self.converter.newFile is not None:
             webbrowser.open(self.converter.newFile)
-
-    def set_info_what(self, message):
-        """What's the converter going to do?
-        Just a stub here.
-        """
-
-    def set_info_how(self, message):
-        """How's the converter doing?"""
-        self.statusBar.config(text=message)

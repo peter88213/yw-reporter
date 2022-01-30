@@ -9,6 +9,7 @@ import webbrowser
 import tkinter as tk
 from tkinter import ttk
 
+from pywriter.pywriter_globals import ERROR
 from pywriter.file.filter import Filter
 from pywriter.file.sc_tg_filter import ScTgFilter
 from pywriter.file.sc_vp_filter import ScVpFilter
@@ -304,7 +305,7 @@ class YwReporterTk(MainTk):
         self.ywPrj = Yw7File(fileName)
         message = self.ywPrj.read()
 
-        if message.startswith('ERROR'):
+        if message.startswith(ERROR):
             self.close_project()
             self.statusBar.config(text=message)
             return ''

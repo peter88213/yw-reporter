@@ -172,36 +172,36 @@ tr.notexp {font-style: italic}
         chRow = ''.join(chColumns)
         scRow = ''.join(scColumns)
 
-        self.fileHeader += '<thead><tr>' + hdRow + '</tr></thead>'
+        self.fileHeader = f'{self.fileHeader}<thead><tr>{hdRow}</tr></thead>'
 
         if kwargs['showChapters']:
 
             if kwargs['showNormalType']:
-                self.chapterTemplate = '<tr>' + chRow + '</tr>'
-                self.partTemplate = '<tr class="part">' + chRow + '</tr>'
+                self.chapterTemplate = f'<tr>{chRow}</tr>'
+                self.partTemplate = f'<tr class="part">{chRow}</tr>'
 
             if kwargs['showUnusedType']:
-                self.unusedChapterTemplate = '<tr class="unused">' + chRow + '</tr>'
+                self.unusedChapterTemplate = f'<tr class="unused">{chRow}</tr>'
 
             if kwargs['showNotesType']:
-                self.notesChapterTemplate = '<tr class="notes">' + chRow + '</tr>'
+                self.notesChapterTemplate = f'<tr class="notes">{chRow}</tr>'
 
             if kwargs['showTodoType']:
-                self.todoChapterTemplate = '<tr class="todo">' + chRow + '</tr>'
+                self.todoChapterTemplate = f'<tr class="todo">{chRow}</tr>'
 
         if kwargs['showScenes']:
 
             if kwargs['showNormalType']:
-                self.sceneTemplate = '<tr>' + scRow + '</tr>'
+                self.sceneTemplate = f'<tr>{scRow}</tr>'
 
             if kwargs['showUnusedType']:
-                self.unusedSceneTemplate = '<tr class="unused">' + scRow + '</tr>'
+                self.unusedSceneTemplate = f'<tr class="unused">{scRow}</tr>'
 
             if kwargs['showNotesType']:
-                self.notesSceneTemplate = '<tr class="notes">' + scRow + '</tr>'
+                self.notesSceneTemplate = f'<tr class="notes">{scRow}</tr>'
 
             if kwargs['showTodoType']:
-                self.todoSceneTemplate = '<tr class="todo">' + scRow + '</tr>'
+                self.todoSceneTemplate = f'<tr class="todo">{scRow}</tr>'
 
             if kwargs['showUnexported']:
-                self.notExportedSceneTemplate = '<tr class="notexp">' + scRow + '</tr>'
+                self.notExportedSceneTemplate = f'<tr class="notexp">{scRow}</tr>'

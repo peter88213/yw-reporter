@@ -15,7 +15,7 @@ import inliner
 SRC = '../src/'
 BUILD = '../test/'
 SOURCE_FILE_GUI = 'yw_reporter_.pyw'
-TARGET_FILE_GUI = BUILD + 'yw_reporter.pyw'
+TARGET_FILE_GUI = f'{BUILD}yw_reporter.pyw'
 
 
 def main():

@@ -141,9 +141,9 @@ class CsvReport(FileExport):
             chColumns.append(',')
             scColumns.append('"$Items"')
 
-        hdRow = ','.join(hdColumns) + '\n'
-        chRow = ','.join(chColumns) + '\n'
-        scRow = ','.join(scColumns) + '\n'
+        hdRow = f'{",".join(hdColumns)}\n'
+        chRow = f'{",".join(chColumns)}\n'
+        scRow = f'{",".join(scColumns)}\n'
 
         self.fileHeader += hdRow.rstrip(',')
 

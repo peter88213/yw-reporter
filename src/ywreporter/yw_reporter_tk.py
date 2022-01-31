@@ -322,7 +322,7 @@ class YwReporterTk(MainTk):
         else:
             authorView = 'Unknown author'
 
-        self.titleBar.config(f'{text=titleView} by {authorView}')
+        self.titleBar.config(text=f'{titleView} by {authorView}')
         self.enable_menu()
 
         self.locations = []

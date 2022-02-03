@@ -15,7 +15,7 @@ class HtmlReport(FileExport):
     EXTENSION = '.html'
     SUFFIX = '_report'
 
-    fileHeader = '''<html>
+    _fileHeader = '''<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
@@ -46,7 +46,7 @@ tr.notexp {font-style: italic}
 <table>
 '''
 
-    fileFooter = '''</table>
+    _fileFooter = '''</table>
 </body>
 </html>
 '''
@@ -172,36 +172,36 @@ tr.notexp {font-style: italic}
         chRow = ''.join(chColumns)
         scRow = ''.join(scColumns)
 
-        self.fileHeader = f'{self.fileHeader}<thead><tr>{hdRow}</tr></thead>'
+        self._fileHeader = f'{self._fileHeader}<thead><tr>{hdRow}</tr></thead>'
 
         if kwargs['show_chapters']:
 
             if kwargs['show_normal_type']:
-                self.chapterTemplate = f'<tr>{chRow}</tr>'
-                self.partTemplate = f'<tr class="part">{chRow}</tr>'
+                self._chapterTemplate = f'<tr>{chRow}</tr>'
+                self._partTemplate = f'<tr class="part">{chRow}</tr>'
 
             if kwargs['show_unused_type']:
-                self.unusedChapterTemplate = f'<tr class="unused">{chRow}</tr>'
+                self._unusedChapterTemplate = f'<tr class="unused">{chRow}</tr>'
 
             if kwargs['show_notes_type']:
-                self.notesChapterTemplate = f'<tr class="notes">{chRow}</tr>'
+                self._notesChapterTemplate = f'<tr class="notes">{chRow}</tr>'
 
             if kwargs['show_todo_type']:
-                self.todoChapterTemplate = f'<tr class="todo">{chRow}</tr>'
+                self._todoChapterTemplate = f'<tr class="todo">{chRow}</tr>'
 
         if kwargs['show_scenes']:
 
             if kwargs['show_normal_type']:
-                self.sceneTemplate = f'<tr>{scRow}</tr>'
+                self._sceneTemplate = f'<tr>{scRow}</tr>'
 
             if kwargs['show_unused_type']:
-                self.unusedSceneTemplate = f'<tr class="unused">{scRow}</tr>'
+                self._unusedSceneTemplate = f'<tr class="unused">{scRow}</tr>'
 
             if kwargs['show_notes_type']:
-                self.notesSceneTemplate = f'<tr class="notes">{scRow}</tr>'
+                self._notesSceneTemplate = f'<tr class="notes">{scRow}</tr>'
 
             if kwargs['show_todo_type']:
-                self.todoSceneTemplate = f'<tr class="todo">{scRow}</tr>'
+                self._todoSceneTemplate = f'<tr class="todo">{scRow}</tr>'
 
             if kwargs['show_unexported']:
-                self.notExportedSceneTemplate = f'<tr class="notexp">{scRow}</tr>'
+                self._notExportedSceneTemplate = f'<tr class="notexp">{scRow}</tr>'

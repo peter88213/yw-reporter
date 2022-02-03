@@ -14,7 +14,7 @@ class CsvReport(FileExport):
     EXTENSION = '.csv'
     SUFFIX = '_report'
 
-    def convert_from_yw(self, text):
+    def _convert_from_yw(self, text):
 
         if text is None:
             text = ''
@@ -145,36 +145,36 @@ class CsvReport(FileExport):
         chRow = f'{",".join(chColumns)}\n'
         scRow = f'{",".join(scColumns)}\n'
 
-        self.fileHeader = f'{self.fileHeader}{hdRow.rstrip(",")}'
+        self._fileHeader = f'{self._fileHeader}{hdRow.rstrip(",")}'
 
         if kwargs['show_chapters']:
 
             if kwargs['show_normal_type']:
-                self.chapterTemplate = chRow
-                self.partTemplate = chRow
+                self._chapterTemplate = chRow
+                self._partTemplate = chRow
 
             if kwargs['show_unused_type']:
-                self.unusedChapterTemplate = chRow
+                self._unusedChapterTemplate = chRow
 
             if kwargs['show_notes_type']:
-                self.notesChapterTemplate = chRow
+                self._notesChapterTemplate = chRow
 
             if kwargs['show_todo_type']:
-                self.todoChapterTemplate = chRow
+                self._todoChapterTemplate = chRow
 
         if kwargs['show_scenes']:
 
             if kwargs['show_normal_type']:
-                self.sceneTemplate = scRow
+                self._sceneTemplate = scRow
 
             if kwargs['show_unused_type']:
-                self.unusedSceneTemplate = scRow
+                self._unusedSceneTemplate = scRow
 
             if kwargs['show_notes_type']:
-                self.notesSceneTemplate = scRow
+                self._notesSceneTemplate = scRow
 
             if kwargs['show_todo_type']:
-                self.todoSceneTemplate = scRow
+                self._todoSceneTemplate = scRow
 
             if kwargs['show_unexported']:
-                self.notExportedSceneTemplate = scRow
+                self._notExportedSceneTemplate = scRow

@@ -31,11 +31,11 @@ class RpConverter(YwCnvUi):
         if fileExtension == Yw7File.EXTENSION:
             sourceFile = Yw7File(sourcePath, **kwargs)
 
-            if kwargs['outputSelection'] == '1':
-                targetFile = CsvReport(fileName + kwargs['suffix'] + CsvReport.EXTENSION, **kwargs)
+            if kwargs['output_selection'] == '1':
+                targetFile = CsvReport(f'{fileName}{kwargs["suffix"]}{CsvReport.EXTENSION}', **kwargs)
 
             else:
-                targetFile = HtmlReport(fileName + kwargs['suffix'] + HtmlReport.EXTENSION, **kwargs)
+                targetFile = HtmlReport(f'{fileName}{kwargs["suffix"]}{HtmlReport.EXTENSION}', **kwargs)
 
             self.export_from_yw(sourceFile, targetFile)
 

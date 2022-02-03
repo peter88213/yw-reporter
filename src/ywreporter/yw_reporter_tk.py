@@ -33,263 +33,263 @@ class YwReporterTk(MainTk):
         """
         super().__init__(title, **kwargs)
         self.converter = None
-        self.tags = []
-        self.viewpoints = []
-        self.vpIds = []
-        self.characters = []
-        self.crIds = []
-        self.locations = []
-        self.lcIds = []
-        self.items = []
-        self.itIds = []
-        self.filterCat = []
+        self._tagList = []
+        self._viewpointTitles = []
+        self._viewpointList = []
+        self._characterTitles = []
+        self._characterList = []
+        self._locationTitles = []
+        self._locationList = []
+        self._itemTitles = []
+        self._itemList = []
+        self._filterCat = []
 
         #--- Row 1: "Levels" checkboxes (chapters, scenes)
 
         row1Cnt = 1
-        hdLevels = tk.Label(self.mainWindow, text='Levels')
+        hdLevels = tk.Label(self._mainWindow, text='Levels')
         hdLevels.grid(row=row1Cnt, column=1, sticky=tk.W, padx=20)
 
         row1Cnt += 1
-        self.showChapters = tk.BooleanVar(value=kwargs['showChapters'])
+        self._showChapters = tk.BooleanVar(value=kwargs['show_chapters'])
         showChaptersCheckbox = ttk.Checkbutton(
-            self.mainWindow, text='Include chapters', variable=self.showChapters, onvalue=True, offvalue=False)
+            self._mainWindow, text='Include chapters', variable=self._showChapters, onvalue=True, offvalue=False)
         showChaptersCheckbox.grid(row=row1Cnt, column=1, sticky=tk.W, padx=20)
 
         row1Cnt += 1
-        self.showScenes = tk.BooleanVar(value=kwargs['showScenes'])
+        self._showScenes = tk.BooleanVar(value=kwargs['show_scenes'])
         showScenesCheckbox = ttk.Checkbutton(
-            self.mainWindow, text='Include scenes', variable=self.showScenes, onvalue=True, offvalue=False)
+            self._mainWindow, text='Include scenes', variable=self._showScenes, onvalue=True, offvalue=False)
         showScenesCheckbox.grid(row=row1Cnt, column=1, sticky=tk.W, padx=20)
 
         #--- Row 2: "Types" checkboxes (normal, unused, ...)
 
         row2Cnt = 1
-        hdTypes = tk.Label(self.mainWindow, text='Types')
+        hdTypes = tk.Label(self._mainWindow, text='Types')
         hdTypes.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
         row2Cnt += 1
-        self.showNormalType = tk.BooleanVar(value=kwargs['showNormalType'])
+        self._showNormalType = tk.BooleanVar(value=kwargs['show_normal_type'])
         showNormalTypeCheckbox = ttk.Checkbutton(
-            self.mainWindow, text='Include "normal" type', variable=self.showNormalType, onvalue=True, offvalue=False)
+            self._mainWindow, text='Include "normal" type', variable=self._showNormalType, onvalue=True, offvalue=False)
         showNormalTypeCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
         row2Cnt += 1
-        self.showUnusedType = tk.BooleanVar(value=kwargs['showUnusedType'])
+        self._showUnusedType = tk.BooleanVar(value=kwargs['show_unused_type'])
         showUnusedTypeCheckbox = ttk.Checkbutton(
-            self.mainWindow, text='Include "unused" type', variable=self.showUnusedType, onvalue=True, offvalue=False)
+            self._mainWindow, text='Include "unused" type', variable=self._showUnusedType, onvalue=True, offvalue=False)
         showUnusedTypeCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
         row2Cnt += 1
-        self.showNotesType = tk.BooleanVar(value=kwargs['showNotesType'])
+        self._showNotesType = tk.BooleanVar(value=kwargs['show_notes_type'])
         showNotesTypeCheckbox = ttk.Checkbutton(
-            self.mainWindow, text='Include "notes" type', variable=self.showNotesType, onvalue=True, offvalue=False)
+            self._mainWindow, text='Include "notes" type', variable=self._showNotesType, onvalue=True, offvalue=False)
         showNotesTypeCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
         row2Cnt += 1
-        self.showTodoType = tk.BooleanVar(value=kwargs['showTodoType'])
+        self._showTodoType = tk.BooleanVar(value=kwargs['show_todo_type'])
         showTodoTypeCheckbox = ttk.Checkbutton(
-            self.mainWindow, text='Include "to do" type', variable=self.showTodoType, onvalue=True, offvalue=False)
+            self._mainWindow, text='Include "to do" type', variable=self._showTodoType, onvalue=True, offvalue=False)
         showTodoTypeCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
         row2Cnt += 1
-        self.showUnexported = tk.BooleanVar(value=kwargs['showUnexported'])
+        self._showUnexported = tk.BooleanVar(value=kwargs['show_unexported'])
         showUnexportedCheckbox = ttk.Checkbutton(
-            self.mainWindow, text='Include "do not export" type', variable=self.showUnexported, onvalue=True, offvalue=False)
+            self._mainWindow, text='Include "do not export" type', variable=self._showUnexported, onvalue=True, offvalue=False)
         showUnexportedCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
         #--- Row 2: "Filter" combo boxes (None/Tag/Viewpoint/...)
 
         row2Cnt += 2
-        hdFilters = tk.Label(self.mainWindow, text='Filter')
+        hdFilters = tk.Label(self._mainWindow, text='Filter')
         hdFilters.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
-        self.filterCatSelection = tk.IntVar()
+        self._filterCatSelection = tk.IntVar()
 
         row2Cnt += 1
         noneCheckbox = ttk.Radiobutton(
-            self.mainWindow, text='None', variable=self.filterCatSelection, value=0, command=lambda: self.set_filter_category(0))
+            self._mainWindow, text='None', variable=self._filterCatSelection, value=0, command=lambda: self._set_filter_category(0))
         noneCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
         row2Cnt += 1
         tagsCheckbox = ttk.Radiobutton(
-            self.mainWindow, text='Tag', variable=self.filterCatSelection, value=1, command=lambda: self.set_filter_category(1))
+            self._mainWindow, text='Tag', variable=self._filterCatSelection, value=1, command=lambda: self._set_filter_category(1))
         tagsCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
         row2Cnt += 1
         viewpointsCheckbox = ttk.Radiobutton(
-            self.mainWindow, text='Viewpoint', variable=self.filterCatSelection, value=2, command=lambda: self.set_filter_category(2))
+            self._mainWindow, text='Viewpoint', variable=self._filterCatSelection, value=2, command=lambda: self._set_filter_category(2))
         viewpointsCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
         row2Cnt += 1
         charactersCheckbox = ttk.Radiobutton(
-            self.mainWindow, text='Character', variable=self.filterCatSelection, value=3, command=lambda: self.set_filter_category(3))
+            self._mainWindow, text='Character', variable=self._filterCatSelection, value=3, command=lambda: self._set_filter_category(3))
         charactersCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
         row2Cnt += 1
         locationsCheckbox = ttk.Radiobutton(
-            self.mainWindow, text='Location', variable=self.filterCatSelection, value=4, command=lambda: self.set_filter_category(4))
+            self._mainWindow, text='Location', variable=self._filterCatSelection, value=4, command=lambda: self._set_filter_category(4))
         locationsCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
         row2Cnt += 1
         itemsCheckbox = ttk.Radiobutton(
-            self.mainWindow, text='Item', variable=self.filterCatSelection, value=5, command=lambda: self.set_filter_category(5))
+            self._mainWindow, text='Item', variable=self._filterCatSelection, value=5, command=lambda: self._set_filter_category(5))
         itemsCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
         row2Cnt += 1
-        self.filterCombobox = ttk.Combobox(self.mainWindow, values=[])
-        self.filterCombobox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
+        self._filterCombobox = ttk.Combobox(self._mainWindow, values=[])
+        self._filterCombobox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
         #--- Row 2: "Output" comboboxes (HTML/CSV)
 
         row2Cnt += 2
-        hdOutput = tk.Label(self.mainWindow, text='Output')
+        hdOutput = tk.Label(self._mainWindow, text='Output')
         hdOutput.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
-        self.outputSelection = tk.IntVar(value=kwargs['outputSelection'])
+        self._outputSelection = tk.IntVar(value=kwargs['output_selection'])
 
         row2Cnt += 1
-        htmlCheckbox = ttk.Radiobutton(self.mainWindow, text='HTML', variable=self.outputSelection, value=0)
+        htmlCheckbox = ttk.Radiobutton(self._mainWindow, text='HTML', variable=self._outputSelection, value=0)
         htmlCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
         row2Cnt += 1
-        csvCheckbox = ttk.Radiobutton(self.mainWindow, text='CSV', variable=self.outputSelection, value=1)
+        csvCheckbox = ttk.Radiobutton(self._mainWindow, text='CSV', variable=self._outputSelection, value=1)
         csvCheckbox.grid(row=row2Cnt, column=2, sticky=tk.W, padx=20)
 
         #--- Row 3: "Columns" checkboxes (Number, title, Description ...)
 
         row3Cnt = 1
-        hdColumns = tk.Label(self.mainWindow, text='Columns')
+        hdColumns = tk.Label(self._mainWindow, text='Columns')
         hdColumns.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
-        self.showNumber = tk.BooleanVar(value=kwargs['showNumber'])
+        self._showNumber = tk.BooleanVar(value=kwargs['show_number'])
         showNumberCheckbox = ttk.Checkbutton(
-            self.mainWindow, text='Number', variable=self.showNumber, onvalue=True, offvalue=False)
+            self._mainWindow, text='Number', variable=self._showNumber, onvalue=True, offvalue=False)
         showNumberCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
-        self.showTitle = tk.BooleanVar(value=kwargs['showTitle'])
+        self._showTitle = tk.BooleanVar(value=kwargs['show_title'])
         showTitleCheckbox = ttk.Checkbutton(
-            self.mainWindow, text='Title', variable=self.showTitle, onvalue=True, offvalue=False)
+            self._mainWindow, text='Title', variable=self._showTitle, onvalue=True, offvalue=False)
         showTitleCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
-        self.showDescription = tk.BooleanVar(value=kwargs['showDescription'])
+        self._showDescription = tk.BooleanVar(value=kwargs['show_description'])
         showDescriptionCheckbox = ttk.Checkbutton(
-            self.mainWindow, text='Description', variable=self.showDescription, onvalue=True, offvalue=False)
+            self._mainWindow, text='Description', variable=self._showDescription, onvalue=True, offvalue=False)
         showDescriptionCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
-        self.showViewpoint = tk.BooleanVar(value=kwargs['showViewpoint'])
+        self._showViewpoint = tk.BooleanVar(value=kwargs['show_viewpoint'])
         showViewpointCheckbox = ttk.Checkbutton(
-            self.mainWindow, text='Viewpoint', variable=self.showViewpoint, onvalue=True, offvalue=False)
+            self._mainWindow, text='Viewpoint', variable=self._showViewpoint, onvalue=True, offvalue=False)
         showViewpointCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
-        self.showTags = tk.BooleanVar(value=kwargs['showTags'])
-        showTagsCheckbox = ttk.Checkbutton(self.mainWindow, text='Tags',
-                                           variable=self.showTags, onvalue=True, offvalue=False)
+        self._showTags = tk.BooleanVar(value=kwargs['show_tags'])
+        showTagsCheckbox = ttk.Checkbutton(self._mainWindow, text='Tags',
+                                           variable=self._showTags, onvalue=True, offvalue=False)
         showTagsCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
-        self.showNotes = tk.BooleanVar(value=kwargs['showNotes'])
+        self._showNotes = tk.BooleanVar(value=kwargs['show_notes'])
         showNotesCheckbox = ttk.Checkbutton(
-            self.mainWindow,  text='Notes', variable=self.showNotes, onvalue=True, offvalue=False)
+            self._mainWindow,  text='Notes', variable=self._showNotes, onvalue=True, offvalue=False)
         showNotesCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
-        self.showDate = tk.BooleanVar(value=kwargs['showDate'])
-        showDateCheckbox = ttk.Checkbutton(self.mainWindow, text='Date',
-                                           variable=self.showDate, onvalue=True, offvalue=False)
+        self._showDate = tk.BooleanVar(value=kwargs['show_date'])
+        showDateCheckbox = ttk.Checkbutton(self._mainWindow, text='Date',
+                                           variable=self._showDate, onvalue=True, offvalue=False)
         showDateCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
-        self.showTime = tk.BooleanVar(value=kwargs['showTime'])
-        showTimeCheckbox = ttk.Checkbutton(self.mainWindow, text='Time',
-                                           variable=self.showTime, onvalue=True, offvalue=False)
+        self._showTime = tk.BooleanVar(value=kwargs['show_time'])
+        showTimeCheckbox = ttk.Checkbutton(self._mainWindow, text='Time',
+                                           variable=self._showTime, onvalue=True, offvalue=False)
         showTimeCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
-        self.showDuration = tk.BooleanVar(value=kwargs['showDuration'])
+        self._showDuration = tk.BooleanVar(value=kwargs['show_duration'])
         showDurationCheckbox = ttk.Checkbutton(
-            self.mainWindow, text='Duration', variable=self.showDuration, onvalue=True, offvalue=False)
+            self._mainWindow, text='Duration', variable=self._showDuration, onvalue=True, offvalue=False)
         showDurationCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
-        self.showActionPattern = tk.BooleanVar(value=kwargs['showActionPattern'])
+        self._showActionPattern = tk.BooleanVar(value=kwargs['show_action_pattern'])
         showActionPatternCheckbox = ttk.Checkbutton(
-            self.mainWindow, text='A/R-Goal-Conflict-Outcome', variable=self.showActionPattern, onvalue=True, offvalue=False)
+            self._mainWindow, text='A/R-Goal-Conflict-Outcome', variable=self._showActionPattern, onvalue=True, offvalue=False)
         showActionPatternCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
-        self.showRatings = tk.BooleanVar(value=kwargs['showRatings'])
+        self._showRatings = tk.BooleanVar(value=kwargs['show_ratings'])
         showRatingsCheckbox = ttk.Checkbutton(
-            self.mainWindow, text='Scene ratings', variable=self.showRatings, onvalue=True, offvalue=False)
+            self._mainWindow, text='Scene ratings', variable=self._showRatings, onvalue=True, offvalue=False)
         showRatingsCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
-        self.showWordsTotal = tk.BooleanVar(value=kwargs['showWordsTotal'])
+        self._showWordsTotal = tk.BooleanVar(value=kwargs['show_words_total'])
         showWordsTotalCheckbox = ttk.Checkbutton(
-            self.mainWindow, text='Words total', variable=self.showWordsTotal, onvalue=True, offvalue=False)
+            self._mainWindow, text='Words total', variable=self._showWordsTotal, onvalue=True, offvalue=False)
         showWordsTotalCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
-        self.showWordcount = tk.BooleanVar(value=kwargs['showWordcount'])
+        self._showWordcount = tk.BooleanVar(value=kwargs['show_wordcount'])
         showWordcountCheckbox = ttk.Checkbutton(
-            self.mainWindow, text='Word count', variable=self.showWordcount, onvalue=True, offvalue=False)
+            self._mainWindow, text='Word count', variable=self._showWordcount, onvalue=True, offvalue=False)
         showWordcountCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
-        self.showLettercount = tk.BooleanVar(value=kwargs['showLettercount'])
+        self._showLettercount = tk.BooleanVar(value=kwargs['show_lettercount'])
         showLettercountCheckbox = ttk.Checkbutton(
-            self.mainWindow, text='Letter count', variable=self.showLettercount, onvalue=True, offvalue=False)
+            self._mainWindow, text='Letter count', variable=self._showLettercount, onvalue=True, offvalue=False)
         showLettercountCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
-        self.showStatus = tk.BooleanVar(value=kwargs['showStatus'])
+        self._showStatus = tk.BooleanVar(value=kwargs['show_status'])
         showStatusCheckbox = ttk.Checkbutton(
-            self.mainWindow, text='Status', variable=self.showStatus, onvalue=True, offvalue=False)
+            self._mainWindow, text='Status', variable=self._showStatus, onvalue=True, offvalue=False)
         showStatusCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
-        self.showCharacters = tk.BooleanVar(value=kwargs['showCharacters'])
+        self._showCharacters = tk.BooleanVar(value=kwargs['show_characters'])
         showCharactersCheckbox = ttk.Checkbutton(
-            self.mainWindow, text='Characters', variable=self.showCharacters, onvalue=True, offvalue=False)
+            self._mainWindow, text='Characters', variable=self._showCharacters, onvalue=True, offvalue=False)
         showCharactersCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
-        self.showLocations = tk.BooleanVar(value=kwargs['showLocations'])
+        self._showLocations = tk.BooleanVar(value=kwargs['show_locations'])
         showLocationsCheckbox = ttk.Checkbutton(
-            self.mainWindow, text='Locations', variable=self.showLocations, onvalue=True, offvalue=False)
+            self._mainWindow, text='Locations', variable=self._showLocations, onvalue=True, offvalue=False)
         showLocationsCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
         row3Cnt += 1
-        self.showItems = tk.BooleanVar(value=kwargs['showItems'])
+        self._showItems = tk.BooleanVar(value=kwargs['show_items'])
         showItemsCheckbox = ttk.Checkbutton(
-            self.mainWindow, text='Items', variable=self.showItems, onvalue=True, offvalue=False)
+            self._mainWindow, text='Items', variable=self._showItems, onvalue=True, offvalue=False)
         showItemsCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
-    def extend_menu(self):
+    def _extend_menu(self):
         """Add main menu entries.
         Override the superclass template method. 
         """
-        self.mainMenu.add_command(label='Create report', command=self.convert_file)
-        self.mainMenu.entryconfig('Create report', state='disabled')
+        self._mainMenu.add_command(label='Create report', command=self._convert_file)
+        self._mainMenu.entryconfig('Create report', state='disabled')
 
-    def disable_menu(self):
+    def _disable_menu(self):
         """Disable menu entries when no project is open.
         Extend the superclass method.      
         """
-        super().disable_menu()
-        self.mainMenu.entryconfig('Create report', state='disabled')
+        super()._disable_menu()
+        self._mainMenu.entryconfig('Create report', state='disabled')
 
-    def enable_menu(self):
+    def _enable_menu(self):
         """Enable menu entries when a project is open.
         Extend the superclass method.
         """
-        super().enable_menu()
-        self.mainMenu.entryconfig('Create report', state='normal')
+        super()._enable_menu()
+        self._mainMenu.entryconfig('Create report', state='normal')
 
     def open_project(self, fileName):
         """Create a yWriter project instance and read the file.
@@ -302,177 +302,169 @@ class YwReporterTk(MainTk):
         if not fileName:
             return ''
 
-        self.ywPrj = Yw7File(fileName)
-        message = self.ywPrj.read()
+        self._ywPrj = Yw7File(fileName)
+        message = self._ywPrj.read()
 
         if message.startswith(ERROR):
-            self.close_project()
+            self._close_project()
             self.set_info_how(message)
             return ''
 
-        if self.ywPrj.title:
-            titleView = self.ywPrj.title
+        if self._ywPrj.title:
+            titleView = self._ywPrj.title
 
         else:
             titleView = 'Untitled yWriter project'
 
-        if self.ywPrj.author:
-            authorView = self.ywPrj.author
+        if self._ywPrj.author:
+            authorView = self._ywPrj.author
 
         else:
             authorView = 'Unknown author'
 
-        self.titleBar.config(text=f'{titleView} by {authorView}')
-        self.enable_menu()
-
-        self.locations = []
-        self.items = []
+        self._titleBar.config(text=f'{titleView} by {authorView}')
+        self._enable_menu()
 
         #-- Build filter selector lists.
 
-        self.tags = []
-        self.vpIds = []
-        self.viewpoints = []
-        self.crIds = []
-        self.characters = []
-        self.lcIds = []
-        self.locations = []
-        self.itIds = []
-        self.items = []
+        self._tagList = []
+        self._viewpointList = []
+        self._viewpointTitles = []
+        self._characterList = []
+        self._characterTitles = []
+        self._locationList = []
+        self._locationTitles = []
+        self._itemList = []
+        self._itemTitles = []
 
-        for chId in self.ywPrj.srtChapters:
+        for chId in self._ywPrj.srtChapters:
 
-            for scId in self.ywPrj.chapters[chId].srtScenes:
+            for scId in self._ywPrj.chapters[chId].srtScenes:
 
-                if self.ywPrj.scenes[scId].tags:
+                if self._ywPrj.scenes[scId].tags:
 
-                    for tag in self.ywPrj.scenes[scId].tags:
+                    for tag in self._ywPrj.scenes[scId].tags:
 
-                        if not tag in self.tags:
-                            self.tags.append(tag)
+                        if not tag in self._tagList:
+                            self._tagList.append(tag)
 
-                if self.ywPrj.scenes[scId].characters:
-                    vpId = self.ywPrj.scenes[scId].characters[0]
+                if self._ywPrj.scenes[scId].characters:
+                    vpId = self._ywPrj.scenes[scId].characters[0]
 
-                    if not vpId in self.vpIds:
-                        self.vpIds.append(vpId)
-                        self.viewpoints.append(
-                            self.ywPrj.characters[vpId].title)
+                    if not vpId in self._viewpointList:
+                        self._viewpointList.append(vpId)
+                        self._viewpointTitles.append(self._ywPrj.characters[vpId].title)
 
-                    for crId in self.ywPrj.scenes[scId].characters:
+                    for crId in self._ywPrj.scenes[scId].characters:
 
-                        if not crId in self.crIds:
-                            self.crIds.append(crId)
-                            self.characters.append(
-                                self.ywPrj.characters[crId].title)
+                        if not crId in self._characterList:
+                            self._characterList.append(crId)
+                            self._characterTitles.append(self._ywPrj.characters[crId].title)
 
-                if self.ywPrj.scenes[scId].locations:
+                if self._ywPrj.scenes[scId].locations:
 
-                    for lcId in self.ywPrj.scenes[scId].locations:
+                    for lcId in self._ywPrj.scenes[scId].locations:
 
-                        if not lcId in self.lcIds:
-                            self.lcIds.append(lcId)
-                            self.locations.append(
-                                self.ywPrj.locations[lcId].title)
+                        if not lcId in self._locationList:
+                            self._locationList.append(lcId)
+                            self._locationTitles.append(self._ywPrj.locations[lcId].title)
 
-                if self.ywPrj.scenes[scId].items:
+                if self._ywPrj.scenes[scId].items:
 
-                    for itId in self.ywPrj.scenes[scId].items:
+                    for itId in self._ywPrj.scenes[scId].items:
 
-                        if not itId in self.itIds:
-                            self.itIds.append(itId)
-                            self.items.append(
-                                self.ywPrj.items[itId].title)
+                        if not itId in self._itemList:
+                            self._itemList.append(itId)
+                            self._itemTitles.append(self._ywPrj.items[itId].title)
 
         # Initialize the filter category selection widgets.
 
-        self.filterCat = [[], self.tags, self.viewpoints, self.characters, self.locations, self.items]
-        self.set_filter_category(0)
-        self.filterCatSelection.set(0)
+        self._filterCat = [[], self._tagList, self._viewpointTitles, self._characterTitles, self._locationTitles, self._itemTitles]
+        self._set_filter_category(0)
+        self._filterCatSelection.set(0)
 
         return fileName
 
-    def close_project(self):
+    def _close_project(self):
         """Clear the text box.
         Extend the superclass method.
         """
-        super().close_project()
-        self.filterCat = [[], [], [], [], [], []]
-        self.filterCombobox['values'] = []
-        self.set_filter_category(0)
-        self.filterCatSelection.set(0)
-        self.filterCombobox.set('')
+        super()._close_project()
+        self._filterCat = [[], [], [], [], [], []]
+        self._filterCombobox['values'] = []
+        self._set_filter_category(0)
+        self._filterCatSelection.set(0)
+        self._filterCombobox.set('')
 
-    def set_filter_category(self, selection):
-        options = self.filterCat[selection]
-        self.filterCombobox['values'] = options
+    def _set_filter_category(self, selection):
+        options = self._filterCat[selection]
+        self._filterCombobox['values'] = options
 
         if options:
-            self.filterCombobox.set(options[0])
+            self._filterCombobox.set(options[0])
 
         else:
-            self.filterCombobox.set('')
+            self._filterCombobox.set('')
 
-    def convert_file(self):
+    def _convert_file(self):
         """Call the converter's conversion method, if a source file is selected.
         """
-        self.set_status('')
+        self._set_status('')
 
         # Filter options.
 
-        filterCat = self.filterCatSelection.get()
-        option = self.filterCombobox.current()
+        filterCat = self._filterCatSelection.get()
+        option = self._filterCombobox.current()
 
         if filterCat == 0:
             sceneFilter = Filter()
 
         elif filterCat == 1:
-            sceneFilter = ScTgFilter(self.tags[option])
+            sceneFilter = ScTgFilter(self._tagList[option])
 
         elif filterCat == 2:
-            sceneFilter = ScVpFilter(self.vpIds[option])
+            sceneFilter = ScVpFilter(self._viewpointList[option])
 
         elif filterCat == 3:
-            sceneFilter = ScCrFilter(self.crIds[option])
+            sceneFilter = ScCrFilter(self._characterList[option])
 
         elif filterCat == 4:
-            sceneFilter = ScLcFilter(self.lcIds[option])
+            sceneFilter = ScLcFilter(self._locationList[option])
 
         elif filterCat == 5:
-            sceneFilter = ScItFilter(self.itIds[option])
+            sceneFilter = ScItFilter(self._itemList[option])
 
-        self.kwargs = dict(
-            yw_last_open=self.ywPrj.filePath,
-            outputSelection=str(self.outputSelection.get()),
-            suffix=HtmlReport.SUFFIX,
-            sceneFilter=sceneFilter,
-            showChapters=self.showChapters.get(),
-            showScenes=self.showScenes.get(),
-            showNormalType=self.showNormalType.get(),
-            showUnusedType=self.showUnusedType.get(),
-            showNotesType=self.showNotesType.get(),
-            showTodoType=self.showTodoType.get(),
-            showUnexported=self.showUnexported.get(),
-            showNumber=self.showNumber.get(),
-            showTitle=self.showTitle.get(),
-            showDescription=self.showDescription.get(),
-            showViewpoint=self.showViewpoint.get(),
-            showTags=self.showTags.get(),
-            showNotes=self.showNotes.get(),
-            showDate=self.showDate.get(),
-            showTime=self.showTime.get(),
-            showDuration=self.showDuration.get(),
-            showActionPattern=self.showActionPattern.get(),
-            showRatings=self.showRatings.get(),
-            showWordsTotal=self.showWordsTotal.get(),
-            showWordcount=self.showWordcount.get(),
-            showLettercount=self.showLettercount.get(),
-            showStatus=self.showStatus.get(),
-            showCharacters=self.showCharacters.get(),
-            showLocations=self.showLocations.get(),
-            showItems=self.showItems.get(),
-        )
-        self.converter.run(self.ywPrj.filePath, **self.kwargs)
+        self.kwargs['yw_last_open'] = self._ywPrj.filePath
+        self.kwargs['output_selection'] = str(self._outputSelection.get())
+        self.kwargs['suffix'] = HtmlReport.SUFFIX
+        self.kwargs['scene_filter'] = sceneFilter
+        self.kwargs['show_chapters'] = self._showChapters.get()
+        self.kwargs['show_scenes'] = self._showScenes.get()
+        self.kwargs['show_normal_type'] = self._showNormalType.get()
+        self.kwargs['show_unused_type'] = self._showUnusedType.get()
+        self.kwargs['show_notes_type'] = self._showNotesType.get()
+        self.kwargs['show_todo_type'] = self._showTodoType.get()
+        self.kwargs['show_unexported'] = self._showUnexported.get()
+        self.kwargs['show_number'] = self._showNumber.get()
+        self.kwargs['show_title'] = self._showTitle.get()
+        self.kwargs['show_description'] = self._showDescription.get()
+        self.kwargs['show_viewpoint'] = self._showViewpoint.get()
+        self.kwargs['show_tags'] = self._showTags.get()
+        self.kwargs['show_notes'] = self._showNotes.get()
+        self.kwargs['show_date'] = self._showDate.get()
+        self.kwargs['show_time'] = self._showTime.get()
+        self.kwargs['show_duration'] = self._showDuration.get()
+        self.kwargs['show_action_pattern'] = self._showActionPattern.get()
+        self.kwargs['show_ratings'] = self._showRatings.get()
+        self.kwargs['show_words_total'] = self._showWordsTotal.get()
+        self.kwargs['show_wordcount'] = self._showWordcount.get()
+        self.kwargs['show_lettercount'] = self._showLettercount.get()
+        self.kwargs['show_status'] = self._showStatus.get()
+        self.kwargs['show_characters'] = self._showCharacters.get()
+        self.kwargs['show_locations'] = self._showLocations.get()
+        self.kwargs['show_items'] = self._showItems.get()
+        
+        self.converter.run(self._ywPrj.filePath, **self.kwargs)
 
         if self.converter.newFile is not None:
             webbrowser.open(self.converter.newFile)

@@ -24,35 +24,35 @@ APPNAME = 'yw-reporter'
 
 SETTINGS = dict(
     yw_last_open='',
-    outputSelection=0,
+    output_selection=0,
 )
 
 OPTIONS = dict(
-    showChapters=True,
-    showScenes=True,
-    showNormalType=True,
-    showUnusedType=False,
-    showNotesType=False,
-    showTodoType=False,
-    showUnexported=False,
-    showNumber=False,
-    showTitle=True,
-    showDescription=True,
-    showViewpoint=False,
-    showTags=False,
-    showNotes=False,
-    showDate=False,
-    showTime=False,
-    showDuration=False,
-    showActionPattern=False,
-    showRatings=False,
-    showWordsTotal=False,
-    showWordcount=False,
-    showLettercount=False,
-    showStatus=False,
-    showCharacters=False,
-    showLocations=False,
-    showItems=False,
+    show_chapters=True,
+    show_scenes=True,
+    show_normal_type=True,
+    show_unused_type=False,
+    show_notes_type=False,
+    show_todo_type=False,
+    show_unexported=False,
+    show_number=False,
+    show_title=True,
+    show_description=True,
+    show_viewpoint=False,
+    show_tags=False,
+    show_notes=False,
+    show_date=False,
+    show_time=False,
+    show_duration=False,
+    show_action_pattern=False,
+    show_ratings=False,
+    show_words_total=False,
+    show_wordcount=False,
+    show_lettercount=False,
+    show_status=False,
+    show_characters=False,
+    show_locations=False,
+    show_items=False,
 )
 
 
@@ -66,14 +66,14 @@ def run(sourcePath, silentMode=True, installDir=''):
         sourceDir = './'
 
     else:
-        sourceDir += '/'
+        sourceDir = 'f{sourceDir}/'
 
     iniFile = f'{installDir}{APPNAME}.ini'
     configuration = Configuration(SETTINGS, OPTIONS)
     configuration.read(iniFile)
     kwargs = dict(
         suffix=SUFFIX,
-        sceneFilter=Filter()
+        scene_filter=Filter()
     )
     kwargs.update(configuration.settings)
     kwargs.update(configuration.options)
@@ -85,7 +85,7 @@ def run(sourcePath, silentMode=True, installDir=''):
         converter.run(sourcePath, **kwargs)
 
     else:
-        converter.ui = YwReporterTk('yWriter report generator @release', sourcePath=sourcePath, **kwargs)
+        converter.ui = YwReporterTk('yWriter report generator @release', **kwargs)
         converter.ui.converter = converter
 
         #--- Get initial project path.

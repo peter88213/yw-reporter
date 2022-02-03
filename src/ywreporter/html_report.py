@@ -54,58 +54,58 @@ tr.notexp {font-style: italic}
     def __init__(self, filePath, **kwargs):
         super().__init__(filePath)
 
-        self.sceneFilter = kwargs['sceneFilter']
+        self._sceneFilter = kwargs['scene_filter']
 
         hdColumns = []
         chColumns = []
         scColumns = []
 
-        if kwargs['showNumber']:
+        if kwargs['show_number']:
             hdColumns.append('<th>Number</th>')
             chColumns.append('<td class="chtitle">$ChapterNumber</td>')
             scColumns.append('<td>$SceneNumber</td>')
 
-        if kwargs['showTitle']:
+        if kwargs['show_title']:
             hdColumns.append('<th>Title</th>')
             chColumns.append('<td class="chtitle">$Title</td>')
             scColumns.append('<td>$Title</td>')
 
-        if kwargs['showDescription']:
+        if kwargs['show_description']:
             hdColumns.append('<th>Description</th>')
             chColumns.append('<td class="chdesc">$Desc</td>')
             scColumns.append('<td>$Desc</td>')
 
-        if kwargs['showViewpoint']:
+        if kwargs['show_viewpoint']:
             hdColumns.append('<th>Viewpoint</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$Viewpoint</td>')
 
-        if kwargs['showTags']:
+        if kwargs['show_tags']:
             hdColumns.append('<th>Tags</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$Tags</td>')
 
-        if kwargs['showNotes']:
+        if kwargs['show_notes']:
             hdColumns.append('<th>Notes</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$Notes</td>')
 
-        if kwargs['showDate']:
+        if kwargs['show_date']:
             hdColumns.append('<th>Date</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$ScDate</td>')
 
-        if kwargs['showTime']:
+        if kwargs['show_time']:
             hdColumns.append('<th>Time</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$ScTime</td>')
 
-        if kwargs['showDuration']:
+        if kwargs['show_duration']:
             hdColumns.append('<th>Duration</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$Duration</td>')
 
-        if kwargs['showActionPattern']:
+        if kwargs['show_action_pattern']:
             hdColumns.append('<th>A/R</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$ReactionScene</td>')
@@ -119,7 +119,7 @@ tr.notexp {font-style: italic}
             chColumns.append('<td></td>')
             scColumns.append('<td>$Outcome</td>')
 
-        if kwargs['showRatings']:
+        if kwargs['show_ratings']:
             hdColumns.append('<th>$FieldTitle1</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$Field1</td>')
@@ -133,37 +133,37 @@ tr.notexp {font-style: italic}
             chColumns.append('<td></td>')
             scColumns.append('<td>$Field4</td>')
 
-        if kwargs['showWordsTotal']:
+        if kwargs['show_words_total']:
             hdColumns.append('<th>Words total</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$WordsTotal</td>')
 
-        if kwargs['showWordcount']:
+        if kwargs['show_wordcount']:
             hdColumns.append('<th>Word count</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$WordCount</td>')
 
-        if kwargs['showLettercount']:
+        if kwargs['show_lettercount']:
             hdColumns.append('<th>Letter count</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$LetterCount</td>')
 
-        if kwargs['showStatus']:
+        if kwargs['show_status']:
             hdColumns.append('<th>Status</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$Status</td>')
 
-        if kwargs['showCharacters']:
+        if kwargs['show_characters']:
             hdColumns.append('<th>Characters</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$Characters</td>')
 
-        if kwargs['showLocations']:
+        if kwargs['show_locations']:
             hdColumns.append('<th>Locations</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$Locations</td>')
 
-        if kwargs['showItems']:
+        if kwargs['show_items']:
             hdColumns.append('<th>Items</th>')
             chColumns.append('<td></td>')
             scColumns.append('<td>$Items</td>')
@@ -174,34 +174,34 @@ tr.notexp {font-style: italic}
 
         self.fileHeader = f'{self.fileHeader}<thead><tr>{hdRow}</tr></thead>'
 
-        if kwargs['showChapters']:
+        if kwargs['show_chapters']:
 
-            if kwargs['showNormalType']:
+            if kwargs['show_normal_type']:
                 self.chapterTemplate = f'<tr>{chRow}</tr>'
                 self.partTemplate = f'<tr class="part">{chRow}</tr>'
 
-            if kwargs['showUnusedType']:
+            if kwargs['show_unused_type']:
                 self.unusedChapterTemplate = f'<tr class="unused">{chRow}</tr>'
 
-            if kwargs['showNotesType']:
+            if kwargs['show_notes_type']:
                 self.notesChapterTemplate = f'<tr class="notes">{chRow}</tr>'
 
-            if kwargs['showTodoType']:
+            if kwargs['show_todo_type']:
                 self.todoChapterTemplate = f'<tr class="todo">{chRow}</tr>'
 
-        if kwargs['showScenes']:
+        if kwargs['show_scenes']:
 
-            if kwargs['showNormalType']:
+            if kwargs['show_normal_type']:
                 self.sceneTemplate = f'<tr>{scRow}</tr>'
 
-            if kwargs['showUnusedType']:
+            if kwargs['show_unused_type']:
                 self.unusedSceneTemplate = f'<tr class="unused">{scRow}</tr>'
 
-            if kwargs['showNotesType']:
+            if kwargs['show_notes_type']:
                 self.notesSceneTemplate = f'<tr class="notes">{scRow}</tr>'
 
-            if kwargs['showTodoType']:
+            if kwargs['show_todo_type']:
                 self.todoSceneTemplate = f'<tr class="todo">{scRow}</tr>'
 
-            if kwargs['showUnexported']:
+            if kwargs['show_unexported']:
                 self.notExportedSceneTemplate = f'<tr class="notexp">{scRow}</tr>'

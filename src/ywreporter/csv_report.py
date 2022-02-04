@@ -14,7 +14,7 @@ class CsvReport(FileExport):
     EXTENSION = '.csv'
     SUFFIX = '_report'
 
-    def _convert_from_yw(self, text):
+    def _convert_from_yw(self, text, quick=False):
 
         if text is None:
             text = ''

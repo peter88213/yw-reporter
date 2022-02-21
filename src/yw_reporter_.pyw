@@ -16,8 +16,8 @@ from pywriter.config.configuration import Configuration
 from pywriter.ui.ui import Ui
 from pywriter.file.filter import Filter
 
-from ywreporter.rp_converter import RpConverter
-from ywreporter.yw_reporter_tk import YwReporterTk
+from ywreporterlib.rp_converter import RpConverter
+from ywreporterlib.yw_reporter_tk import YwReporterTk
 
 SUFFIX = '_report'
 APPNAME = 'yw-reporter'

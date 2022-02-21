@@ -11,16 +11,15 @@ from tkinter import ttk
 
 from pywriter.pywriter_globals import ERROR
 from pywriter.file.filter import Filter
-from pywriter.file.sc_tg_filter import ScTgFilter
-from pywriter.file.sc_vp_filter import ScVpFilter
-from pywriter.file.sc_cr_filter import ScCrFilter
-from pywriter.file.sc_lc_filter import ScLcFilter
-from pywriter.file.sc_it_filter import ScItFilter
-
-from ywreporter.html_report import HtmlReport
 from pywriter.yw.yw7_file import Yw7File
-
 from pywriter.ui.main_tk import MainTk
+
+from ywreporterlib.sc_tg_filter import ScTgFilter
+from ywreporterlib.sc_vp_filter import ScVpFilter
+from ywreporterlib.sc_cr_filter import ScCrFilter
+from ywreporterlib.sc_lc_filter import ScLcFilter
+from ywreporterlib.sc_it_filter import ScItFilter
+from ywreporterlib.html_report import HtmlReport
 
 
 class YwReporterTk(MainTk):

@@ -9,8 +9,8 @@ import os
 from pywriter.pywriter_globals import ERROR
 from pywriter.converter.yw_cnv_ui import YwCnvUi
 from pywriter.yw.yw7_file import Yw7File
-from ywreporter.html_report import HtmlReport
-from ywreporter.csv_report import CsvReport
+from ywreporterlib.html_report import HtmlReport
+from ywreporterlib.csv_report import CsvReport
 
 
 class RpConverter(YwCnvUi):

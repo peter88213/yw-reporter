@@ -4,10 +4,11 @@
 
 ## Changelog
 
-### v1.8.0 Optional update
+### v2.0.0
 
-- Rework the error messaging system.
-- Refactor.
+- Fix a bug where "To do" chapters cause an exception.
+- Rework the user interface. 
+- Refactor the code.
 
 Based on PyWriter v5.0.0
 

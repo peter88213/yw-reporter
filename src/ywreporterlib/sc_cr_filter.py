@@ -35,17 +35,12 @@ class ScCrFilter():
         Oherwise, return False.
         Overrides the superclass method.
         """
-
         if self._character is not None:
-
             try:
                 if self._character in source.scenes[eId].characters:
                     return True
-
                 else:
                     return False
-
             except:
                 return False
-
         return True

@@ -35,17 +35,12 @@ class ScVpFilter():
         Oherwise, return False.
         Overrides the superclass method.
         """
-
         if self._viewpoint is not None:
-
             try:
                 if self._viewpoint == source.scenes[eId].characters[0]:
                     return True
-
                 else:
                     return False
-
             except:
                 return False
-
         return True

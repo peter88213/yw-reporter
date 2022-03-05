@@ -35,17 +35,12 @@ class ScTgFilter():
         Oherwise, return False.
         Overrides the superclass method.
         """
-
         if self._tag is not None:
-
             try:
                 if self._tag in source.scenes[eId].tags:
                     return True
-
                 else:
                     return False
-
             except:
                 return False
-
         return True

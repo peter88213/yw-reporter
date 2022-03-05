@@ -35,17 +35,12 @@ class ScItFilter():
         Oherwise, return False.
         Overrides the superclass method.
         """
-
         if self._item is not None:
-
             try:
                 if self._item in source.scenes[eId].items:
                     return True
-
                 else:
                     return False
-
             except:
                 return False
-
         return True

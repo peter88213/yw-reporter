@@ -11,22 +11,18 @@ import os
 import sys
 import argparse
 from pathlib import Path
-
 from pywriter.config.configuration import Configuration
 from pywriter.ui.ui import Ui
 from pywriter.file.filter import Filter
-
 from ywreporterlib.rp_converter import RpConverter
 from ywreporterlib.yw_reporter_tk import YwReporterTk
 
 SUFFIX = '_report'
 APPNAME = 'yw-reporter'
-
 SETTINGS = dict(
     yw_last_open='',
     output_selection=0,
 )
-
 OPTIONS = dict(
     show_chapters=True,
     show_scenes=True,
@@ -56,19 +52,10 @@ OPTIONS = dict(
 )
 
 
-def run(sourcePath, silentMode=True, installDir=''):
+def run(sourcePath, silentMode=True, installDir='.'):
 
     #--- Load configuration
-
-    sourceDir = os.path.dirname(sourcePath)
-
-    if not sourceDir:
-        sourceDir = './'
-
-    else:
-        sourceDir = 'f{sourceDir}/'
-
-    iniFile = f'{installDir}{APPNAME}.ini'
+    iniFile = f'{installDir}/{APPNAME}.ini'
     configuration = Configuration(SETTINGS, OPTIONS)
     configuration.read(iniFile)
     kwargs = dict(
@@ -77,54 +64,40 @@ def run(sourcePath, silentMode=True, installDir=''):
     )
     kwargs.update(configuration.settings)
     kwargs.update(configuration.options)
-
     converter = RpConverter()
-
     if silentMode:
         converter.ui = Ui('')
         converter.run(sourcePath, **kwargs)
-
     else:
         converter.ui = YwReporterTk('yWriter report generator @release', **kwargs)
         converter.ui.converter = converter
 
         #--- Get initial project path.
-
         if not sourcePath or not os.path.isfile(sourcePath):
             sourcePath = kwargs['yw_last_open']
 
         #--- Instantiate the viewer object.
-
         converter.ui.open_project(sourcePath)
         converter.ui.start()
 
         #--- Save project specific configuration
-
         for keyword in converter.ui.kwargs:
-
             if keyword in configuration.options:
                 configuration.options[keyword] = converter.ui.kwargs[keyword]
-
             elif keyword in configuration.settings:
                 configuration.settings[keyword] = converter.ui.kwargs[keyword]
-
             configuration.write(iniFile)
 
 
 if __name__ == '__main__':
-
     try:
         homeDir = str(Path.home()).replace('\\', '/')
-        installDir = f'{homeDir}/.pywriter/{APPNAME}/config/'
-
+        installDir = f'{homeDir}/.pywriter/{APPNAME}/config'
     except:
-        installDir = ''
-
+        installDir = '.'
     os.makedirs(installDir, exist_ok=True)
-
     if len(sys.argv) == 1:
         run('', False, installDir)
-
     else:
         parser = argparse.ArgumentParser(
             description='yWriter report generator',
@@ -132,7 +105,6 @@ if __name__ == '__main__':
         parser.add_argument('sourcePath',
                             metavar='Sourcefile',
                             help='The path of the yWriter project file.')
-
         parser.add_argument('--silent',
                             action="store_true",
                             help='operation without grphical user interface; suppress error messages and the request to confirm overwriting')

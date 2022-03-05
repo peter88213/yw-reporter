@@ -35,17 +35,12 @@ class ScLcFilter():
         Oherwise, return False.
         Overrides the superclass method.
         """
-
         if self._location is not None:
-
             try:
                 if self._location in source.scenes[eId].locations:
                     return True
-
                 else:
                     return False
-
             except:
                 return False
-
         return True

@@ -24,6 +24,21 @@ If you wish to keep a report, you can save it under a different name from within
 You can generate as many reports with different options as you like without exiting the program in between. Note, however, that a new tab may be created in the web browser each time, so that you can also see earlier reports for which there is no longer a file.
 
 
+### Operation
+
+#### Open a yWriter project
+
+- If no yWriter project is specified by dragging and dropping on the program icon, the latest project selected is preset. You can change it with **File > Open** or **Ctrl-o***.
+
+#### Close the ywriter project
+
+- You can close the project without exiting the program with **File > Close**.
+- If you open another project, the current project is automatically closed.
+
+#### Exit 
+
+- You can exit with **File > Exit** of **Ctrl-q**.
+
 ### Options
 
 #### Levels

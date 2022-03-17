@@ -196,7 +196,7 @@ class YwReporterTk(MainTk):
         row3Cnt += 1
         self._showNotes = tk.BooleanVar(value=kwargs['show_notes'])
         showNotesCheckbox = ttk.Checkbutton(
-            self._mainWindow,  text='Notes', variable=self._showNotes, onvalue=True, offvalue=False)
+            self._mainWindow, text='Notes', variable=self._showNotes, onvalue=True, offvalue=False)
         showNotesCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
         row3Cnt += 1
         self._showDate = tk.BooleanVar(value=kwargs['show_date'])
@@ -259,10 +259,12 @@ class YwReporterTk(MainTk):
             self._mainWindow, text='Items', variable=self._showItems, onvalue=True, offvalue=False)
         showItemsCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
 
-    def _extend_menu(self):
+    def _build_main_menu(self):
         """Add main menu entries.
-        Overrides the superclass template method. 
+        
+        Extends the superclass template method. 
         """
+        super()._build_main_menu()
         self._mainMenu.add_command(label='Create report', command=self._convert_file)
         self._mainMenu.entryconfig('Create report', state='disabled')
 
@@ -305,10 +307,10 @@ class YwReporterTk(MainTk):
             authorView = self._ywPrj.authorName
         else:
             authorView = 'Unknown author'
-        self._titleBar.config(text=f'{titleView} by {authorView}')
+        self._root.title(f'{titleView} by {authorView} - {self._title}')
         self._enable_menu()
 
-        #-- Build filter selector lists.
+        # -- Build filter selector lists.
         self._tagList = []
         self._viewpointList = []
         self._viewpointTitles = []
@@ -350,8 +352,9 @@ class YwReporterTk(MainTk):
         self._filterCatSelection.set(0)
         return fileName
 
-    def _close_project(self):
+    def _close_project(self, event=None):
         """Clear the text box.
+        
         Extends the superclass method.
         """
         super()._close_project()
@@ -370,9 +373,8 @@ class YwReporterTk(MainTk):
             self._filterCombobox.set('')
 
     def _convert_file(self):
-        """Call the converter's conversion method, if a source file is selected.
-        """
-        self._set_status('')
+        """Call the converter's conversion method, if a source file is selected."""
+        self._show_status('')
 
         # Filter options.
         filterCat = self._filterCatSelection.get()

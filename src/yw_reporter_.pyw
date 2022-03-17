@@ -21,6 +21,10 @@ SUFFIX = '_report'
 APPNAME = 'yw-reporter'
 SETTINGS = dict(
     yw_last_open='',
+    root_geometry='',
+    key_restore_status='<Escape>',
+    key_open_project='<Control_L>o',
+    key_on_quit='<Control_L>q',
     output_selection=0,
 )
 OPTIONS = dict(

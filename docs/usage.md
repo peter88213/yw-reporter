@@ -17,7 +17,7 @@ The report generator processes yw7 project files. If no yWriter project is speci
 
 The report options are set by ticking checkboxes. On program startup, the latest options selected are preset.
 
-When the yWriter project is selected and the options are set, you can launch the report generator with **Create report**. A HTML report file is created in the yWriter project folder, and a web browser window opens to show it. If a report file already exists, you will be asked before it is overwritten.
+When the yWriter project is selected and the options are set, you can launch the report generator with **Create report** *(Alt-C)*. A HTML report file is created in the yWriter project folder, and a web browser window opens to show it. If a report file already exists, you will be asked before it is overwritten.
 
 If you wish to keep a report, you can save it under a different name from within the web browser.
 

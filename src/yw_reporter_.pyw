@@ -22,9 +22,6 @@ APPNAME = 'yw-reporter'
 SETTINGS = dict(
     yw_last_open='',
     root_geometry='',
-    key_restore_status='<Escape>',
-    key_open_project='<Control-o>',
-    key_quit_program='<Control-q>',
     output_selection=0,
 )
 OPTIONS = dict(

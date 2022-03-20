@@ -8,9 +8,7 @@ Published under the MIT License (https://opensource.org/licenses/mit-license.php
 import webbrowser
 import tkinter as tk
 from tkinter import ttk
-from pywriter.pywriter_globals import ERROR
 from pywriter.file.filter import Filter
-from pywriter.yw.yw7_file import Yw7File
 from pywriter.ui.main_tk import MainTk
 from ywreporterlib.sc_tg_filter import ScTgFilter
 from ywreporterlib.sc_vp_filter import ScVpFilter
@@ -21,7 +19,11 @@ from ywreporterlib.html_report import HtmlReport
 
 
 class YwReporterTk(MainTk):
-    """A tkinter GUI class for yWriter report generation."""
+    """A tkinter GUI class for yWriter report generation.    
+
+    Public methods:
+        open_project(fileName) -- create a yWriter project instance and read the file. 
+    """
 
     def __init__(self, title, **kwargs):
         """Put a text box to the GUI main window.
@@ -284,31 +286,13 @@ class YwReporterTk(MainTk):
 
     def open_project(self, fileName):
         """Create a yWriter project instance and read the file.
+        
         Display project title, description and status.
-        Return the file name.
+        Return True on success, otherwise return False.
         Extends the superclass method.
         """
-        fileName = super().open_project(fileName)
-        if not fileName:
-            return ''
-
-        self._ywPrj = Yw7File(fileName)
-        message = self._ywPrj.read()
-        if message.startswith(ERROR):
-            self._close_project()
-            self.set_info_how(message)
-            return ''
-
-        if self._ywPrj.title:
-            titleView = self._ywPrj.title
-        else:
-            titleView = 'Untitled yWriter project'
-        if self._ywPrj.authorName:
-            authorView = self._ywPrj.authorName
-        else:
-            authorView = 'Unknown author'
-        self._root.title(f'{titleView} by {authorView} - {self._title}')
-        self._enable_menu()
+        if not super().open_project(fileName):
+            return False
 
         # -- Build filter selector lists.
         self._tagList = []
@@ -350,7 +334,7 @@ class YwReporterTk(MainTk):
         self._filterCat = [[], self._tagList, self._viewpointTitles, self._characterTitles, self._locationTitles, self._itemTitles]
         self._set_filter_category(0)
         self._filterCatSelection.set(0)
-        return fileName
+        return True
 
     def _close_project(self, event=None):
         """Clear the text box.

@@ -304,31 +304,31 @@ class YwReporterTk(MainTk):
         self._locationTitles = []
         self._itemList = []
         self._itemTitles = []
-        for chId in self._ywPrj.srtChapters:
-            for scId in self._ywPrj.chapters[chId].srtScenes:
-                if self._ywPrj.scenes[scId].tags:
-                    for tag in self._ywPrj.scenes[scId].tags:
+        for chId in self.ywPrj.srtChapters:
+            for scId in self.ywPrj.chapters[chId].srtScenes:
+                if self.ywPrj.scenes[scId].tags:
+                    for tag in self.ywPrj.scenes[scId].tags:
                         if not tag in self._tagList:
                             self._tagList.append(tag)
-                if self._ywPrj.scenes[scId].characters:
-                    vpId = self._ywPrj.scenes[scId].characters[0]
+                if self.ywPrj.scenes[scId].characters:
+                    vpId = self.ywPrj.scenes[scId].characters[0]
                     if not vpId in self._viewpointList:
                         self._viewpointList.append(vpId)
-                        self._viewpointTitles.append(self._ywPrj.characters[vpId].title)
-                    for crId in self._ywPrj.scenes[scId].characters:
+                        self._viewpointTitles.append(self.ywPrj.characters[vpId].title)
+                    for crId in self.ywPrj.scenes[scId].characters:
                         if not crId in self._characterList:
                             self._characterList.append(crId)
-                            self._characterTitles.append(self._ywPrj.characters[crId].title)
-                if self._ywPrj.scenes[scId].locations:
-                    for lcId in self._ywPrj.scenes[scId].locations:
+                            self._characterTitles.append(self.ywPrj.characters[crId].title)
+                if self.ywPrj.scenes[scId].locations:
+                    for lcId in self.ywPrj.scenes[scId].locations:
                         if not lcId in self._locationList:
                             self._locationList.append(lcId)
-                            self._locationTitles.append(self._ywPrj.locations[lcId].title)
-                if self._ywPrj.scenes[scId].items:
-                    for itId in self._ywPrj.scenes[scId].items:
+                            self._locationTitles.append(self.ywPrj.locations[lcId].title)
+                if self.ywPrj.scenes[scId].items:
+                    for itId in self.ywPrj.scenes[scId].items:
                         if not itId in self._itemList:
                             self._itemList.append(itId)
-                            self._itemTitles.append(self._ywPrj.items[itId].title)
+                            self._itemTitles.append(self.ywPrj.items[itId].title)
 
         # Initialize the filter category selection widgets.
         self._filterCat = [[], self._tagList, self._viewpointTitles, self._characterTitles, self._locationTitles, self._itemTitles]
@@ -358,7 +358,7 @@ class YwReporterTk(MainTk):
 
     def _convert_file(self):
         """Call the converter's conversion method, if a source file is selected."""
-        self._show_status('')
+        self.show_status('')
 
         # Filter options.
         filterCat = self._filterCatSelection.get()
@@ -375,7 +375,7 @@ class YwReporterTk(MainTk):
             sceneFilter = ScLcFilter(self._locationList[option])
         elif filterCat == 5:
             sceneFilter = ScItFilter(self._itemList[option])
-        self.kwargs['yw_last_open'] = self._ywPrj.filePath
+        self.kwargs['yw_last_open'] = self.ywPrj.filePath
         self.kwargs['output_selection'] = str(self._outputSelection.get())
         self.kwargs['suffix'] = HtmlReport.SUFFIX
         self.kwargs['scene_filter'] = sceneFilter
@@ -404,6 +404,6 @@ class YwReporterTk(MainTk):
         self.kwargs['show_characters'] = self._showCharacters.get()
         self.kwargs['show_locations'] = self._showLocations.get()
         self.kwargs['show_items'] = self._showItems.get()
-        self.converter.run(self._ywPrj.filePath, **self.kwargs)
+        self.converter.run(self.ywPrj.filePath, **self.kwargs)
         if self.converter.newFile is not None:
             webbrowser.open(self.converter.newFile)

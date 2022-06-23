@@ -64,6 +64,7 @@ tr.notexp {font-style: italic}
             show_notes_type -- bool: if True, include "normal" type.
             show_todo_type -- bool: if True, include "to do" type.
             show_unexported -- bool: if True, include "do not export" type.
+            show_uid -- bool: if True, include "ID" column.
             show_number -- bool: if True, include "Number" column.
             show_title -- bool: if True, include "Title" column.
             show_description -- bool: if True, include "Description" column.
@@ -90,6 +91,10 @@ tr.notexp {font-style: italic}
         hdColumns = []
         chColumns = []
         scColumns = []
+        if kwargs['show_uid']:
+            hdColumns.append('<th>ID</th>')
+            chColumns.append('<td class="chtitle">ChId:$ID</td>')
+            scColumns.append('<td>ScID:$ID</td>')
         if kwargs['show_number']:
             hdColumns.append('<th>Number</th>')
             chColumns.append('<td class="chtitle">$ChapterNumber</td>')

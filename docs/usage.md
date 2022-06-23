@@ -65,6 +65,7 @@ You can generate as many reports with different options as you like without exit
 
 #### Columns
 
+- **ID** -- Create a column for yWriter's internal chapter/scene IDs.
 - **Number** -- Create a column for chapter/scene numbers.
 - **Title** -- Create a column for chapter/scene titles.
 - **Description** -- Create a column for chapter/scene descriptions.

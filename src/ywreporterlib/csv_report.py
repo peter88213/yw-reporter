@@ -35,6 +35,7 @@ class CsvReport(FileExport):
             show_notes_type -- bool: if True, include "normal" type.
             show_todo_type -- bool: if True, include "to do" type.
             show_unexported -- bool: if True, include "do not export" type.
+            show_uid -- bool: if True, include "ID" column.
             show_number -- bool: if True, include "Number" column.
             show_title -- bool: if True, include "Title" column.
             show_description -- bool: if True, include "Description" column.
@@ -61,6 +62,10 @@ class CsvReport(FileExport):
         hdColumns = []
         chColumns = []
         scColumns = []
+        if kwargs['show_uid']:
+            hdColumns.append('"ID"')
+            chColumns.append('"ChID:$ID"')
+            scColumns.append('"ScID:$ID"')
         if kwargs['show_number']:
             hdColumns.append('"Number"')
             chColumns.append('"$ChapterNumber"')

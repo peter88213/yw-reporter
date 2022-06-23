@@ -32,6 +32,7 @@ OPTIONS = dict(
     show_notes_type=False,
     show_todo_type=False,
     show_unexported=False,
+    show_uid=False,
     show_number=False,
     show_title=True,
     show_description=True,

@@ -42,6 +42,7 @@ class YwReporterTk(MainTk):
             show_notes_type -- bool: if True, include "normal" type.
             show_todo_type -- bool: if True, include "to do" type.
             show_unexported -- bool: if True, include "do not export" type.
+            show_uid -- bool: if True, include "ID" column.
             show_number -- bool: if True, include "Number" column.
             show_title -- bool: if True, include "Title" column.
             show_description -- bool: if True, include "Description" column.
@@ -170,6 +171,11 @@ class YwReporterTk(MainTk):
         row3Cnt = 1
         hdColumns = tk.Label(self.mainWindow, text='Columns')
         hdColumns.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
+        row3Cnt += 1
+        self._showUid = tk.BooleanVar(value=kwargs['show_uid'])
+        showUidCheckbox = ttk.Checkbutton(
+            self.mainWindow, text='ID', variable=self._showUid, onvalue=True, offvalue=False)
+        showUidCheckbox.grid(row=row3Cnt, column=3, sticky=tk.W, padx=20)
         row3Cnt += 1
         self._showNumber = tk.BooleanVar(value=kwargs['show_number'])
         showNumberCheckbox = ttk.Checkbutton(
@@ -386,6 +392,7 @@ class YwReporterTk(MainTk):
         self.kwargs['show_notes_type'] = self._showNotesType.get()
         self.kwargs['show_todo_type'] = self._showTodoType.get()
         self.kwargs['show_unexported'] = self._showUnexported.get()
+        self.kwargs['show_uid'] = self._showUid.get()
         self.kwargs['show_number'] = self._showNumber.get()
         self.kwargs['show_title'] = self._showTitle.get()
         self.kwargs['show_description'] = self._showDescription.get()

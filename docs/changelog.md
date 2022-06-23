@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v2.2.2 Optional update
+
+- Add yWriter's internal chapter and scene IDs.
+
+Based on PyWriter v5.10.2
+
 ### v2.2.1 Optional update
 
 - Refactor the code.

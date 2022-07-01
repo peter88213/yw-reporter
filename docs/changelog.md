@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v2.2.3 Improved word counting
+
+- Fix word counting considering comments, hyphens, and dashes.
+
+Based on PyWriter v5.12.3
+
 ### v2.2.2 Optional update
 
 - Add yWriter's internal chapter and scene IDs.

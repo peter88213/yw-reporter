@@ -18,7 +18,6 @@ except ModuleNotFoundError:
     print('The tkinter module is missing. Please install the tk support package for your python3 version.')
     sys.exit(1)
 
-
 APPNAME = 'yw-reporter'
 VERSION = ' @release'
 APP = f'{APPNAME}.pyw'
@@ -44,6 +43,7 @@ python3 '$Apppath' %F
 root = Tk()
 processInfo = Label(root, text='')
 message = []
+
 
 def output(text):
     message.append(text)
@@ -138,7 +138,11 @@ if __name__ == '__main__':
 
     # Run the installation.
     homePath = str(Path.home()).replace('\\', '/')
-    install(f'{homePath}/.pywriter/')
+    pywriterPath = f'{homePath}/.pywriter/'
+    try:
+        install(pywriterPath)
+    except Exception as ex:
+        output(str(ex))
 
     # Show options: open installation folders or quit.
     root.openButton = Button(text="Open installation folder", command=lambda: open_folder(f'{homePath}/.pywriter/{APPNAME}'))

@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v2.2.8
+
+- Update the PyWriter library for future Python versions.
+
+Based on PyWriter v7.14.2
+
 ### v2.2.7 Optional release
 
 - Code refactoring and library update.

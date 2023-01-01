@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v2.2.10
+
+- Make it run with old Windows versions.
+
+Based on PyWriter v7.14.3
+
 ### v2.2.9
 
 - Modify "shebang" line to make the script run with Python 3.11 under Windows.

@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v2.2.11
+
+- Fix typo.
+
+Based on PyWriter v7.14.3
+
 ### v2.2.10
 
 - Make it run with old Windows versions.

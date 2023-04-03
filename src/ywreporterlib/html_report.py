@@ -93,7 +93,7 @@ tr.notexp {font-style: italic}
         scColumns = []
         if kwargs['show_uid']:
             hdColumns.append('<th>ID</th>')
-            chColumns.append('<td class="chtitle">ChId:$ID</td>')
+            chColumns.append('<td class="chtitle">ChID:$ID</td>')
             scColumns.append('<td>ScID:$ID</td>')
         if kwargs['show_number']:
             hdColumns.append('<th>Number</th>')

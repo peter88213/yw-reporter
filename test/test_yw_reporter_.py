@@ -1,7 +1,6 @@
-""" Regression test for the yw_reporter project.
+"""Regression test for the yw_reporter project.
 
-Test suite for yw_reporter.pyw.
-
+Copyright (c) 2023 Peter Triesberger
 For further information see https://github.com/peter88213/yw-reporter
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
@@ -9,7 +8,6 @@ from shutil import copyfile
 import os
 import unittest
 import yw_reporter_
-
 
 # Test environment
 

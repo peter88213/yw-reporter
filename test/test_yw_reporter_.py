@@ -1,4 +1,4 @@
-""" Python unit tests for the yw_reporter project.
+""" Regression test for the yw_reporter project.
 
 Test suite for yw_reporter.pyw.
 

@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v2.2.13
+
+- UTF-16 error handling like with PyWriter v12.19.0.
+
+Based on PyWriter v7.14.5
+
 ### v2.2.12
 
 - Provide a detailed error message if the yw7 file cannot be processed.

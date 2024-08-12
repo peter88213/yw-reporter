@@ -4,6 +4,13 @@
 
 ## Changelog
 
+### v2.2.12
+
+- Provide a detailed error message if the yw7 file cannot be processed.
+- Handle UTF-16 encoded files with wrong XML declaration as created with yWriter iOS.
+
+Based on PyWriter v7.14.3
+
 ### v2.2.11
 
 - Fix typo.

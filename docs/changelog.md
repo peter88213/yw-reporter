@@ -9,7 +9,7 @@
 - Provide a detailed error message if the yw7 file cannot be processed.
 - Handle UTF-16 encoded files with wrong XML declaration as created with yWriter iOS.
 
-Based on PyWriter v7.14.3
+Based on PyWriter v7.14.4
 
 ### v2.2.11
 

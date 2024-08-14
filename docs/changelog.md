@@ -5,6 +5,13 @@
 ## Changelog
 
 
+### v2.2.15
+
+- Provide a workaround to avoid unicode error with "C:\Users\...".
+- Handling "invalid" escape sequences in regular expressions.
+
+Based on PyWriter v7.14.9
+
 ### v2.2.14
 
 - Providing a meaningful error message on XML parser error.

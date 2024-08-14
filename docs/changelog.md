@@ -4,6 +4,13 @@
 
 ## Changelog
 
+
+### v2.2.14
+
+- Providing a meaningful error message on XML parser error.
+
+Based on PyWriter v7.14.6
+
 ### v2.2.13
 
 - UTF-16 error handling like with PyWriter v12.19.0.
